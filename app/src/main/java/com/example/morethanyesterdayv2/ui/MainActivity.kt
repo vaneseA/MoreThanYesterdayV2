@@ -3,10 +3,12 @@ package com.example.morethanyesterdayv2.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.example.morethanyesterdayv2.databinding.ActivityMainBinding
+import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 import java.io.FileInputStream
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-//        val intent = Intent(this, SelectedDateRecordActivity::class.java)
+        val intent = Intent(this, SelectedDateActivity::class.java)
 
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             var selectedDate = String.format("%d년 %d월 %d일", year, month + 1, dayOfMonth)
@@ -44,6 +46,10 @@ class MainActivity : AppCompatActivity() {
             // RecordWriteAcitivity : 넘기고자 하는 Component
             intent.putExtra("Date", selectedDate)
 //            getExerciseListData(selectedDate)
+        }
+        binding.goToWriteBtn.setOnClickListener {
+            Log.d("goToWriteBtn", selectedDate)
+            startActivity(Intent(this, SelectedDateActivity::class.java))
         }
     }
 
@@ -72,3 +78,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
