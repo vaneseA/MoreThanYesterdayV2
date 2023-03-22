@@ -16,6 +16,7 @@ class SelectExerciseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySelectExerciseBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         initRecycler()
 
     }
