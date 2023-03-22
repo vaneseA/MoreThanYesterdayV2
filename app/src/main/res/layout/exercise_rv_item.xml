@@ -21,7 +21,8 @@
             android:orientation="vertical"
             android:weightSum="2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            >
 
             <!-- 운동명 -->
             <TextView
