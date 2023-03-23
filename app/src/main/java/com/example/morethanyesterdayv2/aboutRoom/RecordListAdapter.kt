@@ -55,6 +55,7 @@ class RecordListAdapter(
                     .inflate(R.layout.custom_add_set_dialog, null)
             val builder = AlertDialog.Builder(context)
                 .setView(dialogView)
+                .setCancelable(false)
 
             val alertDialog = builder.show()
 
@@ -67,11 +68,22 @@ class RecordListAdapter(
             val dialogCancleBtn = alertDialog.findViewById<Button>(R.id.dialogCancleBtn)
             val dialogAddBtn = alertDialog.findViewById<Button>(R.id.dialogAddBtn)
 
+            val plusFiveBtn = alertDialog.findViewById<TextView>(R.id.plusFiveBtn)
+            val minusFiveBtn = alertDialog.findViewById<TextView>(R.id.minusFiveBtn)
+            val plusOneBtn = alertDialog.findViewById<TextView>(R.id.plusOneBtn)
+            val minusOneBtn = alertDialog.findViewById<TextView>(R.id.minusOneBtn)
+
+
             dialogExerciseName?.text = name
             dialogExerciseType?.text = type
 
             dialogCancleBtn?.setOnClickListener { alertDialog.dismiss() }
             dialogAddBtn?.setOnClickListener { alertDialog.dismiss() }
+
+            plusFiveBtn?.setOnClickListener {}
+            minusFiveBtn?.setOnClickListener {}
+            plusOneBtn?.setOnClickListener {}
+            minusOneBtn?.setOnClickListener {}
 
 
         }
