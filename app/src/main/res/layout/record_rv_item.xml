@@ -122,6 +122,12 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:padding="4dp" />
+
+        <Button
+            android:id="@+id/addSetBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="세트 추가" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
 

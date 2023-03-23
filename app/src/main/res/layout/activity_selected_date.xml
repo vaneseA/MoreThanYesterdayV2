@@ -25,12 +25,26 @@
         android:id="@+id/buttonSave"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="104dp"
         android:layout_marginBottom="8dp"
         android:text="저장"
         app:layout_constraintBottom_toBottomOf="@+id/editMemo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editMemo" />
+        app:layout_constraintTop_toTopOf="@+id/editMemo"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/SelectExerciseBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="운동추가"
+        app:layout_constraintBottom_toBottomOf="@+id/editMemo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonSave"
+        app:layout_constraintTop_toTopOf="@+id/editMemo"
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerMemo"
@@ -40,6 +54,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        tools:listitem="@layout/record_rv_item"
         app:layout_constraintBottom_toTopOf="@+id/editMemo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

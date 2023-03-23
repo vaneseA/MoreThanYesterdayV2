@@ -1,5 +1,6 @@
 package com.example.morethanyesterdayv2.ui.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,7 +40,6 @@ class SelectedDateActivity : AppCompatActivity() {
 
         with(binding) {
             recyclerMemo.adapter = memoAdapter
-//            recyclerMemo.layoutManager = LinearLayoutManager(baseContext)
             recyclerMemo.layoutManager = LinearLayoutManager(this@SelectedDateActivity)
 
             buttonSave.setOnClickListener {
@@ -51,6 +51,9 @@ class SelectedDateActivity : AppCompatActivity() {
                     insertMemo(memo)
                 }
             }
+        }
+        binding.SelectExerciseBtn.setOnClickListener {
+            startActivity(Intent(this, SelectExerciseActivity::class.java))
         }
     }
 
