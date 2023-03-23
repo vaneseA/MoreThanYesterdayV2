@@ -27,13 +27,13 @@ class RecordListAdapter(
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.setMemo(exerciseList.get(position))
+        holder.setExerciseRecord(exerciseList.get(position))
     }
 
     override fun getItemCount(): Int = exerciseList.size
 
     class Holder(val binding: RecordRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun setMemo(exerciseEntity: ExerciseEntity) {
+        fun setExerciseRecord(exerciseEntity: ExerciseEntity) {
             with(binding) {
                 textNo.text = "${exerciseEntity.no}" + "."
                 NameArea.text = exerciseEntity.exerciseName
