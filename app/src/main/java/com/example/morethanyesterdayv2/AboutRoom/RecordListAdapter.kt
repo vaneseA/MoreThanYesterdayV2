@@ -24,12 +24,11 @@ class RecordListAdapter(val exerciseList: List<ExerciseEntity>) :
     class Holder(val binding: RecordRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun setMemo(exerciseEntity: ExerciseEntity) {
             with(binding) {
-                textNo.text = "${exerciseEntity.no}"+"."
+                textNo.text = "${exerciseEntity.no}" + "."
                 NameArea.text = exerciseEntity.exerciseName
                 TypeArea.text = exerciseEntity.exerciseType
 
-//                val sdf = SimpleDateFormat("yyyy/MM/dd:mm")
-//                textDate.text = sdf.format(memo.datetime)
+                addSetBtn.setOnClickListener { }
             }
 
         }

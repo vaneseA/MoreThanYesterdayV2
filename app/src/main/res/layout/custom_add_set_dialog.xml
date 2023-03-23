@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:orientation="vertical">
+
+
+    <RadioGroup
+        android:id="@+id/radio_group_profile_set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_toRightOf="@id/dialogSet"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dialogSet"
+        app:layout_constraintTop_toBottomOf="@+id/dialogExerciseName">
+
+        <RadioButton
+            android:id="@+id/rbProfileSet_Female"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+
+            android:layout_weight="1"
+            android:background="@drawable/radionbutton_kg"
+            android:button="@android:color/transparent"
+            android:ems="4"
+            android:fontFamily="@font/jalnanche"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="kg"
+            android:textColor="@color/selector_text_color_radiobutton"
+            app:layout_constraintEnd_toStartOf="@+id/lb"
+            app:layout_constraintStart_toEndOf="@+id/dialogSet"
+            tools:layout_editor_absoluteY="128dp" />
+
+        <RadioButton
+            android:id="@+id/lb"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/radionbutton_lb"
+            android:button="@android:color/transparent"
+            android:checked="true"
+            android:ems="4"
+            android:fontFamily="@font/jalnanche"
+            android:gravity="center"
+            android:text="lb"
+            android:textColor="@color/selector_text_color_radiobutton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/rbProfileSet_Female"
+            tools:layout_editor_absoluteY="128dp" />
+
+    </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/numberTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialogSet"
+        app:layout_constraintVertical_bias="0.060000002" />
+
+    <EditText
+        android:id="@+id/userInputEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+
+        app:layout_constraintEnd_toStartOf="@+id/plusBtn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numberTextView" />
+
+    <Button
+        android:id="@+id/plusBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="+"
+        app:layout_constraintEnd_toStartOf="@+id/minusBtn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/userInputEditText"
+        app:layout_constraintTop_toTopOf="@+id/userInputEditText" />
+
+    <Button
+        android:id="@+id/minusBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/plusBtn"
+        app:layout_constraintTop_toTopOf="@+id/userInputEditText" />
+
+
+    <TextView
+        android:id="@+id/dialogSet"
+        android:layout_width="0"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="0세트"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialogExerciseName" />
+
+    <TextView
+        android:id="@+id/dialogExerciseName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:text="운동이름"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dialogExerciseType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="운동종류"
+        android:textColor="@color/gray"
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@+id/dialogExerciseName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
