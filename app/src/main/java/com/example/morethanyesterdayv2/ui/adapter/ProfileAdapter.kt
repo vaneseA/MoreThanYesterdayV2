@@ -53,17 +53,16 @@ class ProfileAdapter(private val context: Context) :
             if (pos != RecyclerView.NO_POSITION) {
                 itemView.setOnClickListener {
                     listener?.onItemClick(itemView, item, pos)
-                    createDeleteAlterDialog(pos)
+                    createDeleteAlterDialog(pos,txtName.text.toString())
                 }
             }
 
 
         }
     }
-    fun createDeleteAlterDialog(currentItem: Int){
-
+    fun createDeleteAlterDialog(currentItem: Int, exerciseName:String){
         AlertDialog.Builder(context)
-            .setTitle("운동 삭제")
+            .setTitle("$exerciseName")
             .setMessage("해당 운동을 삭제하시겠습니까?")
             .setPositiveButton("삭제", {
                     dialog , _ ->
