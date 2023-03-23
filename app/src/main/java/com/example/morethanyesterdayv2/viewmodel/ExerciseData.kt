@@ -1,6 +1,6 @@
 package com.example.morethanyesterdayv2.viewmodel
 
-data class ExerciseModel(
+data class ExerciseData(
 
 //    //배정받은 날짜
 //    var selectedDate: String = "",

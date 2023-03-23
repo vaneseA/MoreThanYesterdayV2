@@ -1,43 +1,45 @@
 package com.example.morethanyesterdayv2.ui.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.example.morethanyesterdayv2.R
 import com.example.morethanyesterdayv2.databinding.ActivitySelectExerciseBinding
-import com.example.morethanyesterdayv2.ui.adapter.ExerciseAdapter
-import com.example.morethanyesterdayv2.viewmodel.ExerciseModel
-import kotlinx.android.synthetic.main.activity_select_exercise.*
+import com.example.morethanyesterdayv2.databinding.ActivitySelectedDateBinding
+import com.example.morethanyesterdayv2.ui.adapter.ProfileAdapter
+import com.example.morethanyesterdayv2.viewmodel.ProfileData
 
 class SelectExerciseActivity : AppCompatActivity() {
-//    private lateinit var binding: ActivitySelectExerciseBinding
-    var datas = mutableListOf<ExerciseModel>()
-    lateinit var exerciseAdapter: ExerciseAdapter
-
+    private lateinit var binding: ActivitySelectExerciseBinding
+    lateinit var profileAdapter: ProfileAdapter
+    val datas = mutableListOf<ProfileData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_select_exercise)
-
+        binding = ActivitySelectExerciseBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initRecycler()
-
     }
-
     private fun initRecycler() {
-        exerciseAdapter = ExerciseAdapter(this)
-        ExerciseRV.adapter = exerciseAdapter
+        profileAdapter = ProfileAdapter(this)
+        binding.ExerciseRV.adapter = profileAdapter
 
 
         datas.apply {
-            add(ExerciseModel(name = "데드리프트", type = "등"))
-            add(ExerciseModel(name = "덤벨프레스", type = "가슴"))
-            add(ExerciseModel(name = "데드리프트", type = "등"))
-            add(ExerciseModel(name = "데드리프트", type = "등"))
-            add(ExerciseModel(name = "데드리프트", type = "등"))
-            add(ExerciseModel(name = "데드리프트", type = "등"))
-            add(ExerciseModel(name = "데드리프트", type = "등"))
+                add(ProfileData(name = "데드리프트", type = "등"))
+                add(ProfileData(name = "풀업", type = "등"))
+                add(ProfileData(name = "렛풀다운", type = "등"))
+                add(ProfileData(name = "케이블 시티드 로우", type = "등"))
+            profileAdapter.datas = datas
+            profileAdapter.notifyDataSetChanged()
 
-            exerciseAdapter.datas = datas
-            exerciseAdapter.notifyDataSetChanged()
         }
+        profileAdapter.setOnItemClickListener(object : ProfileAdapter.OnItemClickListener{
+            override fun onItemClick(v: View, data: ProfileData, pos : Int) {
+
+            }
+
+        })
     }
 }
