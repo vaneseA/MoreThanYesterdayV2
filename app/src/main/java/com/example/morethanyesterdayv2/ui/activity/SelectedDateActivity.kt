@@ -45,8 +45,8 @@ class SelectedDateActivity : AppCompatActivity() {
             buttonSave.setOnClickListener {
                 val content = editMemo.text.toString()
                 if (content.isNotEmpty()) {
-                    val datetime = System.currentTimeMillis()
-                    val memo = RoomMemo(content, datetime)
+//                    val datetime = System.currentTimeMillis()
+                    val memo = RoomMemo(content)
                     editMemo.setText("")
                     insertMemo(memo)
                 }

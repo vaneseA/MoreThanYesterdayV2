@@ -7,12 +7,23 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import com.example.morethanyesterdayv2.AboutRoom.RoomHelper
+import com.example.morethanyesterdayv2.AboutRoom.RoomMemo
+import com.example.morethanyesterdayv2.AboutRoom.RoomMemoDAO
 import com.example.morethanyesterdayv2.R
 import com.example.morethanyesterdayv2.viewmodel.ExerciseData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ExerciseListAdapter(private val context: Context) :
     RecyclerView.Adapter<ExerciseListAdapter.ViewHolder>() {
 
+    lateinit var helper: RoomHelper
+    val memoList = mutableListOf<RoomMemo>()
+    lateinit var memoDAO: RoomMemoDAO
 
     var datas = mutableListOf<ExerciseData>()
 
@@ -67,8 +78,15 @@ class ExerciseListAdapter(private val context: Context) :
                 +"을/를 추가하시겠습니까?")
             .setPositiveButton("Yes", {
                     dialog , _ ->
-//                exerciseWithSetList.remove(currentItem)
-//                onDeleteCallBack(currentItem)
+                helper =
+                    Room.databaseBuilder(context, RoomHelper::class.java, "room_db")
+                        .build()
+                memoDAO = helper.roomMemoDao()
+                val memo = RoomMemo(exerciseName)
+                insertMemo(memo)
+
+
+
                 notifyDataSetChanged()
                 dialog.dismiss()
             })
@@ -77,6 +95,20 @@ class ExerciseListAdapter(private val context: Context) :
             }).create().show()
     }
 
+    fun insertMemo(memo: RoomMemo) {
+        CoroutineScope(Dispatchers.IO).launch {
+            memoDAO.insert(memo)
+            refreshAdapter()
+        }
+    }
+    fun refreshAdapter() {
+        CoroutineScope(Dispatchers.IO).launch {
+            memoList.clear()
+            memoList.addAll(memoDAO.getAll())
+
+
+        }
+    }
 //    private fun addExerciseDialog(currentItem: Int, exerciseName:String) {
 //
 //        // custom_dialog를 뷰 객체로 반환
@@ -91,6 +123,7 @@ class ExerciseListAdapter(private val context: Context) :
 //
 //
 //    }
+
 
 }
 
