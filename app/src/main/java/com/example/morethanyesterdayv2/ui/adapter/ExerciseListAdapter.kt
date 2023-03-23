@@ -8,18 +8,16 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.R
-import com.example.morethanyesterdayv2.viewmodel.ExerciseWithSet
-import com.example.morethanyesterdayv2.viewmodel.ProfileData
+import com.example.morethanyesterdayv2.viewmodel.ExerciseData
 
-class ProfileAdapter(private val context: Context) :
-    RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
+class ExerciseListAdapter(private val context: Context) :
+    RecyclerView.Adapter<ExerciseListAdapter.ViewHolder>() {
 
 
-    private var exerciseWithSetList = mutableListOf<ExerciseWithSet>()
-    var datas = mutableListOf<ProfileData>()
+    var datas = mutableListOf<ExerciseData>()
 
     interface OnItemClickListener {
-        fun onItemClick(v: View, data: ProfileData, pos: Int)
+        fun onItemClick(v: View, data: ExerciseData, pos: Int)
     }
 
     private var listener: OnItemClickListener? = null
@@ -45,36 +43,54 @@ class ProfileAdapter(private val context: Context) :
         private val txtName: TextView = itemView.findViewById(R.id.exerciseNameArea)
         private val txtType: TextView = itemView.findViewById(R.id.exerciseTypeArea)
 
-        fun bind(item: ProfileData) {
+        fun bind(item: ExerciseData) {
             txtName.text = item.name
             txtType.text = item.type
+            var seletedDate = "1월 24일"
 
             val pos = adapterPosition
             if (pos != RecyclerView.NO_POSITION) {
                 itemView.setOnClickListener {
                     listener?.onItemClick(itemView, item, pos)
-                    createDeleteAlterDialog(pos,txtName.text.toString())
+                    createDeleteAlterDialog(pos,txtName.text.toString(),seletedDate)
                 }
             }
 
 
         }
     }
-    fun createDeleteAlterDialog(currentItem: Int, exerciseName:String){
+    fun createDeleteAlterDialog(currentItem: Int, exerciseName:String, seletedDate:String){
         AlertDialog.Builder(context)
-            .setTitle("$exerciseName")
-            .setMessage("해당 운동을 삭제하시겠습니까?")
-            .setPositiveButton("삭제", {
+            .setTitle("$seletedDate")
+            .setMessage(
+            "$exerciseName "
+                +"을/를 추가하시겠습니까?")
+            .setPositiveButton("Yes", {
                     dialog , _ ->
 //                exerciseWithSetList.remove(currentItem)
 //                onDeleteCallBack(currentItem)
                 notifyDataSetChanged()
                 dialog.dismiss()
             })
-            .setNegativeButton("취소",{
+            .setNegativeButton("No",{
                     dialog, _ -> dialog.dismiss()
             }).create().show()
     }
+
+//    private fun addExerciseDialog(currentItem: Int, exerciseName:String) {
+//
+//        // custom_dialog를 뷰 객체로 반환
+//        val dialogView = LayoutInflater.from(context).inflate(R.layout.custom_mylike_dialog, null)
+//        // 대화상자 생성
+//        val builder = android.app.AlertDialog.Builder(context)
+//            .setView(dialogView)
+//            .setTitle("$exerciseName")
+//            .setMessage("해당 운동을 삭제하시겠습니까?")
+//        // 대화상자 띄움
+//        val alertDialog = builder.show()
+//
+//
+//    }
 
 }
 
