@@ -1,4 +1,4 @@
-package com.example.morethanyesterdayv2.AboutRoom
+package com.example.morethanyesterdayv2.aboutRoom
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

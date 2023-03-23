@@ -1,11 +1,17 @@
-package com.example.morethanyesterdayv2.AboutRoom
+package com.example.morethanyesterdayv2.aboutRoom
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import com.example.morethanyesterdayv2.R
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
 
-class RecordListAdapter(val exerciseList: List<ExerciseEntity>) :
+class RecordListAdapter(
+    val exerciseList: List<ExerciseEntity>,
+    var context: Context
+) :
     RecyclerView.Adapter<RecordListAdapter.Holder>() {
 
 
@@ -28,9 +34,22 @@ class RecordListAdapter(val exerciseList: List<ExerciseEntity>) :
                 NameArea.text = exerciseEntity.exerciseName
                 TypeArea.text = exerciseEntity.exerciseType
 
-                addSetBtn.setOnClickListener { }
+                addSetBtn.setOnClickListener {
+                    addSetDialog(it.context)
+                }
             }
 
         }
+
+        private fun addSetDialog(context: Context) {
+            val dialogView =
+                LayoutInflater.from(context)
+                    .inflate(R.layout.custom_add_set_dialog, null)
+            val builder = AlertDialog.Builder(context)
+                .setView(dialogView)
+
+            val alertDialog = builder.show()
+        }
     }
+
 }

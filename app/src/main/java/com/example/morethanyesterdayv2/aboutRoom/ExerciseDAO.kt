@@ -1,6 +1,7 @@
-package com.example.morethanyesterdayv2.AboutRoom
+package com.example.morethanyesterdayv2.aboutRoom
 
 import androidx.room.*
+import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
 
 @Dao
 interface ExerciseDAO {

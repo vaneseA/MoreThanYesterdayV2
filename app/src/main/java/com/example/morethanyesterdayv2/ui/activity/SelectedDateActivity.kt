@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
-import com.example.morethanyesterdayv2.AboutRoom.RecordListAdapter
-import com.example.morethanyesterdayv2.AboutRoom.RoomHelper
-import com.example.morethanyesterdayv2.AboutRoom.ExerciseEntity
-import com.example.morethanyesterdayv2.AboutRoom.ExerciseDAO
+import com.example.morethanyesterdayv2.aboutRoom.ExerciseDAO
+import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
+import com.example.morethanyesterdayv2.aboutRoom.RecordListAdapter
+import com.example.morethanyesterdayv2.aboutRoom.RoomHelper
 import com.example.morethanyesterdayv2.databinding.ActivitySelectedDateBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,8 +20,8 @@ class SelectedDateActivity : AppCompatActivity() {
     val binding by lazy { ActivitySelectedDateBinding.inflate(layoutInflater) }
     lateinit var helper: RoomHelper
     lateinit var memoAdapter: RecordListAdapter
-    val memoList = mutableListOf<ExerciseEntity>()
-    lateinit var memoDAO: ExerciseDAO
+    val exerciseList = mutableListOf<ExerciseEntity>()
+    lateinit var exerciseDAO: ExerciseDAO
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,9 +32,9 @@ class SelectedDateActivity : AppCompatActivity() {
             Room.databaseBuilder(this, RoomHelper::class.java, "room_db")
 //                .allowMainThreadQueries()//공부할때만 쓴다
                 .build()
-        memoDAO = helper.exerciseDAO()
+        exerciseDAO = helper.exerciseDAO()
 
-        memoAdapter = RecordListAdapter(memoList)
+        memoAdapter = RecordListAdapter(exerciseList,this@SelectedDateActivity)
 
         refreshAdapter()
 
@@ -48,20 +48,15 @@ class SelectedDateActivity : AppCompatActivity() {
         }
     }
 
-    fun insertMemo(memo: ExerciseEntity) {
-        CoroutineScope(Dispatchers.IO).launch {
-            memoDAO.insert(memo)
-            refreshAdapter()
-        }
-    }
-
     fun refreshAdapter() {
         CoroutineScope(Dispatchers.IO).launch {
-            memoList.clear()
-            memoList.addAll(memoDAO.getAll())
+            exerciseList.clear()
+            exerciseList.addAll(exerciseDAO.getAll())
             withContext(Dispatchers.Main) {
                 memoAdapter.notifyDataSetChanged()
             }
         }
     }
+
+
 }

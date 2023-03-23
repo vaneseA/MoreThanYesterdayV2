@@ -8,9 +8,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import com.example.morethanyesterdayv2.AboutRoom.RoomHelper
-import com.example.morethanyesterdayv2.AboutRoom.ExerciseEntity
-import com.example.morethanyesterdayv2.AboutRoom.ExerciseDAO
+import com.example.morethanyesterdayv2.aboutRoom.RoomHelper
+import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
+import com.example.morethanyesterdayv2.aboutRoom.ExerciseDAO
 import com.example.morethanyesterdayv2.R
 import com.example.morethanyesterdayv2.viewmodel.ExerciseData
 import kotlinx.coroutines.CoroutineScope
