@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.R
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
 
+
 class RecordListAdapter(
     val exerciseList: List<ExerciseEntity>,
     var context: Context
