@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_baseline_clear_24.xml" value="0.1265" />
         <entry key="app/src/main/res/drawable-v24/ic_baseline_create_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_baseline_delete_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/bg_dialog_rounded.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/radionbutton_female.xml" value="0.191" />
         <entry key="app/src/main/res/drawable/radionbutton_male.xml" value="0.191" />
         <entry key="app/src/main/res/drawable/underline.xml" value="0.1305" />
@@ -14,7 +15,7 @@
         <entry key="app/src/main/res/layout/activity_select_exercise.xml" value="0.13" />
         <entry key="app/src/main/res/layout/activity_selected_date.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_selected_day.xml" value="0.21822916666666667" />
-        <entry key="app/src/main/res/layout/custom_add_set_dialog.xml" value="0.21822916666666667" />
+        <entry key="app/src/main/res/layout/custom_add_set_dialog.xml" value="0.25" />
         <entry key="app/src/main/res/layout/custom_mylike_dialog.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/exercise_card_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/exercise_rv_item.xml" value="0.21822916666666667" />

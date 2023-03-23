@@ -1,11 +1,13 @@
 package com.example.morethanyesterdayv2.aboutRoom
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.R
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
@@ -56,14 +58,22 @@ class RecordListAdapter(
 
             val alertDialog = builder.show()
 
+            //dialog radius줘서 모서리 둥글게
+            alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
             //binding 전까지는 이거
             val dialogExerciseName = alertDialog.findViewById<TextView>(R.id.dialogExerciseName)
             val dialogExerciseType = alertDialog.findViewById<TextView>(R.id.dialogExerciseType)
-            dialogExerciseType
-            dialogExerciseType
+            val dialogCancleBtn = alertDialog.findViewById<Button>(R.id.dialogCancleBtn)
+            val dialogAddBtn = alertDialog.findViewById<Button>(R.id.dialogAddBtn)
 
             dialogExerciseName?.text = name
             dialogExerciseType?.text = type
+
+            dialogCancleBtn?.setOnClickListener { alertDialog.dismiss() }
+            dialogAddBtn?.setOnClickListener { alertDialog.dismiss() }
+
+
         }
     }
 
