@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
-import com.example.morethanyesterdayv2.AboutRoom.RecyclerAdapter
+import com.example.morethanyesterdayv2.AboutRoom.RecordListAdapter
 import com.example.morethanyesterdayv2.AboutRoom.RoomHelper
-import com.example.morethanyesterdayv2.AboutRoom.RoomMemo
-import com.example.morethanyesterdayv2.AboutRoom.RoomMemoDAO
+import com.example.morethanyesterdayv2.AboutRoom.ExerciseEntity
+import com.example.morethanyesterdayv2.AboutRoom.ExerciseDAO
 import com.example.morethanyesterdayv2.databinding.ActivitySelectedDateBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,9 +19,9 @@ class SelectedDateActivity : AppCompatActivity() {
 
     val binding by lazy { ActivitySelectedDateBinding.inflate(layoutInflater) }
     lateinit var helper: RoomHelper
-    lateinit var memoAdapter: RecyclerAdapter
-    val memoList = mutableListOf<RoomMemo>()
-    lateinit var memoDAO: RoomMemoDAO
+    lateinit var memoAdapter: RecordListAdapter
+    val memoList = mutableListOf<ExerciseEntity>()
+    lateinit var memoDAO: ExerciseDAO
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,9 +32,9 @@ class SelectedDateActivity : AppCompatActivity() {
             Room.databaseBuilder(this, RoomHelper::class.java, "room_db")
 //                .allowMainThreadQueries()//공부할때만 쓴다
                 .build()
-        memoDAO = helper.roomMemoDao()
+        memoDAO = helper.exerciseDAO()
 
-        memoAdapter = RecyclerAdapter(memoList)
+        memoAdapter = RecordListAdapter(memoList)
 
         refreshAdapter()
 
@@ -48,7 +48,7 @@ class SelectedDateActivity : AppCompatActivity() {
         }
     }
 
-    fun insertMemo(memo: RoomMemo) {
+    fun insertMemo(memo: ExerciseEntity) {
         CoroutineScope(Dispatchers.IO).launch {
             memoDAO.insert(memo)
             refreshAdapter()

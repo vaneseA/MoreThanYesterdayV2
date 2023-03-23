@@ -5,8 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "room_memo")
-class RoomMemo {
+@Entity(tableName = "room_exercise")
+class ExerciseEntity {
     @PrimaryKey(autoGenerate = true)// no에 값이 없을 때 자동증가된 숫자 값을 db에 입력해준다.
     @ColumnInfo
     var no: Long? = null

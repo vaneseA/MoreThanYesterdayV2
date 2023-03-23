@@ -9,21 +9,20 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.morethanyesterdayv2.AboutRoom.RoomHelper
-import com.example.morethanyesterdayv2.AboutRoom.RoomMemo
-import com.example.morethanyesterdayv2.AboutRoom.RoomMemoDAO
+import com.example.morethanyesterdayv2.AboutRoom.ExerciseEntity
+import com.example.morethanyesterdayv2.AboutRoom.ExerciseDAO
 import com.example.morethanyesterdayv2.R
 import com.example.morethanyesterdayv2.viewmodel.ExerciseData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ExerciseListAdapter(private val context: Context) :
     RecyclerView.Adapter<ExerciseListAdapter.ViewHolder>() {
 
     lateinit var helper: RoomHelper
-    val memoList = mutableListOf<RoomMemo>()
-    lateinit var memoDAO: RoomMemoDAO
+    val memoList = mutableListOf<ExerciseEntity>()
+    lateinit var memoDAO: ExerciseDAO
 
     var datas = mutableListOf<ExerciseData>()
 
@@ -82,8 +81,8 @@ class ExerciseListAdapter(private val context: Context) :
                 helper =
                     Room.databaseBuilder(context, RoomHelper::class.java, "room_db")
                         .build()
-                memoDAO = helper.roomMemoDao()
-                val memo = RoomMemo(exerciseName,exerciseType)
+                memoDAO = helper.exerciseDAO()
+                val memo = ExerciseEntity(exerciseName,exerciseType)
                 insertMemo(memo)
 
 
@@ -96,7 +95,7 @@ class ExerciseListAdapter(private val context: Context) :
             }).create().show()
     }
 
-    fun insertMemo(memo: RoomMemo) {
+    fun insertMemo(memo: ExerciseEntity) {
         CoroutineScope(Dispatchers.IO).launch {
             memoDAO.insert(memo)
             refreshAdapter()

@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
 
-class RecyclerAdapter(val memoList: List<RoomMemo>) :
-    RecyclerView.Adapter<RecyclerAdapter.Holder>() {
+class RecordListAdapter(val exerciseList: List<ExerciseEntity>) :
+    RecyclerView.Adapter<RecordListAdapter.Holder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -16,17 +16,17 @@ class RecyclerAdapter(val memoList: List<RoomMemo>) :
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.setMemo(memoList.get(position))
+        holder.setMemo(exerciseList.get(position))
     }
 
-    override fun getItemCount(): Int = memoList.size
+    override fun getItemCount(): Int = exerciseList.size
 
     class Holder(val binding: RecordRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun setMemo(memo: RoomMemo) {
+        fun setMemo(exerciseEntity: ExerciseEntity) {
             with(binding) {
-                textNo.text = "${memo.no}"+"."
-                NameArea.text = memo.exerciseName
-                TypeArea.text = "등"
+                textNo.text = "${exerciseEntity.no}"+"."
+                NameArea.text = exerciseEntity.exerciseName
+                TypeArea.text = exerciseEntity.exerciseType
 
 //                val sdf = SimpleDateFormat("yyyy/MM/dd:mm")
 //                textDate.text = sdf.format(memo.datetime)
