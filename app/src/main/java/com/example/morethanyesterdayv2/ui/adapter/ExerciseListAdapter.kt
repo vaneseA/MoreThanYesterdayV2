@@ -58,19 +58,20 @@ class ExerciseListAdapter(private val context: Context) :
             txtName.text = item.name
             txtType.text = item.type
             var seletedDate = "1월 24일"
+            var exerciseName = "등"
 
             val pos = adapterPosition
             if (pos != RecyclerView.NO_POSITION) {
                 itemView.setOnClickListener {
                     listener?.onItemClick(itemView, item, pos)
-                    createDeleteAlterDialog(pos,txtName.text.toString(),seletedDate)
+                    createDeleteAlterDialog(pos,txtName.text.toString(),exerciseName,seletedDate,)
                 }
             }
 
 
         }
     }
-    fun createDeleteAlterDialog(currentItem: Int, exerciseName:String, seletedDate:String){
+    fun createDeleteAlterDialog(currentItem: Int, exerciseName:String,exerciseType:String, seletedDate:String){
         AlertDialog.Builder(context)
             .setTitle("$seletedDate")
             .setMessage(
@@ -82,7 +83,7 @@ class ExerciseListAdapter(private val context: Context) :
                     Room.databaseBuilder(context, RoomHelper::class.java, "room_db")
                         .build()
                 memoDAO = helper.roomMemoDao()
-                val memo = RoomMemo(exerciseName)
+                val memo = RoomMemo(exerciseName,exerciseType)
                 insertMemo(memo)
 
 

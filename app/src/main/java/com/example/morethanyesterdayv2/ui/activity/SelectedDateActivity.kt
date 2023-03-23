@@ -42,15 +42,6 @@ class SelectedDateActivity : AppCompatActivity() {
             recyclerMemo.adapter = memoAdapter
             recyclerMemo.layoutManager = LinearLayoutManager(this@SelectedDateActivity)
 
-            buttonSave.setOnClickListener {
-                val content = editMemo.text.toString()
-                if (content.isNotEmpty()) {
-//                    val datetime = System.currentTimeMillis()
-                    val memo = RoomMemo(content)
-                    editMemo.setText("")
-                    insertMemo(memo)
-                }
-            }
         }
         binding.SelectExerciseBtn.setOnClickListener {
             startActivity(Intent(this, SelectExerciseActivity::class.java))

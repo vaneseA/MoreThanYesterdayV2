@@ -11,12 +11,12 @@ class RoomMemo {
     @ColumnInfo
     var no: Long? = null
     @ColumnInfo
-    var content: String = ""
-//    @ColumnInfo(name = "date")
-//    var datetime: Long = 0
+    var exerciseName: String = ""
+    @ColumnInfo
+    var exerciseType: String = ""
 
-    constructor(content:String){
-        this.content = content
-//        this.datetime = datetime
+    constructor(exerciseName:String,exerciseType:String){
+        this.exerciseName = exerciseName
+        this.exerciseType = exerciseType
     }
 }

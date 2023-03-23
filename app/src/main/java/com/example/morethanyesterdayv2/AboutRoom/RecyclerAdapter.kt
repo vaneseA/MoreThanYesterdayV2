@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
-import java.text.SimpleDateFormat
 
 class RecyclerAdapter(val memoList: List<RoomMemo>) :
     RecyclerView.Adapter<RecyclerAdapter.Holder>() {
@@ -26,7 +25,7 @@ class RecyclerAdapter(val memoList: List<RoomMemo>) :
         fun setMemo(memo: RoomMemo) {
             with(binding) {
                 textNo.text = "${memo.no}"+"."
-                NameArea.text = memo.content
+                NameArea.text = memo.exerciseName
                 TypeArea.text = "등"
 
 //                val sdf = SimpleDateFormat("yyyy/MM/dd:mm")
