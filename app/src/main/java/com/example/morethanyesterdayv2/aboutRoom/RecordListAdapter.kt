@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
+import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 
 
@@ -12,7 +13,7 @@ class RecordListAdapter(
     val exerciseList: List<ExerciseEntity>,
     var context: Context
 ) :
-    RecyclerView.Adapter<RecordListAdapter.Holder>() {
+    RecyclerView.Adapter<RecordListAdapter.Holder>(), AddSetDialogInterface {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -33,18 +34,20 @@ class RecordListAdapter(
         var exerciseEntity: ExerciseEntity? = null
         var mPosition: Int? = null
 
-        init {
-            binding.addSetBtn.setOnClickListener {
-                selectedDateActivity?.clickViewEvents(mPosition!!,exerciseEntity!!)
-            }
-        }
         fun setData(member: ExerciseEntity, position: Int) {
             binding.textNo.text = exerciseEntity?.no.toString()
             binding.NameArea.text = exerciseEntity?.exerciseName
             binding.TypeArea.text = exerciseEntity?.exerciseType
+            binding.addSetBtn.setOnClickListener {
+                selectedDateActivity?.clickViewEvents(position, member)
+            }
             this.exerciseEntity = member
             this.mPosition = position
         }
+
+    }
+
+    override fun onYesButtonClick(id: Int) {
     }
 }
 

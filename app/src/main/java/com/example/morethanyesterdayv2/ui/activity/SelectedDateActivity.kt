@@ -74,8 +74,8 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
     }
 
     // 뷰 클릭 이벤트 정의
-    fun clickViewEvents(position: Int, exerciseList: ExerciseEntity) {
-        val dialog = CustomDialog(this, exerciseList, position)
+    fun clickViewEvents(position: Int, member: ExerciseEntity) {
+        val dialog = CustomDialog(this@SelectedDateActivity,position,member)
         // 알림창이 띄워져있는 동안 배경 클릭 막기
         dialog.isCancelable = false
         dialog.show(this.supportFragmentManager, "ConfirmDialog")

@@ -13,13 +13,13 @@ import com.example.morethanyesterdayv2.aboutRecord.ActionType
 import com.example.morethanyesterdayv2.aboutRecord.MynumberViewModel
 import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
 import com.example.morethanyesterdayv2.databinding.CustomAddSetDialogBinding
+import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 
 class CustomDialog(
-    addSetDialogInterface: AddSetDialogInterface,
-    exerciseEntity: ExerciseEntity,
+    addSetDialogInterface: SelectedDateActivity,
     position: Int,
+    member: ExerciseEntity,
 ) : DialogFragment() {
-    val exerciseList = mutableListOf<ExerciseEntity>()
 
 
     lateinit var mynumberViewModel: MynumberViewModel
@@ -29,12 +29,11 @@ class CustomDialog(
     private val binding get() = _binding!!
 
     private var addSetDialogInterface: AddSetDialogInterface? = null
-
-    private var member: String? = null
+    var exerciseEntity: ExerciseEntity? = null
     private var position: Int? = null
 
     init {
-        this.member = member.toString()
+        this.exerciseEntity = member
         this.position = position
         this.addSetDialogInterface = addSetDialogInterface
     }
@@ -59,8 +58,8 @@ class CustomDialog(
             binding.userInputCount?.text = it.toString()
         })
 
-        binding.dialogExerciseName?.text = exerciseList.exerciseName
-        binding.dialogExerciseType?.text = exerciseList.exerciseType
+        binding.dialogExerciseName?.text = exerciseEntity?.exerciseName
+        binding.dialogExerciseType?.text = exerciseEntity?.exerciseType
 
         binding.dialogCancleBtn?.setOnClickListener { dismiss() }
         binding.dialogAddBtn?.setOnClickListener { dismiss() }
