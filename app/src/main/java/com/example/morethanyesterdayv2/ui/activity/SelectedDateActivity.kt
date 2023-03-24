@@ -24,14 +24,16 @@ import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
 import com.example.morethanyesterdayv2.aboutRoom.RecordListAdapter
 import com.example.morethanyesterdayv2.aboutRoom.RoomHelper
 import com.example.morethanyesterdayv2.databinding.ActivitySelectedDateBinding
+import com.example.morethanyesterdayv2.dialog.ConfirmDialogInterface
+import com.example.morethanyesterdayv2.dialog.CustomDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SelectedDateActivity : AppCompatActivity(), View.OnClickListener {
+class SelectedDateActivity : AppCompatActivity(), ConfirmDialogInterface {
 
-    lateinit var mynumberViewModel: MynumberViewModel
+//    private lateinit var mynumberViewModel: MynumberViewModel
 
     val binding by lazy { ActivitySelectedDateBinding.inflate(layoutInflater) }
     lateinit var helper: RoomHelper
@@ -73,7 +75,7 @@ class SelectedDateActivity : AppCompatActivity(), View.OnClickListener {
             startActivity(Intent(this, SelectExerciseActivity::class.java))
         }
 
-        mynumberViewModel = ViewModelProvider(this).get(MynumberViewModel::class.java)
+
     }
 
     fun refreshAdapter() {
@@ -86,77 +88,16 @@ class SelectedDateActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun addSetDialog(position: Int, member: ExerciseEntity) {
-        val dialogView =
-            LayoutInflater.from(this@SelectedDateActivity)
-                .inflate(R.layout.custom_add_set_dialog, null)
-        val builder = AlertDialog.Builder(this@SelectedDateActivity)
-            .setView(dialogView)
-            .setCancelable(false)
-
-        val alertDialog = builder.show()
-
-        //dialog radius줘서 모서리 둥글게
-        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        //binding 전까지는 이거
-        val dialogExerciseName = alertDialog.findViewById<TextView>(R.id.dialogExerciseName)
-        val dialogExerciseType = alertDialog.findViewById<TextView>(R.id.dialogExerciseType)
-        val dialogCancleBtn = alertDialog.findViewById<Button>(R.id.dialogCancleBtn)
-        val dialogAddBtn = alertDialog.findViewById<Button>(R.id.dialogAddBtn)
-
-        val plusFiveBtn = alertDialog.findViewById<TextView>(R.id.plusFiveBtn)
-        val minusFiveBtn = alertDialog.findViewById<TextView>(R.id.minusFiveBtn)
-        val plusOneBtn = alertDialog.findViewById<TextView>(R.id.plusOneBtn)
-        val minusOneBtn = alertDialog.findViewById<TextView>(R.id.minusOneBtn)
-        val userInputWeight = alertDialog.findViewById<TextView>(R.id.userInputWeight)
-        val userInputCount = alertDialog.findViewById<TextView>(R.id.userInputCount)
-
-        mynumberViewModel.currentWeightValue.observe(this, Observer {
-            userInputWeight?.text = it.toString()
-        })
-        mynumberViewModel.currentCountValue.observe(this, Observer {
-            userInputCount?.text = it.toString()
-        })
-
-        dialogExerciseName?.text = member.exerciseName
-        dialogExerciseType?.text = member.exerciseType
-
-        dialogCancleBtn?.setOnClickListener { alertDialog.dismiss() }
-        dialogAddBtn?.setOnClickListener { alertDialog.dismiss() }
-
-        plusFiveBtn?.setOnClickListener {
-            mynumberViewModel.updateValue(
-                actionType = ActionType.WEIGHTPLUS,
-                5
-            )
-        }
-        minusFiveBtn?.setOnClickListener {
-            mynumberViewModel.updateValue(
-                actionType = ActionType.WEIGHTMINUS,
-                5
-            )
-        }
-        plusOneBtn?.setOnClickListener {
-            mynumberViewModel.updateValue(
-                actionType = ActionType.COUNTPLUS,
-                1
-            )
-        }
-        minusOneBtn?.setOnClickListener {
-            mynumberViewModel.updateValue(
-                actionType = ActionType.COUNTMINUS,
-                1
-            )
-        }
-
-
+    // 뷰 클릭 이벤트 정의
+    fun clickViewEvents(postion: Int, member: ExerciseEntity) {
+            val dialog = CustomDialog(this, postion, member)
+            // 알림창이 띄워져있는 동안 배경 클릭 막기
+            dialog.isCancelable = false
+            dialog.show(this.supportFragmentManager, "ConfirmDialog")
     }
 
-    override fun onClick(view: View?) {
-        //뷰모델에 라이브데이터 값을 변경하는 메소드 실행
-        when (view) {
-        }
+    override fun onYesButtonClick(id: Int) {
+        TODO("Not yet implemented")
     }
 
 }

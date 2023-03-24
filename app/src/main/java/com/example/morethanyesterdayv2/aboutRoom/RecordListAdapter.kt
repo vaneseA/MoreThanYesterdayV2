@@ -35,7 +35,7 @@ class RecordListAdapter(
 
         init {
             binding.addSetBtn.setOnClickListener {
-                selectedDateActivity?.addSetDialog(mPosition!!,exerciseEntity!!)
+                selectedDateActivity?.clickViewEvents(mPosition!!,exerciseEntity!!)
             }
         }
         fun setData(member: ExerciseEntity, position: Int) {
