@@ -15,7 +15,7 @@ import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
 import com.example.morethanyesterdayv2.databinding.CustomAddSetDialogBinding
 
 class CustomDialog(
-    confirmDialogInterface: ConfirmDialogInterface,
+    addSetDialogInterface: AddSetDialogInterface,
     position: Int, member: ExerciseEntity
 ) : DialogFragment() {
 
@@ -25,7 +25,7 @@ class CustomDialog(
     private var _binding: CustomAddSetDialogBinding? = null
     private val binding get() = _binding!!
 
-    private var confirmDialogInterface: ConfirmDialogInterface? = null
+    private var addSetDialogInterface: AddSetDialogInterface? = null
 
     private var member: String? = null
     private var position: Int? = null
@@ -33,7 +33,7 @@ class CustomDialog(
     init {
         this.member = member.toString()
         this.position = position
-        this.confirmDialogInterface = confirmDialogInterface
+        this.addSetDialogInterface = addSetDialogInterface
     }
 
     override fun onCreateView(
@@ -96,6 +96,6 @@ class CustomDialog(
     }
 }
 
-interface ConfirmDialogInterface {
+interface AddSetDialogInterface {
     fun onYesButtonClick(id: Int)
 }

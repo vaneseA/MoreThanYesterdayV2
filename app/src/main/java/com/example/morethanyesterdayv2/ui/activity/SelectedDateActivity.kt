@@ -24,14 +24,14 @@ import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
 import com.example.morethanyesterdayv2.aboutRoom.RecordListAdapter
 import com.example.morethanyesterdayv2.aboutRoom.RoomHelper
 import com.example.morethanyesterdayv2.databinding.ActivitySelectedDateBinding
-import com.example.morethanyesterdayv2.dialog.ConfirmDialogInterface
+import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
 import com.example.morethanyesterdayv2.dialog.CustomDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SelectedDateActivity : AppCompatActivity(), ConfirmDialogInterface {
+class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
 
 //    private lateinit var mynumberViewModel: MynumberViewModel
 
