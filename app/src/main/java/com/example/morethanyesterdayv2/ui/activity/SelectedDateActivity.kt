@@ -6,14 +6,19 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.morethanyesterdayv2.R
+import com.example.morethanyesterdayv2.aboutRecord.ActionType
+import com.example.morethanyesterdayv2.aboutRecord.MynumberViewModel
 import com.example.morethanyesterdayv2.aboutRoom.ExerciseDAO
 import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
 import com.example.morethanyesterdayv2.aboutRoom.RecordListAdapter
@@ -24,7 +29,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SelectedDateActivity : AppCompatActivity() {
+class SelectedDateActivity : AppCompatActivity(), View.OnClickListener {
+
+    lateinit var mynumberViewModel: MynumberViewModel
 
     val binding by lazy { ActivitySelectedDateBinding.inflate(layoutInflater) }
     lateinit var helper: RoomHelper
@@ -32,12 +39,12 @@ class SelectedDateActivity : AppCompatActivity() {
     val exerciseList = mutableListOf<ExerciseEntity>()
     lateinit var exerciseDAO: ExerciseDAO
 
-    init{
+    init {
         instance = this
     }
 
-    companion object{
-        private var instance:SelectedDateActivity? = null
+    companion object {
+        private var instance: SelectedDateActivity? = null
         fun getInstance(): SelectedDateActivity? {
             return instance
         }
@@ -53,7 +60,7 @@ class SelectedDateActivity : AppCompatActivity() {
                 .build()
         exerciseDAO = helper.exerciseDAO()
 
-        recordListAdapter = RecordListAdapter(exerciseList,this@SelectedDateActivity)
+        recordListAdapter = RecordListAdapter(exerciseList, this@SelectedDateActivity)
 
         refreshAdapter()
 
@@ -65,6 +72,8 @@ class SelectedDateActivity : AppCompatActivity() {
         binding.SelectExerciseBtn.setOnClickListener {
             startActivity(Intent(this, SelectExerciseActivity::class.java))
         }
+
+        mynumberViewModel = ViewModelProvider(this).get(MynumberViewModel::class.java)
     }
 
     fun refreshAdapter() {
@@ -76,6 +85,7 @@ class SelectedDateActivity : AppCompatActivity() {
             }
         }
     }
+
     fun addSetDialog(position: Int, member: ExerciseEntity) {
         val dialogView =
             LayoutInflater.from(this@SelectedDateActivity)
@@ -99,7 +109,15 @@ class SelectedDateActivity : AppCompatActivity() {
         val minusFiveBtn = alertDialog.findViewById<TextView>(R.id.minusFiveBtn)
         val plusOneBtn = alertDialog.findViewById<TextView>(R.id.plusOneBtn)
         val minusOneBtn = alertDialog.findViewById<TextView>(R.id.minusOneBtn)
+        val userInputWeight = alertDialog.findViewById<TextView>(R.id.userInputWeight)
+        val userInputCount = alertDialog.findViewById<TextView>(R.id.userInputCount)
 
+        mynumberViewModel.currentWeightValue.observe(this, Observer {
+            userInputWeight?.text = it.toString()
+        })
+        mynumberViewModel.currentCountValue.observe(this, Observer {
+            userInputCount?.text = it.toString()
+        })
 
         dialogExerciseName?.text = member.exerciseName
         dialogExerciseType?.text = member.exerciseType
@@ -107,12 +125,38 @@ class SelectedDateActivity : AppCompatActivity() {
         dialogCancleBtn?.setOnClickListener { alertDialog.dismiss() }
         dialogAddBtn?.setOnClickListener { alertDialog.dismiss() }
 
-        plusFiveBtn?.setOnClickListener {}
-        minusFiveBtn?.setOnClickListener {}
-        plusOneBtn?.setOnClickListener {}
-        minusOneBtn?.setOnClickListener {}
+        plusFiveBtn?.setOnClickListener {
+            mynumberViewModel.updateValue(
+                actionType = ActionType.WEIGHTPLUS,
+                5
+            )
+        }
+        minusFiveBtn?.setOnClickListener {
+            mynumberViewModel.updateValue(
+                actionType = ActionType.WEIGHTMINUS,
+                5
+            )
+        }
+        plusOneBtn?.setOnClickListener {
+            mynumberViewModel.updateValue(
+                actionType = ActionType.COUNTPLUS,
+                1
+            )
+        }
+        minusOneBtn?.setOnClickListener {
+            mynumberViewModel.updateValue(
+                actionType = ActionType.COUNTMINUS,
+                1
+            )
+        }
 
 
+    }
+
+    override fun onClick(view: View?) {
+        //뷰모델에 라이브데이터 값을 변경하는 메소드 실행
+        when (view) {
+        }
     }
 
 }
