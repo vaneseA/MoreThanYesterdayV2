@@ -16,8 +16,11 @@ import com.example.morethanyesterdayv2.databinding.CustomAddSetDialogBinding
 
 class CustomDialog(
     addSetDialogInterface: AddSetDialogInterface,
-    position: Int, member: ExerciseEntity
+    exerciseEntity: ExerciseEntity,
+    position: Int,
 ) : DialogFragment() {
+    val exerciseList = mutableListOf<ExerciseEntity>()
+
 
     lateinit var mynumberViewModel: MynumberViewModel
 
@@ -56,8 +59,8 @@ class CustomDialog(
             binding.userInputCount?.text = it.toString()
         })
 
-//        binding.dialogExerciseName?.text = member.exerciseName
-//        binding.dialogExerciseType?.text = member.exerciseType
+        binding.dialogExerciseName?.text = exerciseList.exerciseName
+        binding.dialogExerciseType?.text = exerciseList.exerciseType
 
         binding.dialogCancleBtn?.setOnClickListener { dismiss() }
         binding.dialogAddBtn?.setOnClickListener { dismiss() }
