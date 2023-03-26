@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.morethanyesterdayv2.aboutrvinrv.RecordDAO
-import com.example.morethanyesterdayv2.aboutrvinrv.RecordEntity
+import com.example.morethanyesterdayv2.aboutrvinrv.ParentItem
 import com.example.morethanyesterdayv2.aboutrvinrv.RecordSetListAdapter
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
@@ -27,8 +26,8 @@ class RecordListAdapter(
     }
 
     override fun onBindViewHolder(holder: ParentViewHolder, position: Int) {
-        val member = exerciseList[position]
-        holder.setData(member, position)
+        val parentItem = exerciseList[position]
+        holder.setData(parentItem, position)
     }
 
     override fun getItemCount(): Int = exerciseList.size
@@ -39,9 +38,9 @@ class RecordListAdapter(
 
         private val selectedDateActivity = SelectedDateActivity.getInstance()
         var exerciseEntity: ExerciseEntity? = null
-        var Position: Int? = null
+        var position: Int? = null
 
-        fun setData(exerciseEntity: ExerciseEntity, position: Int) {
+        fun setData(parentItem: ParentItem, position: Int) {
             binding.textNo.text = exerciseEntity?.no.toString()
             binding.NameArea.text = exerciseEntity?.exerciseName
             binding.TypeArea.text = exerciseEntity?.exerciseType
@@ -51,12 +50,12 @@ class RecordListAdapter(
 
             binding.nestedRV.setHasFixedSize(true)
             binding.nestedRV.layoutManager = LinearLayoutManager(itemView.context)
-//            val adapter = RecordSetListAdapter(exerciseEntity,position)
-            binding.nestedRV.adapter = recordSetListAdapter
+            val adapter = RecordSetListAdapter(parentItem,mList)
+            binding.nestedRV.adapter = adapter
 
 
             this.exerciseEntity = exerciseEntity
-            this.Position = position
+            this.position = position
         }
 
     }

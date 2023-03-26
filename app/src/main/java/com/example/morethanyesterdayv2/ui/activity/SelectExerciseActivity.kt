@@ -32,11 +32,6 @@ class SelectExerciseActivity : AppCompatActivity() {
             exerciseListAdapter.notifyDataSetChanged()
 
         }
-//        exerciseListAdapter.setOnItemClickListener(object : ExerciseListAdapter.OnItemClickListener{
-//            override fun onItemClick(v: View, data: ExerciseData, pos : Int) {
-//
-//            }
-//
-//        })
+
     }
 }

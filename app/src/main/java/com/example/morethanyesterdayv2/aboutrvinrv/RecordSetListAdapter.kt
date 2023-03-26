@@ -28,8 +28,6 @@ class RecordSetListAdapter(private val recordList: List<RecordEntity>,
     override fun getItemCount(): Int = recordList.size
 
     class Holder(val binding: SetRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
-
-
         var recordEntity: RecordEntity? = null
         var position: Int? = null
 
