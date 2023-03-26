@@ -9,11 +9,23 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
 import com.example.morethanyesterdayv2.aboutRecord.ActionType
 import com.example.morethanyesterdayv2.aboutRecord.MynumberViewModel
 import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
+import com.example.morethanyesterdayv2.aboutRoom.RoomHelper
+import com.example.morethanyesterdayv2.aboutrvinrv.RecordDAO
+import com.example.morethanyesterdayv2.aboutrvinrv.RecordEntity
+import com.example.morethanyesterdayv2.aboutrvinrv.RecordRoomHelper
 import com.example.morethanyesterdayv2.databinding.CustomAddSetDialogBinding
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
+lateinit var recordRoomHelper: RecordRoomHelper
+val recordSetList = mutableListOf<RecordEntity>()
+lateinit var recordDAO: RecordDAO
 
 class CustomDialog(
     addSetDialogInterface: SelectedDateActivity,
@@ -62,7 +74,16 @@ class CustomDialog(
         binding.dialogExerciseType?.text = exerciseEntity?.exerciseType
 
         binding.dialogCancleBtn?.setOnClickListener { dismiss() }
-        binding.dialogAddBtn?.setOnClickListener { dismiss() }
+        binding.dialogAddBtn?.setOnClickListener {
+            recordRoomHelper =
+                Room.databaseBuilder(it.context, RecordRoomHelper::class.java, "room_record_db")
+                    .build()
+            recordDAO = recordRoomHelper.recordDAO()
+            val record =
+                RecordEntity(recordName = "렛풀다운", recordType = "등", kg = "50", count = "10")
+            insertRecord(record)
+            dialog?.dismiss()
+        }
 
         binding.plusFiveBtn?.setOnClickListener {
             mynumberViewModel.updateValue(
@@ -95,6 +116,12 @@ class CustomDialog(
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+}
+
+fun insertRecord(record: RecordEntity) {
+    CoroutineScope(Dispatchers.IO).launch {
+        recordDAO.insert(record)
     }
 }
 

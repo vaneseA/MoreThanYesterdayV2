@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.morethanyesterdayv2.aboutrvinrv.RecordDAO
 import com.example.morethanyesterdayv2.aboutrvinrv.RecordEntity
 import com.example.morethanyesterdayv2.aboutrvinrv.RecordSetListAdapter
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
@@ -27,6 +28,7 @@ class RecordListAdapter(
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val member = exerciseList[position]
         holder.setData(member, position)
+        holder.binding.nestedRV.
     }
 
     override fun getItemCount(): Int = exerciseList.size

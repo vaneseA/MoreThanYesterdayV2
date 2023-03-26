@@ -10,9 +10,6 @@ class RecordEntity {
     @ColumnInfo
     var setNo: Long? = null
 
-    //배정받은 날짜
-    @ColumnInfo
-    var selectedDate: String = ""
 
     //  운동이름
     @ColumnInfo
@@ -22,24 +19,31 @@ class RecordEntity {
     @ColumnInfo
     var recordType: String = ""
 
-    // 총 세트 수
-    @ColumnInfo
-    var set: String = ""
 
-    // 총 중량
+    // 중량
     @ColumnInfo
     var kg: String = ""
 
-    // 최고 중량
-    @ColumnInfo
-    var bestKg: String = ""
-
-    // 총 횟수
+    // 횟수
     @ColumnInfo
     var count: String = ""
 
-//    constructor(exerciseName:String,exerciseType:String){
-//        this.exerciseName = exerciseName
-//        this.exerciseType = exerciseType
-//    }
+
+    //    //배정받은 날짜
+//    @ColumnInfo
+//    var selectedDate: String = ""
+
+
+//    // 세트 수
+//    @ColumnInfo
+//    var set: String = ""
+
+
+
+    constructor(recordName: String, recordType: String, kg: String, count: String) {
+        this.recordName = recordName
+        this.recordType = recordType
+        this.kg = kg
+        this.count = count
+    }
 }

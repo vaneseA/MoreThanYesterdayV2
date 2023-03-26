@@ -4,14 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
 import com.example.morethanyesterdayv2.databinding.SetRvItemBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 
 
 class RecordSetListAdapter(
-
     var context: Context
 ) :
     RecyclerView.Adapter<RecordSetListAdapter.Holder>(), AddSetDialogInterface {
@@ -24,21 +22,20 @@ class RecordSetListAdapter(
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val list = recordList[position]
-        holder.setData(list, position)
+        val listForNasted = recordList[position]
+        holder.recordData(listForNasted, position)
     }
 
     override fun getItemCount(): Int = recordList.size
 
     class Holder(val binding: SetRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        private val selectedDateActivity = SelectedDateActivity.getInstance()
         var recordEntity: RecordEntity? = null
         var position: Int? = null
 
-        fun setData(recordEntity: RecordEntity, position: Int) {
-            binding.recordSetItem.text = recordEntity?.setNo.toString()
-            binding.recordKgItem.text = recordEntity?.kg
-            binding.recordCountItem.text = recordEntity?.count
+        fun recordData(recordEntity: RecordEntity, position: Int) {
+            binding.recordSetItem.text = recordEntity?.setNo.toString() + "번째 세트"
+            binding.recordKgItem.text = recordEntity?.kg + "kg"
+            binding.recordCountItem.text = recordEntity?.count + "회"
             this.recordEntity = recordEntity
             this.position = position
         }
