@@ -10,6 +10,7 @@ import com.example.morethanyesterdayv2.aboutrvinrv.RecordEntity
 import com.example.morethanyesterdayv2.aboutrvinrv.RecordSetListAdapter
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
+import com.example.morethanyesterdayv2.dialog.recordSetList
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 
 
@@ -28,14 +29,13 @@ class RecordListAdapter(
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val member = exerciseList[position]
         holder.setData(member, position)
-        holder.binding.nestedRV.
     }
 
     override fun getItemCount(): Int = exerciseList.size
 
     inner class Holder(val binding: RecordRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        private val recordSetListAdapter = RecordSetListAdapter(context)
+        private val recordSetListAdapter = RecordSetListAdapter(recordSetList,context)
 
         private val selectedDateActivity = SelectedDateActivity.getInstance()
         var exerciseEntity: ExerciseEntity? = null
@@ -48,7 +48,7 @@ class RecordListAdapter(
             binding.addSetBtn.setOnClickListener {
                 selectedDateActivity?.clickViewEvents(position, member)
             }
-            recordSetListAdapter
+
             binding.nestedRV.setHasFixedSize(false)
             binding.nestedRV.layoutManager = LinearLayoutManager(context)
             binding.nestedRV.adapter = recordSetListAdapter

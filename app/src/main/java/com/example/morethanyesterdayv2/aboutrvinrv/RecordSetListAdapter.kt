@@ -9,11 +9,10 @@ import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 
 
-class RecordSetListAdapter(
+class RecordSetListAdapter(private val recordList: List<RecordEntity>,
     var context: Context
 ) :
     RecyclerView.Adapter<RecordSetListAdapter.Holder>(), AddSetDialogInterface {
-    var recordList = listOf<RecordEntity>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =
@@ -22,8 +21,8 @@ class RecordSetListAdapter(
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val listForNasted = recordList[position]
-        holder.recordData(listForNasted, position)
+        val listForNested = recordList[position]
+        holder.recordData(listForNested, position)
     }
 
     override fun getItemCount(): Int = recordList.size
