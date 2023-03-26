@@ -18,44 +18,45 @@ class RecordListAdapter(
     val exerciseList: List<ExerciseEntity>,
     var context: Context
 ) :
-    RecyclerView.Adapter<RecordListAdapter.Holder>(), AddSetDialogInterface {
+    RecyclerView.Adapter<RecordListAdapter.ParentViewHolder>(), AddSetDialogInterface {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParentViewHolder {
         val binding =
             RecordRvItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return Holder(binding)
+        return ParentViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: Holder, position: Int) {
+    override fun onBindViewHolder(holder: ParentViewHolder, position: Int) {
         val member = exerciseList[position]
         holder.setData(member, position)
     }
 
     override fun getItemCount(): Int = exerciseList.size
 
-    inner class Holder(val binding: RecordRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ParentViewHolder(val binding: RecordRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         private val recordSetListAdapter = RecordSetListAdapter(recordSetList,context)
 
         private val selectedDateActivity = SelectedDateActivity.getInstance()
         var exerciseEntity: ExerciseEntity? = null
-        var mPosition: Int? = null
+        var Position: Int? = null
 
-        fun setData(member: ExerciseEntity, position: Int) {
+        fun setData(exerciseEntity: ExerciseEntity, position: Int) {
             binding.textNo.text = exerciseEntity?.no.toString()
             binding.NameArea.text = exerciseEntity?.exerciseName
             binding.TypeArea.text = exerciseEntity?.exerciseType
             binding.addSetBtn.setOnClickListener {
-                selectedDateActivity?.clickViewEvents(position, member)
+                selectedDateActivity?.clickViewEvents(position, exerciseEntity)
             }
 
-            binding.nestedRV.setHasFixedSize(false)
-            binding.nestedRV.layoutManager = LinearLayoutManager(context)
+            binding.nestedRV.setHasFixedSize(true)
+            binding.nestedRV.layoutManager = LinearLayoutManager(itemView.context)
+//            val adapter = RecordSetListAdapter(exerciseEntity,position)
             binding.nestedRV.adapter = recordSetListAdapter
 
 
-            this.exerciseEntity = member
-            this.mPosition = position
+            this.exerciseEntity = exerciseEntity
+            this.Position = position
         }
 
     }

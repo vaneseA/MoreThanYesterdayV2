@@ -1,42 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true">
 
     <TextView
         android:id="@+id/recordSetItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1Sets"
-        app:fontFamily="@font/jalnanche"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/recordKgItem"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="118dp"
+        app:fontFamily="@font/jalnanche" />
 
     <TextView
         android:id="@+id/recordKgItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="97dp"
+        android:layout_marginStart="100dp"
         android:layout_marginEnd="118dp"
         android:text="0kg"
-        app:fontFamily="@font/jalnanche"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/recordCountItem"
-        app:layout_constraintStart_toEndOf="@+id/recordSetItem"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:fontFamily="@font/jalnanche" />
 
     <TextView
         android:id="@+id/recordCountItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
         android:text="0회"
-        app:fontFamily="@font/jalnanche"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/recordKgItem"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:fontFamily="@font/jalnanche" />
+
+</com.google.android.material.card.MaterialCardView>

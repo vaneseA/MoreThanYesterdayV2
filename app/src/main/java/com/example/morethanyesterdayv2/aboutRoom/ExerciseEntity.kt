@@ -3,6 +3,7 @@ package com.example.morethanyesterdayv2.aboutRoom
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.morethanyesterdayv2.aboutrvinrv.RecordEntity
 
 
 @Entity(tableName = "room_exercise")
@@ -14,6 +15,8 @@ class ExerciseEntity {
     var exerciseName: String = ""
     @ColumnInfo
     var exerciseType: String = ""
+
+//    var mList : List<RecordEntity>()
 
     constructor(exerciseName:String,exerciseType:String){
         this.exerciseName = exerciseName
