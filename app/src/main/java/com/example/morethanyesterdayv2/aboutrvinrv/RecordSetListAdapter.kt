@@ -11,11 +11,11 @@ import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 
 
 class RecordSetListAdapter(
-    val recordList: List<RecordEntity>,
+
     var context: Context
 ) :
     RecyclerView.Adapter<RecordSetListAdapter.Holder>(), AddSetDialogInterface {
-
+    var recordList = listOf<RecordEntity>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =
@@ -39,9 +39,6 @@ class RecordSetListAdapter(
             binding.recordSetItem.text = recordEntity?.setNo.toString()
             binding.recordKgItem.text = recordEntity?.kg
             binding.recordCountItem.text = recordEntity?.count
-//            binding.addSetBtn.setOnClickListener {
-//                selectedDateActivity?.clickViewEvents(position, member)
-//            }
             this.recordEntity = recordEntity
             this.position = position
         }
