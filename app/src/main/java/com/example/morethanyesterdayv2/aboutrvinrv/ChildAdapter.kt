@@ -3,13 +3,15 @@ package com.example.morethanyesterdayv2.aboutrvinrv
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.databinding.SetRvItemBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
 
 
-class ChildAdapter(private val recordList: List<RecordEntity>,
-                   var context: Context
+class ChildAdapter(
+    private val recordList: List<RecordEntity>,
+    var context: Context
 ) :
     RecyclerView.Adapter<ChildAdapter.Holder>(), AddSetDialogInterface {
 
@@ -43,4 +45,3 @@ class ChildAdapter(private val recordList: List<RecordEntity>,
     override fun onYesButtonClick(id: Int) {
     }
 }
-

@@ -1,11 +1,16 @@
 package com.example.morethanyesterdayv2.aboutRoom
 
+
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.example.morethanyesterdayv2.aboutrvinrv.RecordEntity
+import com.example.morethanyesterdayv2.aboutrvinrv.RoomConverters
 
 
 @Entity(tableName = "room_exercise")
+@TypeConverters(RoomConverters::class) // TypeConverter 등록
 class ExerciseEntity {
     @PrimaryKey(autoGenerate = true)// no에 값이 없을 때 자동증가된 숫자 값을 db에 입력해준다.
     @ColumnInfo
@@ -28,6 +33,10 @@ class ExerciseEntity {
 
     @ColumnInfo
     var totalCount: String = ""
+
+    @ColumnInfo
+    var recordList: List<RecordEntity> = emptyList() // recordList 추가
+
 
     constructor(exerciseName: String, exerciseType: String) {
         this.exerciseName = exerciseName
