@@ -18,16 +18,18 @@ class SelectExerciseActivity : AppCompatActivity() {
         setContentView(binding.root)
         initRecycler()
     }
+
     private fun initRecycler() {
         exerciseListAdapter = ExerciseListAdapter(this)
         binding.ExerciseRV.adapter = exerciseListAdapter
 
 
         datas.apply {
-                add(ExerciseData(name = "데드리프트", type = "등"))
-                add(ExerciseData(name = "풀업", type = "등"))
-                add(ExerciseData(name = "렛풀다운", type = "등"))
-                add(ExerciseData(name = "케이블 시티드 로우", type = "등"))
+            add(ExerciseData(name = "데드리프트", type = "등"))
+            add(ExerciseData(name = "풀업", type = "등"))
+            add(ExerciseData(name = "렛풀다운", type = "등"))
+            add(ExerciseData(name = "벤치프레스", type = "가슴"))
+            add(ExerciseData(name = "케이블 시티드 로우", type = "등"))
             exerciseListAdapter.datas = datas
             exerciseListAdapter.notifyDataSetChanged()
 

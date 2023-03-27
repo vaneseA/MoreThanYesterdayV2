@@ -35,6 +35,7 @@ class ParentAdapter(
         private val selectedDateActivity = SelectedDateActivity.getInstance()
 
         fun setData(exerciseEntity: ExerciseEntity, position: Int) {
+            binding.textNo.text =exerciseEntity.no.toString()
             binding.NameArea.text = exerciseEntity.exerciseName
             binding.TypeArea.text = exerciseEntity.exerciseType
             binding.totalSetArea.text = "총 " + exerciseEntity.totalSet.toString() + "set, "

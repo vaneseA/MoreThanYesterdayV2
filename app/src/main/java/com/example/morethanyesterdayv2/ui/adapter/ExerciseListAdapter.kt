@@ -57,13 +57,13 @@ class ExerciseListAdapter(private val context: Context) :
             txtName.text = item.name
             txtType.text = item.type
             var seletedDate = "1월 24일"
-            var exerciseName = "등"
+            var exerciseType = item.type
 
-            val pos = adapterPosition
-            if (pos != RecyclerView.NO_POSITION) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
                 itemView.setOnClickListener {
-                    listener?.onItemClick(itemView, item, pos)
-                    createDeleteAlterDialog(pos,txtName.text.toString(),exerciseName,seletedDate,)
+                    listener?.onItemClick(itemView, item, position)
+                    createDeleteAlterDialog(position,txtName.text.toString(),exerciseType,seletedDate,)
                 }
             }
 
