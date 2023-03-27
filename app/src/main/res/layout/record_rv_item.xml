@@ -87,7 +87,7 @@
                     android:orientation="horizontal">
                     <!-- 총 세트 -->
                     <TextView
-                        android:id="@+id/exerciseSetArea"
+                        android:id="@+id/total_set_area"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="10dp"
@@ -97,7 +97,7 @@
 
                     <!-- 총 kg -->
                     <TextView
-                        android:id="@+id/exerciseKgArea"
+                        android:id="@+id/total_kg_area"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="10dp"
@@ -107,7 +107,7 @@
 
                     <!-- 최고 kg -->
                     <TextView
-                        android:id="@+id/exerciseBestKgArea"
+                        android:id="@+id/best_kg_area"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="10dp"
@@ -117,7 +117,7 @@
 
                     <!-- 총 횟수 -->
                     <TextView
-                        android:id="@+id/exerciseCountArea"
+                        android:id="@+id/total_count_area"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="10dp"

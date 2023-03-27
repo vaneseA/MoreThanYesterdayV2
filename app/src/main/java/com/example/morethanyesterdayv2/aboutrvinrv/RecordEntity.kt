@@ -29,17 +29,6 @@ class RecordEntity {
     var count: String = ""
 
 
-    //    //배정받은 날짜
-//    @ColumnInfo
-//    var selectedDate: String = ""
-
-
-//    // 세트 수
-//    @ColumnInfo
-//    var set: String = ""
-
-
-
     constructor(recordName: String, recordType: String, kg: String, count: String) {
         this.recordName = recordName
         this.recordType = recordType

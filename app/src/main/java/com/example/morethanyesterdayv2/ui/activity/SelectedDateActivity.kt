@@ -43,7 +43,6 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
 
         helper =
             Room.databaseBuilder(this, RoomHelper::class.java, "room_db")
-//                .allowMainThreadQueries()//공부할때만 쓴다
                 .build()
         exerciseDAO = helper.exerciseDAO()
 
