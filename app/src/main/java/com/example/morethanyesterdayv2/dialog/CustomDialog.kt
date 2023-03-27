@@ -13,7 +13,6 @@ import androidx.room.Room
 import com.example.morethanyesterdayv2.aboutRecord.ActionType
 import com.example.morethanyesterdayv2.aboutRecord.MynumberViewModel
 import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
-import com.example.morethanyesterdayv2.aboutRoom.RoomHelper
 import com.example.morethanyesterdayv2.aboutrvinrv.RecordDAO
 import com.example.morethanyesterdayv2.aboutrvinrv.RecordEntity
 import com.example.morethanyesterdayv2.aboutrvinrv.RecordRoomHelper
@@ -30,7 +29,7 @@ lateinit var recordDAO: RecordDAO
 class CustomDialog(
     addSetDialogInterface: SelectedDateActivity,
     position: Int,
-    member: ExerciseEntity,
+    exerciseEntity: ExerciseEntity,
 ) : DialogFragment() {
 
 
@@ -45,9 +44,11 @@ class CustomDialog(
     private var position: Int? = null
 
     init {
-        this.exerciseEntity = member
+        this.exerciseEntity = exerciseEntity
         this.position = position
         this.addSetDialogInterface = addSetDialogInterface
+
+
     }
 
     override fun onCreateView(
@@ -87,8 +88,8 @@ class CustomDialog(
 
             // record 객체의 kg와 count 속성에 값을 대입
             val record = RecordEntity(
-                recordName = "렛풀다운",
-                recordType = "등",
+                recordName = exerciseEntity?.exerciseName ?: "",
+                recordType = exerciseEntity?.exerciseType ?: "",
                 kg = kg.toString(),
                 count = count.toString()
             )
