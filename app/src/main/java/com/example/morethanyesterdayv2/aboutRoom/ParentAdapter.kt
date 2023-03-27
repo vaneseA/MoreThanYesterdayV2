@@ -5,18 +5,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.morethanyesterdayv2.aboutrvinrv.RecordSetListAdapter
+import com.example.morethanyesterdayv2.aboutrvinrv.ChildAdapter
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
 import com.example.morethanyesterdayv2.dialog.recordSetList
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 
 
-class RecordListAdapter(
+class ParentAdapter(
     val exerciseList: List<ExerciseEntity>,
     var context: Context
 ) :
-    RecyclerView.Adapter<RecordListAdapter.Holder>(), AddSetDialogInterface {
+    RecyclerView.Adapter<ParentAdapter.Holder>(), AddSetDialogInterface {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =
@@ -33,7 +33,7 @@ class RecordListAdapter(
 
     inner class Holder(val binding: RecordRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        private val recordSetListAdapter = RecordSetListAdapter(recordSetList,context)
+        private val recordSetListAdapter = ChildAdapter(recordSetList,context)
 
         private val selectedDateActivity = SelectedDateActivity.getInstance()
         var exerciseEntity: ExerciseEntity? = null

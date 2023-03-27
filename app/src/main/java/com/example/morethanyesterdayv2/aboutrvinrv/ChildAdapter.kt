@@ -6,13 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.databinding.SetRvItemBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
-import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 
 
-class RecordSetListAdapter(private val recordList: List<RecordEntity>,
-    var context: Context
+class ChildAdapter(private val recordList: List<RecordEntity>,
+                   var context: Context
 ) :
-    RecyclerView.Adapter<RecordSetListAdapter.Holder>(), AddSetDialogInterface {
+    RecyclerView.Adapter<ChildAdapter.Holder>(), AddSetDialogInterface {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =

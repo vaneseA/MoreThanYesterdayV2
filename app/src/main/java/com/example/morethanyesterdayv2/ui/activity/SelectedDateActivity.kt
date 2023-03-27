@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.morethanyesterdayv2.aboutRoom.ExerciseDAO
 import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
-import com.example.morethanyesterdayv2.aboutRoom.RecordListAdapter
+import com.example.morethanyesterdayv2.aboutRoom.ParentAdapter
 import com.example.morethanyesterdayv2.aboutRoom.RoomHelper
 import com.example.morethanyesterdayv2.databinding.ActivitySelectedDateBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
@@ -22,7 +22,7 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
 
     val binding by lazy { ActivitySelectedDateBinding.inflate(layoutInflater) }
     lateinit var helper: RoomHelper
-    lateinit var recordListAdapter: RecordListAdapter
+    lateinit var recordListAdapter: ParentAdapter
     val exerciseList = mutableListOf<ExerciseEntity>()
     lateinit var exerciseDAO: ExerciseDAO
 
@@ -46,7 +46,7 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
                 .build()
         exerciseDAO = helper.exerciseDAO()
 
-        recordListAdapter = RecordListAdapter(exerciseList, this@SelectedDateActivity)
+        recordListAdapter = ParentAdapter(exerciseList, this@SelectedDateActivity)
 
         refreshAdapter()
 
