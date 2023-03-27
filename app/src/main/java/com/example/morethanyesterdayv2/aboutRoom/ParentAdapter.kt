@@ -13,7 +13,7 @@ import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 
 
 class ParentAdapter(
-    val exerciseList: List<ExerciseEntity>,
+    private val parentList: List<ExerciseEntity>,
     var context: Context
 ) :
     RecyclerView.Adapter<ParentAdapter.Holder>(), AddSetDialogInterface {
@@ -25,35 +25,27 @@ class ParentAdapter(
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val member = exerciseList[position]
-        holder.setData(member, position)
+        val parentItem = parentList[position]
+        holder.setData(parentItem, position)
     }
 
-    override fun getItemCount(): Int = exerciseList.size
+    override fun getItemCount(): Int = parentList.size
 
     inner class Holder(val binding: RecordRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        private val recordSetListAdapter = ChildAdapter(recordSetList,context)
+        private val childAdapter = ChildAdapter(recordSetList,context)
 
-        private val selectedDateActivity = SelectedDateActivity.getInstance()
-        var exerciseEntity: ExerciseEntity? = null
-        var mPosition: Int? = null
+        fun setData(exerciseEntity: ExerciseEntity, position: Int) {
+            binding.NameArea.text = exerciseEntity.exerciseName
+            binding.TypeArea.text = exerciseEntity.exerciseType
+            binding.totalSetArea.text = "총 " + exerciseEntity.totalSet.toString() + "set, "
+            binding.totalKgArea.text = "총 " + exerciseEntity.totalKG + "kg, "
+            binding.bestKgArea.text = "최고 " + exerciseEntity.bestKg + "kg, "
+            binding.totalCountArea.text = "총 " + exerciseEntity.totalCount + "회"
 
-        fun setData(member: ExerciseEntity, position: Int) {
-            binding.textNo.text = exerciseEntity?.no.toString()
-            binding.NameArea.text = exerciseEntity?.exerciseName
-            binding.TypeArea.text = exerciseEntity?.exerciseType
-            binding.addSetBtn.setOnClickListener {
-                selectedDateActivity?.clickViewEvents(position, member)
-            }
-
-            binding.nestedRV.setHasFixedSize(false)
-            binding.nestedRV.layoutManager = LinearLayoutManager(context)
-            binding.nestedRV.adapter = recordSetListAdapter
-
-
-            this.exerciseEntity = member
-            this.mPosition = position
+            binding.nestedRV.setHasFixedSize(true)
+            binding.nestedRV.layoutManager = LinearLayoutManager(itemView.context)
+            binding.nestedRV.adapter = childAdapter
         }
 
     }
