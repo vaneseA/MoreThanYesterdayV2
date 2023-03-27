@@ -79,8 +79,19 @@ class CustomDialog(
                 Room.databaseBuilder(it.context, RecordRoomHelper::class.java, "room_record_db")
                     .build()
             recordDAO = recordRoomHelper.recordDAO()
-            val record =
-                RecordEntity(recordName = "렛풀다운", recordType = "등", kg = "50", count = "10")
+            // 사용자가 입력한 kg 값을 문자열에서 실수로 변환하여 가져옴
+            val kg = binding.userInputWeight?.text?.toString()?.toDoubleOrNull() ?: 0.0
+
+            // 사용자가 입력한 count 값을 문자열에서 정수로 변환하여 가져옴
+            val count = binding.userInputCount?.text?.toString()?.toIntOrNull() ?: 0
+
+            // record 객체의 kg와 count 속성에 값을 대입
+            val record = RecordEntity(
+                recordName = "렛풀다운",
+                recordType = "등",
+                kg = kg.toString(),
+                count = count.toString()
+            )
             insertRecord(record)
             dialog?.dismiss()
         }

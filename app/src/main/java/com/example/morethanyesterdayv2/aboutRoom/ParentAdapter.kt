@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.aboutrvinrv.ChildAdapter
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
+import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 
 
 class ParentAdapter(
@@ -31,6 +32,7 @@ class ParentAdapter(
 
     inner class Holder(val binding: RecordRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
         private lateinit var childAdapter: ChildAdapter
+        private val selectedDateActivity = SelectedDateActivity.getInstance()
 
         fun setData(exerciseEntity: ExerciseEntity, position: Int) {
             binding.NameArea.text = exerciseEntity.exerciseName
@@ -39,6 +41,11 @@ class ParentAdapter(
             binding.totalKgArea.text = "총 " + exerciseEntity.totalKG + "kg, "
             binding.bestKgArea.text = "최고 " + exerciseEntity.bestKg + "kg, "
             binding.totalCountArea.text = "총 " + exerciseEntity.totalCount + "회"
+
+
+            binding.addSetBtn.setOnClickListener {
+                selectedDateActivity?.clickViewEvents(position, exerciseEntity)
+            }
 
             childAdapter = ChildAdapter(exerciseEntity.recordList, context)
             binding.nestedRV.setHasFixedSize(true)
