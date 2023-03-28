@@ -28,7 +28,8 @@ class SelectExerciseActivity : AppCompatActivity() {
     }
 
     private fun initRecycler() {
-        exerciseListAdapter = ExerciseListAdapter(this)
+        val selectedDate = intent?.getStringExtra("selectedDate") ?: ""
+        exerciseListAdapter = ExerciseListAdapter(this, selectedDate)
         binding.ExerciseRV.adapter = exerciseListAdapter
 
         viewModel.exerciseDataList.observe(this) { ExerciseEntity ->

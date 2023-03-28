@@ -20,7 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ExerciseListAdapter(private val context: Context) :
+class ExerciseListAdapter(private val context: Context, private val selectedDate: String) :
     RecyclerView.Adapter<ExerciseListAdapter.ViewHolder>() {
 
     lateinit var helper: RoomHelper
@@ -38,7 +38,7 @@ class ExerciseListAdapter(private val context: Context) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view: View = inflater.inflate(R.layout.exercise_rv_item, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view,selectedDate)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -48,34 +48,45 @@ class ExerciseListAdapter(private val context: Context) :
     override fun getItemCount(): Int = datas.size
 
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View, private val selectedDate: String) : RecyclerView.ViewHolder(view) {
 
         private val txtName: TextView = itemView.findViewById(R.id.exerciseNameArea)
         private val txtType: TextView = itemView.findViewById(R.id.exerciseTypeArea)
 
-        fun bind(item: ExerciseData) {
+        fun bind(item: ExerciseData,) {
             txtName.text = item.name
             txtType.text = item.type
-            var selectedDate = "1월 24일"
             var exerciseType = item.type
 
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 itemView.setOnClickListener {
                     listener?.onItemClick(itemView, item, position)
-                    addExerciseDialog(position,txtName.text.toString(),exerciseType,selectedDate,)
+                    addExerciseDialog(
+                        position,
+                        txtName.text.toString(),
+                        exerciseType,
+                        selectedDate,
+                    )
                 }
             }
 
 
         }
     }
-    fun addExerciseDialog(position: Int, exerciseName:String, exerciseType:String, selectedDate:String){
+
+    fun addExerciseDialog(
+        position: Int,
+        exerciseName: String,
+        exerciseType: String,
+        selectedDate: String
+    ) {
         AlertDialog.Builder(context)
-            .setTitle("$selectedDate")
+            .setTitle(selectedDate)
             .setMessage(
-            "$exerciseName "
-                +"을/를 추가하시겠습니까?")
+                "$exerciseName "
+                        + "을/를 추가하시겠습니까?"
+            )
             .setPositiveButton("Yes") { dialog, _ ->
                 helper =
                     Room.databaseBuilder(context, RoomHelper::class.java, "room_db")
@@ -95,8 +106,6 @@ class ExerciseListAdapter(private val context: Context) :
                 dialog.dismiss()
             }.create().show()
     }
-
-
 
 
     fun insertExercise(entity: ExerciseEntity) {
