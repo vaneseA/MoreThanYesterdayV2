@@ -9,11 +9,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.morethanyesterdayv2.aboutRoom.RoomHelper
-import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
-import com.example.morethanyesterdayv2.aboutRoom.ExerciseDAO
+import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
+import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
 import com.example.morethanyesterdayv2.R
 import com.example.morethanyesterdayv2.ui.activity.SelectExerciseActivity
-import com.example.morethanyesterdayv2.viewmodel.ExerciseData
+import com.example.morethanyesterdayv2.data.ExerciseData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

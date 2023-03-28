@@ -1,4 +1,4 @@
-package com.example.morethanyesterdayv2.viewmodel
+package com.example.morethanyesterdayv2.data
 
 data class ExerciseData (
     val name : String,

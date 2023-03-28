@@ -1,7 +1,7 @@
 package com.example.morethanyesterdayv2.repository
 
-import com.example.morethanyesterdayv2.aboutRoom.ExerciseDAO
-import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
+import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
+import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 
 class ExerciseRepository(private val exerciseDAO: ExerciseDAO) {
     fun getAllExercises(): List<ExerciseEntity> {

@@ -1,4 +1,4 @@
-package com.example.morethanyesterdayv2.ui
+package com.example.morethanyesterdayv2.ui.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.example.morethanyesterdayv2.databinding.ActivityMainBinding
-import com.example.morethanyesterdayv2.mainviewmodel.MainViewModel
-import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
+import com.example.morethanyesterdayv2.aboutRecord.MainViewModel
 import java.io.FileInputStream
 
 class MainActivity : AppCompatActivity() {

@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.morethanyesterdayv2.aboutRoom.ExerciseDAO
-import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
+import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
+import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

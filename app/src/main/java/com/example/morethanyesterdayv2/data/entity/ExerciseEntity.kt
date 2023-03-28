@@ -1,12 +1,11 @@
-package com.example.morethanyesterdayv2.aboutRoom
+package com.example.morethanyesterdayv2.data.entity
 
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.example.morethanyesterdayv2.aboutrvinrv.RecordEntity
-import com.example.morethanyesterdayv2.aboutrvinrv.RoomConverters
+import com.example.morethanyesterdayv2.aboutRoom.RoomConverters
 
 
 @Entity(tableName = "room_exercise")

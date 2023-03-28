@@ -1,6 +1,7 @@
-package com.example.morethanyesterdayv2.aboutrvinrv
+package com.example.morethanyesterdayv2.aboutRoom
 
 import androidx.room.TypeConverter
+import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

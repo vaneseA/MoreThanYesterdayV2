@@ -1,8 +1,8 @@
-package com.example.morethanyesterdayv2.aboutRoom
+package com.example.morethanyesterdayv2.data.dao
 
 import androidx.room.*
-import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
-import com.example.morethanyesterdayv2.aboutrvinrv.RecordEntity
+import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
+import com.example.morethanyesterdayv2.data.entity.RecordEntity
 
 
 //Dao는 Room에서 데이터베이스와 상호작용을 위한 인터페이스이다,entity와 매핑되는 테이블에 대한 CRUD 작업을 수행한다.

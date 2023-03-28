@@ -1,4 +1,4 @@
-package com.example.morethanyesterdayv2.aboutRoom
+package com.example.morethanyesterdayv2.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,8 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.morethanyesterdayv2.aboutrvinrv.ChildAdapter
-import com.example.morethanyesterdayv2.aboutrvinrv.RecordEntity
+import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
+import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity

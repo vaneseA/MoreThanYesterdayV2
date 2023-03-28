@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.morethanyesterdayv2.viewmodel.SelectedDateViewModel
-import com.example.morethanyesterdayv2.aboutRoom.ExerciseDAO
-import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
-import com.example.morethanyesterdayv2.aboutRoom.ParentAdapter
+import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
+import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
+import com.example.morethanyesterdayv2.ui.adapter.ParentAdapter
 import com.example.morethanyesterdayv2.aboutRoom.RoomHelper
 import com.example.morethanyesterdayv2.databinding.ActivitySelectedDateBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface

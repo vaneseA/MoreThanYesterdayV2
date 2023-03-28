@@ -4,7 +4,8 @@ import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.morethanyesterdayv2.aboutrvinrv.RecordDAO
+import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
+import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 
 
 //룸데이터를 추가할때 필요한클래스

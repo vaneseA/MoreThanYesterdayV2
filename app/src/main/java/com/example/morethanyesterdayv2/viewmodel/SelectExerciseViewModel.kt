@@ -3,7 +3,7 @@ package com.example.morethanyesterdayv2.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.morethanyesterdayv2.viewmodel.ExerciseData
+import com.example.morethanyesterdayv2.data.ExerciseData
 
 class SelectExerciseViewModel : ViewModel() {
     private val _exerciseDataList = MutableLiveData<MutableList<ExerciseData>>()

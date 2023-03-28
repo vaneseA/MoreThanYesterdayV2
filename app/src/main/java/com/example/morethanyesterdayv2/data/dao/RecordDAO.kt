@@ -1,6 +1,7 @@
-package com.example.morethanyesterdayv2.aboutrvinrv
+package com.example.morethanyesterdayv2.data.dao
 
 import androidx.room.*
+import com.example.morethanyesterdayv2.data.entity.RecordEntity
 
 
 @Dao
