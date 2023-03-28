@@ -21,7 +21,7 @@ interface ExerciseDAO {
     @Delete
     fun delete(exerciseEntity: ExerciseEntity)
 
-    @Query("SELECT * FROM room_exercise WHERE exerciseName = :exerciseName")
-    fun getRecordsByExerciseName(exerciseName: String): List<RecordEntity>
+    @Query("SELECT * FROM room_exercise WHERE selectedDate = :selectedDate")
+    fun getExercisesByDate(selectedDate: String): List<ExerciseEntity>
 
 }

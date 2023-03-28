@@ -11,12 +11,13 @@ import com.example.morethanyesterdayv2.aboutRoom.RoomConverters
 @Entity(tableName = "room_exercise")
 @TypeConverters(RoomConverters::class) // TypeConverter 등록
 class ExerciseEntity {
+
+    @ColumnInfo
+    var selectedDate: String = ""
+
     @PrimaryKey(autoGenerate = true)// no에 값이 없을 때 자동증가된 숫자 값을 db에 입력해준다.
     @ColumnInfo
     var no: Long? = null
-
-//    @ColumnInfo
-//    var selectedDate: String = ""
 
     @ColumnInfo
     var exerciseName: String = ""
