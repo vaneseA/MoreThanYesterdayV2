@@ -74,22 +74,19 @@ class ExerciseListAdapter(private val context: Context) :
             .setMessage(
             "$exerciseName "
                 +"을/를 추가하시겠습니까?")
-            .setPositiveButton("Yes", {
-                    dialog , _ ->
+            .setPositiveButton("Yes") { dialog, _ ->
                 helper =
                     Room.databaseBuilder(context, RoomHelper::class.java, "room_db")
                         .build()
                 exerciseDAO = helper.exerciseDAO()
-                val exerciseInfo = ExerciseEntity(exerciseName,exerciseType)
+                val exerciseInfo = ExerciseEntity(exerciseName, exerciseType)
                 insertExercise(exerciseInfo)
                 notifyDataSetChanged()
                 dialog.dismiss()
-                // 현재 액티비티를 종료하고 이전 액티비티로 이동하는 코드
-                (context as SelectExerciseActivity).finish()
-            })
-            .setNegativeButton("No",{
-                    dialog, _ -> dialog.dismiss()
-            }).create().show()
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }.create().show()
     }
 
 
