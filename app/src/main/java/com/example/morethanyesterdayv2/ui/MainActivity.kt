@@ -7,14 +7,16 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import com.example.morethanyesterdayv2.databinding.ActivityMainBinding
+import com.example.morethanyesterdayv2.mainviewmodel.MainViewModel
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 import java.io.FileInputStream
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var viewModel: MainViewModel // ViewModel 객체 선언
 
     private var selectedDate = ""
 
@@ -32,19 +34,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
+        // ViewModel 객체 생성
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
 
         val intent = Intent(this, SelectedDateActivity::class.java)
 
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            var selectedDate = String.format("%d년 %d월 %d일", year, month + 1, dayOfMonth)
+            viewModel.selectedDate = String.format("%d년 %d월 %d일", year, month + 1, dayOfMonth)
             binding.diaryTextView.visibility = View.VISIBLE
             binding.goToWriteBtn.visibility = View.VISIBLE
-            binding.diaryTextView.text = selectedDate
-            checkDay(year, month, dayOfMonth, userID)
+            binding.diaryTextView.text = viewModel.selectedDate
+            checkDay(year, month, dayOfMonth, viewModel.userID)
             // RecordWriteAcitivity : 넘기고자 하는 Component
-            intent.putExtra("Date", selectedDate)
+            intent.putExtra("Date", viewModel.selectedDate)
 //            getExerciseListData(selectedDate)
         }
         binding.goToWriteBtn.setOnClickListener {
@@ -55,8 +59,8 @@ class MainActivity : AppCompatActivity() {
 
     // 달력 내용 조회, 수정
     fun checkDay(cYear: Int, cMonth: Int, cDay: Int, userID: String) {
-        //저장할 파일 이름설정
-        fname = "" + userID + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt"
+        viewModel.fname = "" + userID + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt"
+
 
         var fileInputStream: FileInputStream
         try {
