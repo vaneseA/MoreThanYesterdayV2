@@ -68,9 +68,9 @@ class ExerciseListAdapter(private val context: Context) :
 
         }
     }
-    fun addExerciseDialog(position: Int, exerciseName:String, exerciseType:String, seletedDate:String){
+    fun addExerciseDialog(position: Int, exerciseName:String, exerciseType:String, selectedDate:String){
         AlertDialog.Builder(context)
-            .setTitle("$seletedDate")
+            .setTitle("$selectedDate")
             .setMessage(
             "$exerciseName "
                 +"을/를 추가하시겠습니까?")
