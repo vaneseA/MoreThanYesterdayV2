@@ -37,11 +37,10 @@ class ParentAdapter(
     override fun getItemCount(): Int = parentList.size
 
     inner class Holder(val binding: RecordRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        private lateinit var childAdapter: ChildAdapter
         private val selectedDateActivity = SelectedDateActivity.getInstance()
 
         fun setData(exerciseEntity: ExerciseEntity, position: Int) {
-            binding.textNo.text =exerciseEntity.no.toString()
+            binding.textNo.text = exerciseEntity.no.toString()
             binding.NameArea.text = exerciseEntity.exerciseName
             binding.TypeArea.text = exerciseEntity.exerciseType
             binding.totalSetArea.text = "총 " + exerciseEntity.totalSet.toString() + "set, "
@@ -54,10 +53,6 @@ class ParentAdapter(
                 selectedDateActivity?.clickViewEvents(position, exerciseEntity)
             }
 
-            childAdapter = ChildAdapter(exerciseEntity.recordList, context)
-            binding.nestedRV.setHasFixedSize(true)
-            binding.nestedRV.layoutManager = LinearLayoutManager(itemView.context)
-            binding.nestedRV.adapter = childAdapter
         }
     }
 
