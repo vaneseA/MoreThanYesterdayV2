@@ -12,6 +12,7 @@ import com.example.morethanyesterdayv2.aboutRoom.RoomHelper
 import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
 import com.example.morethanyesterdayv2.aboutRoom.ExerciseDAO
 import com.example.morethanyesterdayv2.R
+import com.example.morethanyesterdayv2.ui.activity.SelectExerciseActivity
 import com.example.morethanyesterdayv2.viewmodel.ExerciseData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -85,10 +86,10 @@ class ExerciseListAdapter(private val context: Context) :
                 val memo = ExerciseEntity(exerciseName,exerciseType)
                 insertMemo(memo)
 
-
-
                 notifyDataSetChanged()
                 dialog.dismiss()
+                // 현재 액티비티를 종료하고 이전 액티비티로 이동하는 코드
+                (context as SelectExerciseActivity).finish()
             })
             .setNegativeButton("No",{
                     dialog, _ -> dialog.dismiss()
@@ -109,20 +110,6 @@ class ExerciseListAdapter(private val context: Context) :
 
         }
     }
-//    private fun addExerciseDialog(currentItem: Int, exerciseName:String) {
-//
-//        // custom_dialog를 뷰 객체로 반환
-//        val dialogView = LayoutInflater.from(context).inflate(R.layout.custom_mylike_dialog, null)
-//        // 대화상자 생성
-//        val builder = android.app.AlertDialog.Builder(context)
-//            .setView(dialogView)
-//            .setTitle("$exerciseName")
-//            .setMessage("해당 운동을 삭제하시겠습니까?")
-//        // 대화상자 띄움
-//        val alertDialog = builder.show()
-//
-//
-//    }
 
 
 }

@@ -95,6 +95,7 @@ class CustomDialog(
             )
             insertRecord(record)
             dialog?.dismiss()
+
         }
 
         binding.plusFiveBtn?.setOnClickListener {
@@ -139,4 +140,5 @@ fun insertRecord(record: RecordEntity) {
 
 interface AddSetDialogInterface {
     fun onYesButtonClick(id: Int)
+
 }

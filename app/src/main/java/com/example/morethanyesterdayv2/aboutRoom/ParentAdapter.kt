@@ -3,9 +3,12 @@ package com.example.morethanyesterdayv2.aboutRoom
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.aboutrvinrv.ChildAdapter
+import com.example.morethanyesterdayv2.aboutrvinrv.RecordEntity
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
@@ -16,6 +19,9 @@ class ParentAdapter(
     var context: Context
 ) :
     RecyclerView.Adapter<ParentAdapter.Holder>(), AddSetDialogInterface {
+
+    private val _recordListLiveData = MutableLiveData<List<RecordEntity>>()
+    val recordListLiveData: LiveData<List<RecordEntity>> = _recordListLiveData
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =

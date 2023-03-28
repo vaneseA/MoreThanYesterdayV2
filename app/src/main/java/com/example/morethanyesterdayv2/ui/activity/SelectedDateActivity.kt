@@ -81,7 +81,7 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
     }
 
     override fun onYesButtonClick(id: Int) {
-        TODO("Not yet implemented")
+
     }
 
 }
