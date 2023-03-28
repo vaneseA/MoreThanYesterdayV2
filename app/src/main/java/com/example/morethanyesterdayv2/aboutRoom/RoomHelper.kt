@@ -1,6 +1,8 @@
 package com.example.morethanyesterdayv2.aboutRoom
 
+import android.app.Application
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.morethanyesterdayv2.aboutrvinrv.RecordDAO
 
@@ -9,4 +11,21 @@ import com.example.morethanyesterdayv2.aboutrvinrv.RecordDAO
 @Database(entities = arrayOf(ExerciseEntity::class), version = 1, exportSchema = false)
 abstract class RoomHelper : RoomDatabase() {
     abstract fun exerciseDAO(): ExerciseDAO
+
+    companion object {
+        private lateinit var instance: RoomHelper
+
+        fun getDatabase(application: Application): RoomHelper {
+            synchronized(RoomHelper::class.java) {
+                if (!::instance.isInitialized) {
+                    instance = Room.databaseBuilder(
+                        application.applicationContext,
+                        RoomHelper::class.java,
+                        "room_db"
+                    ).build()
+                }
+            }
+            return instance
+        }
+    }
 }
