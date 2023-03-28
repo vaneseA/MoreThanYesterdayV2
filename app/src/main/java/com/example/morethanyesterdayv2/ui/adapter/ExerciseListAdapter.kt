@@ -32,9 +32,6 @@ class ExerciseListAdapter(private val context: Context) :
     }
 
     private var listener: OnItemClickListener? = null
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.listener = listener
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
