@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import com.example.morethanyesterdayv2.aa.SelectExerciseViewModel
 import com.example.morethanyesterdayv2.databinding.ActivitySelectExerciseBinding
 import com.example.morethanyesterdayv2.ui.adapter.ExerciseListAdapter
-import com.example.morethanyesterdayv2.viewmodel.ExerciseData
+
 
 class SelectExerciseActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySelectExerciseBinding
@@ -27,8 +27,8 @@ class SelectExerciseActivity : AppCompatActivity() {
         exerciseListAdapter = ExerciseListAdapter(this)
         binding.ExerciseRV.adapter = exerciseListAdapter
 
-        viewModel.exerciseDataList.observe(this) { exerciseDataList ->
-            exerciseListAdapter.datas = exerciseDataList
+        viewModel.exerciseDataList.observe(this) { ExerciseEntity ->
+            exerciseListAdapter.datas = ExerciseEntity
             exerciseListAdapter.notifyDataSetChanged()
         }
     }
