@@ -53,6 +53,8 @@ class ParentAdapter(
                 selectedDateActivity?.clickViewEvents(position, exerciseEntity)
             }
 
+
+
         }
     }
 

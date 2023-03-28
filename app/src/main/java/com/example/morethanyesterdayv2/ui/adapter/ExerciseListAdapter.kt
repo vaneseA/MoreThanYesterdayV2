@@ -98,7 +98,9 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
                 dialog.dismiss()
 
                 // SelectExerciseActivity를 종료하고 SelectedActivity로 이동
+
                 val intent = Intent(context, SelectedDateActivity::class.java)
+                intent.putExtra("selectedDate", selectedDate)
                 context.startActivity(intent)
                 (context as SelectExerciseActivity).finish()
             }
