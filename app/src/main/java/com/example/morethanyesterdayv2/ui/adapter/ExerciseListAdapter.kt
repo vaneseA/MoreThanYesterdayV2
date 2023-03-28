@@ -22,8 +22,8 @@ class ExerciseListAdapter(private val context: Context) :
     RecyclerView.Adapter<ExerciseListAdapter.ViewHolder>() {
 
     lateinit var helper: RoomHelper
-    val memoList = mutableListOf<ExerciseEntity>()
-    lateinit var memoDAO: ExerciseDAO
+    val exerciseList = mutableListOf<ExerciseEntity>()
+    lateinit var exerciseDAO: ExerciseDAO
 
     var datas = mutableListOf<ExerciseData>()
 
@@ -79,9 +79,9 @@ class ExerciseListAdapter(private val context: Context) :
                 helper =
                     Room.databaseBuilder(context, RoomHelper::class.java, "room_db")
                         .build()
-                memoDAO = helper.exerciseDAO()
-                val memo = ExerciseEntity(exerciseName,exerciseType)
-                insertMemo(memo)
+                exerciseDAO = helper.exerciseDAO()
+                val exerciseInfo = ExerciseEntity(exerciseName,exerciseType)
+                insertExercise(exerciseInfo)
                 notifyDataSetChanged()
                 dialog.dismiss()
                 // 현재 액티비티를 종료하고 이전 액티비티로 이동하는 코드
@@ -95,16 +95,16 @@ class ExerciseListAdapter(private val context: Context) :
 
 
 
-    fun insertMemo(memo: ExerciseEntity) {
+    fun insertExercise(entity: ExerciseEntity) {
         CoroutineScope(Dispatchers.IO).launch {
-            memoDAO.insert(memo)
+            exerciseDAO.insert(entity)
             refreshAdapter()
         }
     }
     fun refreshAdapter() {
         CoroutineScope(Dispatchers.IO).launch {
-            memoList.clear()
-            memoList.addAll(memoDAO.getAll())
+            exerciseList.clear()
+            exerciseList.addAll(exerciseDAO.getAll())
 
 
         }
