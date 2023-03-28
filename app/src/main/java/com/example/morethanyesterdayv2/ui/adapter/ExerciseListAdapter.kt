@@ -61,14 +61,14 @@ class ExerciseListAdapter(private val context: Context) :
             if (position != RecyclerView.NO_POSITION) {
                 itemView.setOnClickListener {
                     listener?.onItemClick(itemView, item, position)
-                    createDeleteAlterDialog(position,txtName.text.toString(),exerciseType,selectedDate,)
+                    addEerciseDialog(position,txtName.text.toString(),exerciseType,selectedDate,)
                 }
             }
 
 
         }
     }
-    fun createDeleteAlterDialog(currentItem: Int, exerciseName:String,exerciseType:String, seletedDate:String){
+    fun addEerciseDialog(currentItem: Int, exerciseName:String, exerciseType:String, seletedDate:String){
         AlertDialog.Builder(context)
             .setTitle("$seletedDate")
             .setMessage(
