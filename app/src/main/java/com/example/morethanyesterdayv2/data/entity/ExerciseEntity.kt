@@ -15,6 +15,9 @@ class ExerciseEntity {
     @ColumnInfo
     var no: Long? = null
 
+//    @ColumnInfo
+//    var selectedDate: String = ""
+
     @ColumnInfo
     var exerciseName: String = ""
 

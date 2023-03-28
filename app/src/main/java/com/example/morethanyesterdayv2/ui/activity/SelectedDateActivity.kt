@@ -3,6 +3,7 @@ package com.example.morethanyesterdayv2.ui.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -39,6 +40,12 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+
+        val selectedDate = intent?.getStringExtra("selectedDate") ?: ""
+        Log.d("selectedDate", selectedDate)
+        supportActionBar?.title = selectedDate
+
 
         viewModel = ViewModelProvider(this).get(SelectedDateViewModel::class.java)
 

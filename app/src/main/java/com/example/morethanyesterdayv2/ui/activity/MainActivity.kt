@@ -17,9 +17,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel // ViewModel 객체 선언
 
-    private var selectedDate = ""
-
-
     var userID: String = "userID"
     lateinit var fname: String
     lateinit var str: String
@@ -47,12 +44,11 @@ class MainActivity : AppCompatActivity() {
             binding.diaryTextView.text = viewModel.selectedDate
             checkDay(year, month, dayOfMonth, viewModel.userID)
             // RecordWriteAcitivity : 넘기고자 하는 Component
-            intent.putExtra("Date", viewModel.selectedDate)
-//            getExerciseListData(selectedDate)
+
         }
         binding.goToWriteBtn.setOnClickListener {
-            Log.d("goToWriteBtn", selectedDate)
-            startActivity(Intent(this, SelectedDateActivity::class.java))
+            intent.putExtra("selectedDate", viewModel.selectedDate)
+            startActivity(intent)
         }
     }
 
