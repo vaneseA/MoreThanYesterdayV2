@@ -85,7 +85,6 @@ class ExerciseListAdapter(private val context: Context) :
                 memoDAO = helper.exerciseDAO()
                 val memo = ExerciseEntity(exerciseName,exerciseType)
                 insertMemo(memo)
-
                 notifyDataSetChanged()
                 dialog.dismiss()
                 // 현재 액티비티를 종료하고 이전 액티비티로 이동하는 코드
@@ -95,6 +94,9 @@ class ExerciseListAdapter(private val context: Context) :
                     dialog, _ -> dialog.dismiss()
             }).create().show()
     }
+
+
+
 
     fun insertMemo(memo: ExerciseEntity) {
         CoroutineScope(Dispatchers.IO).launch {
