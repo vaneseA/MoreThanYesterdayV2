@@ -95,15 +95,6 @@ class ExerciseListAdapter(private val context: Context) :
     fun insertExercise(entity: ExerciseEntity) {
         CoroutineScope(Dispatchers.IO).launch {
             exerciseDAO.insert(entity)
-            refreshAdapter()
-        }
-    }
-    fun refreshAdapter() {
-        CoroutineScope(Dispatchers.IO).launch {
-            exerciseList.clear()
-            exerciseList.addAll(exerciseDAO.getAll())
-
-
         }
     }
 
