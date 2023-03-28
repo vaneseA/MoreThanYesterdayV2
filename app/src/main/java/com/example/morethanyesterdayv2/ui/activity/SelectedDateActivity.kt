@@ -70,7 +70,9 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
 
         }
         binding.SelectExerciseBtn.setOnClickListener {
-            startActivity(Intent(this, SelectExerciseActivity::class.java))
+            val intent = Intent(this, SelectExerciseActivity::class.java)
+            intent.putExtra("selectedDate", selectedDate)
+            startActivity(intent)
             finish()
         }
 
