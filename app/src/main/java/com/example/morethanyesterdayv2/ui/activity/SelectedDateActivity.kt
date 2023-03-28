@@ -64,6 +64,7 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
         }
         binding.SelectExerciseBtn.setOnClickListener {
             startActivity(Intent(this, SelectExerciseActivity::class.java))
+            finish()
         }
 
 

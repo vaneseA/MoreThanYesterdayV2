@@ -1,6 +1,7 @@
 package com.example.morethanyesterdayv2.ui.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
 import com.example.morethanyesterdayv2.R
 import com.example.morethanyesterdayv2.ui.activity.SelectExerciseActivity
 import com.example.morethanyesterdayv2.data.ExerciseData
+import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -83,6 +85,11 @@ class ExerciseListAdapter(private val context: Context) :
                 insertExercise(exerciseInfo)
                 notifyDataSetChanged()
                 dialog.dismiss()
+
+                // SelectExerciseActivity를 종료하고 SelectedActivity로 이동
+                val intent = Intent(context, SelectedDateActivity::class.java)
+                context.startActivity(intent)
+                (context as SelectExerciseActivity).finish()
             }
             .setNegativeButton("No") { dialog, _ ->
                 dialog.dismiss()
