@@ -23,6 +23,15 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
         return exerciseList
     }
 
+    fun loadExerciseListByDate(selectedDate: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val list = exerciseDAO.getAllByDate(selectedDate)
+            withContext(Dispatchers.Main) {
+                exerciseList.value = list
+            }
+        }
+    }
+
     fun loadExerciseList() {
         viewModelScope.launch(Dispatchers.IO) {
             val list = exerciseDAO.getAll()

@@ -80,9 +80,9 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
     }
 
     fun refreshAdapter() {
-        viewModel.loadExerciseList()
+        val selectedDate = intent?.getStringExtra("selectedDate") ?: ""
+        viewModel.loadExerciseListByDate(selectedDate)
     }
-
     fun clickViewEvents(position: Int, member: ExerciseEntity) {
         val dialog = CustomDialog(this,position,member)
         // 알림창이 띄워져있는 동안 배경 클릭 막기

@@ -92,7 +92,7 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
                     Room.databaseBuilder(context, RoomHelper::class.java, "room_db")
                         .build()
                 exerciseDAO = helper.exerciseDAO()
-                val exerciseInfo = ExerciseEntity(exerciseName, exerciseType)
+                val exerciseInfo = ExerciseEntity(selectedDate,exerciseName, exerciseType)
                 insertExercise(exerciseInfo)
                 notifyDataSetChanged()
                 dialog.dismiss()
