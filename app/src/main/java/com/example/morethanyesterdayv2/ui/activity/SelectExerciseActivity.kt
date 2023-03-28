@@ -3,19 +3,23 @@ package com.example.morethanyesterdayv2.ui.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
+import com.example.morethanyesterdayv2.aa.SelectExerciseViewModel
 import com.example.morethanyesterdayv2.databinding.ActivitySelectExerciseBinding
 import com.example.morethanyesterdayv2.ui.adapter.ExerciseListAdapter
 import com.example.morethanyesterdayv2.viewmodel.ExerciseData
 
 class SelectExerciseActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySelectExerciseBinding
-    lateinit var exerciseListAdapter: ExerciseListAdapter
-    val datas = mutableListOf<ExerciseData>()
+    private lateinit var exerciseListAdapter: ExerciseListAdapter
+
+    private val viewModel: SelectExerciseViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySelectExerciseBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         initRecycler()
     }
 
@@ -23,17 +27,10 @@ class SelectExerciseActivity : AppCompatActivity() {
         exerciseListAdapter = ExerciseListAdapter(this)
         binding.ExerciseRV.adapter = exerciseListAdapter
 
-
-        datas.apply {
-            add(ExerciseData(name = "데드리프트", type = "등"))
-            add(ExerciseData(name = "풀업", type = "등"))
-            add(ExerciseData(name = "렛풀다운", type = "등"))
-            add(ExerciseData(name = "벤치프레스", type = "가슴"))
-            add(ExerciseData(name = "케이블 시티드 로우", type = "등"))
-            exerciseListAdapter.datas = datas
+        viewModel.exerciseDataList.observe(this) { exerciseDataList ->
+            exerciseListAdapter.datas = exerciseDataList
             exerciseListAdapter.notifyDataSetChanged()
-
         }
-
     }
+
 }
