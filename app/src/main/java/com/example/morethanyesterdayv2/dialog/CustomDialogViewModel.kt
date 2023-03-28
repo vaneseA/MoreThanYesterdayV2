@@ -35,7 +35,6 @@ class CustomDialogViewModel : ViewModel() {
 
     //초기값 설정
     init {
-        Log.d(TAG, "MynumberViewModel - 생성자 호출 ")
         _currentWeightValue.value = 0
         _currentCountValue.value = 0
     }
