@@ -31,7 +31,7 @@ class CustomDialog(
 ) : DialogFragment() {
 
 
-    lateinit var mynumberViewModel: MynumberViewModel
+    lateinit var customDialogViewModel: CustomDialogViewModel
 
     // 뷰 바인딩 정의
     private var _binding: CustomAddSetDialogBinding? = null
@@ -60,12 +60,12 @@ class CustomDialog(
         // 레이아웃 배경을 투명하게 해줌, 필수 아님
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        mynumberViewModel = ViewModelProvider(this).get(MynumberViewModel::class.java)
+        customDialogViewModel = ViewModelProvider(this).get(CustomDialogViewModel::class.java)
 
-        mynumberViewModel.currentWeightValue.observe(this, Observer {
+        customDialogViewModel.currentWeightValue.observe(this, Observer {
             binding.userInputWeight?.text = it.toString()
         })
-        mynumberViewModel.currentCountValue.observe(this, Observer {
+        customDialogViewModel.currentCountValue.observe(this, Observer {
             binding.userInputCount?.text = it.toString()
         })
 
@@ -97,25 +97,25 @@ class CustomDialog(
         }
 
         binding.plusFiveBtn?.setOnClickListener {
-            mynumberViewModel.updateValue(
+            customDialogViewModel.updateValue(
                 actionType = ActionType.WEIGHTPLUS,
                 5
             )
         }
         binding.minusFiveBtn?.setOnClickListener {
-            mynumberViewModel.updateValue(
+            customDialogViewModel.updateValue(
                 actionType = ActionType.WEIGHTMINUS,
                 5
             )
         }
         binding.plusOneBtn?.setOnClickListener {
-            mynumberViewModel.updateValue(
+            customDialogViewModel.updateValue(
                 actionType = ActionType.COUNTPLUS,
                 1
             )
         }
         binding.minusOneBtn?.setOnClickListener {
-            mynumberViewModel.updateValue(
+            customDialogViewModel.updateValue(
                 actionType = ActionType.COUNTMINUS,
                 1
             )

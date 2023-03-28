@@ -11,7 +11,7 @@ enum class ActionType {
 //데이터의 변경
 // 뷰모델은 데이터의 변경사항을 알려주는 라이브 데이터를 가지고 있고
 
-class MynumberViewModel : ViewModel() {
+class CustomDialogViewModel : ViewModel() {
 
     companion object {
         const val TAG: String = "로그"
