@@ -1,4 +1,4 @@
-package com.example.morethanyesterdayv2.aboutRecord
+package com.example.morethanyesterdayv2.dialog
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.example.morethanyesterdayv2.databinding.ActivityMainBinding
-import com.example.morethanyesterdayv2.aboutRecord.MainViewModel
+import com.example.morethanyesterdayv2.viewmodel.MainViewModel
 import java.io.FileInputStream
 
 class MainActivity : AppCompatActivity() {
