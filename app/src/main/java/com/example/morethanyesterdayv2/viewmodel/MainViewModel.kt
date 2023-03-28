@@ -1,4 +1,4 @@
-package com.example.morethanyesterdayv2.aa
+package com.example.morethanyesterdayv2.viewmodel
 
 import androidx.lifecycle.ViewModel
 

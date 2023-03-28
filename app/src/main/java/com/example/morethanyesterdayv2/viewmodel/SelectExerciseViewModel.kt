@@ -1,4 +1,4 @@
-package com.example.morethanyesterdayv2.aa
+package com.example.morethanyesterdayv2.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,8 +19,8 @@ class SelectExerciseViewModel : ViewModel() {
         )
     }
 
-    fun addExerciseData(exerciseData: ExerciseData) {
-        _exerciseDataList.value?.add(exerciseData)
-        _exerciseDataList.value = _exerciseDataList.value
-    }
+//    fun addExerciseData(exerciseData: ExerciseData) {
+//        _exerciseDataList.value?.add(exerciseData)
+//        _exerciseDataList.value = _exerciseDataList.value
+//    }
 }

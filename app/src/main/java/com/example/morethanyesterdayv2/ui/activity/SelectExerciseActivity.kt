@@ -2,9 +2,8 @@ package com.example.morethanyesterdayv2.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
-import com.example.morethanyesterdayv2.aa.SelectExerciseViewModel
+import com.example.morethanyesterdayv2.viewmodel.SelectExerciseViewModel
 import com.example.morethanyesterdayv2.databinding.ActivitySelectExerciseBinding
 import com.example.morethanyesterdayv2.ui.adapter.ExerciseListAdapter
 

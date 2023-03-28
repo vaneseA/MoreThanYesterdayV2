@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
-import com.example.morethanyesterdayv2.aa.SelectedDateViewModel
+import com.example.morethanyesterdayv2.viewmodel.SelectedDateViewModel
 import com.example.morethanyesterdayv2.aboutRoom.ExerciseDAO
 import com.example.morethanyesterdayv2.aboutRoom.ExerciseEntity
 import com.example.morethanyesterdayv2.aboutRoom.ParentAdapter
