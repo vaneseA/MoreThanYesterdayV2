@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel // ViewModel 객체 선언
 
-    var userID: String = "userID"
     lateinit var fname: String
     lateinit var str: String
     lateinit var updateBtn: Button
@@ -54,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
     // 달력 내용 조회, 수정
     fun checkDay(cYear: Int, cMonth: Int, cDay: Int) {
-        viewModel.fname = "" + userID + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt"
+        viewModel.fname = "" + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt"
 
 
         var fileInputStream: FileInputStream
