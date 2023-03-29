@@ -34,7 +34,7 @@ class SelectExerciseActivity : AppCompatActivity() {
         binding.ExerciseRV.adapter = exerciseListAdapter
 
         viewModel.exerciseDataList.observe(this) { ExerciseEntity ->
-            exerciseListAdapter.datas = ExerciseEntity
+            exerciseListAdapter.exerciseDataList = ExerciseEntity
             exerciseListAdapter.notifyDataSetChanged()
         }
     }
