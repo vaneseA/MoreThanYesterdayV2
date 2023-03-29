@@ -27,7 +27,7 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
     val exerciseList = mutableListOf<ExerciseEntity>()
     lateinit var exerciseDAO: ExerciseDAO
 
-    var datas = mutableListOf<ExerciseData>()
+    var exerciseDataList = mutableListOf<ExerciseData>()
 
     interface OnItemClickListener {
         fun onItemClick(v: View, data: ExerciseData, pos: Int)
@@ -42,10 +42,10 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(datas[position])
+        holder.bind(exerciseDataList[position])
     }
 
-    override fun getItemCount(): Int = datas.size
+    override fun getItemCount(): Int = exerciseDataList.size
 
 
     inner class ViewHolder(view: View, private val selectedDate: String) : RecyclerView.ViewHolder(view) {
