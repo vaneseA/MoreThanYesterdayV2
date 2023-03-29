@@ -37,10 +37,6 @@ class MainAdapter(
             binding.mainTotalKg.text = "총 " + exerciseEntity.totalKG + "kg, "
             binding.mainBestKg.text = "최고 " + exerciseEntity.bestKg + "kg, "
             binding.mainTotalCount.text = "총 " + exerciseEntity.totalCount + "회"
-
-
-
-
         }
     }
 
