@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             binding.diaryTextView.visibility = View.VISIBLE
             binding.goToWriteBtn.visibility = View.VISIBLE
             binding.diaryTextView.text = viewModel.selectedDate
-            checkDay(year, month, dayOfMonth, viewModel.userID)
+            checkDay(year, month, dayOfMonth)
             // RecordWriteAcitivity : 넘기고자 하는 Component
 
         }
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // 달력 내용 조회, 수정
-    fun checkDay(cYear: Int, cMonth: Int, cDay: Int, userID: String) {
+    fun checkDay(cYear: Int, cMonth: Int, cDay: Int) {
         viewModel.fname = "" + userID + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt"
 
 

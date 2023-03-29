@@ -3,7 +3,6 @@ package com.example.morethanyesterdayv2.ui.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -22,7 +21,7 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
 
     val binding by lazy { ActivitySelectedDateBinding.inflate(layoutInflater) }
     lateinit var helper: RoomHelper
-    lateinit var recordListAdapter: ParentAdapter
+    lateinit var parentAdapter: ParentAdapter
     val exerciseList = mutableListOf<ExerciseEntity>()
     lateinit var exerciseDAO: ExerciseDAO
 
@@ -54,7 +53,7 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
             // 선택한 날짜에 해당하는 운동 목록만 가져온다
             exerciseList.clear()
             exerciseList.addAll(list.filter { it.selectedDate == selectedDate })
-            recordListAdapter.notifyDataSetChanged()
+            parentAdapter.notifyDataSetChanged()
         })
 
         helper =
@@ -62,10 +61,10 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
                 .build()
         exerciseDAO = helper.exerciseDAO()
 
-        recordListAdapter = ParentAdapter(exerciseList, this@SelectedDateActivity)
+        parentAdapter = ParentAdapter(exerciseList, this@SelectedDateActivity)
 
         with(binding) {
-            recordRV.adapter = recordListAdapter
+            recordRV.adapter = parentAdapter
             recordRV.layoutManager = LinearLayoutManager(this@SelectedDateActivity)
 
         }
