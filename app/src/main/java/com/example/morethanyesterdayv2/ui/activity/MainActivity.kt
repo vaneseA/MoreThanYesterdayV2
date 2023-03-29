@@ -8,7 +8,11 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.databinding.ActivityMainBinding
+import com.example.morethanyesterdayv2.ui.adapter.MainAdapter
+import com.example.morethanyesterdayv2.ui.adapter.ParentAdapter
 import com.example.morethanyesterdayv2.viewmodel.MainViewModel
 import java.io.FileInputStream
 
@@ -16,6 +20,11 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel // ViewModel 객체 선언
+
+
+    lateinit var mainAdapter: MainAdapter
+    val exerciseList = mutableListOf<ExerciseEntity>()
+
 
     lateinit var fname: String
     lateinit var str: String
@@ -43,12 +52,18 @@ class MainActivity : AppCompatActivity() {
             binding.diaryTextView.text = viewModel.selectedDate
             checkDay(year, month, dayOfMonth)
             // RecordWriteAcitivity : 넘기고자 하는 Component
-
         }
+
+
         binding.goToWriteBtn.setOnClickListener {
             intent.putExtra("selectedDate", viewModel.selectedDate)
             startActivity(intent)
         }
+        mainAdapter = MainAdapter(exerciseList, this@MainActivity)
+
+
+        binding.mainRecordRV.adapter = mainAdapter
+        binding.mainRecordRV.layoutManager = LinearLayoutManager(this@MainActivity)
     }
 
     // 달력 내용 조회, 수정
