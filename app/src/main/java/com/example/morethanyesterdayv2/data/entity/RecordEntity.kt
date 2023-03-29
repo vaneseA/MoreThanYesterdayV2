@@ -10,6 +10,8 @@ class RecordEntity {
     @ColumnInfo(name = "id")
     var setNo: Long? = null
 
+    @ColumnInfo(name = "selectedDate")
+    var selectedDate: String = ""
 
     //  운동이름
     @ColumnInfo(name = "exerciseName")
@@ -21,15 +23,22 @@ class RecordEntity {
 
 
     // 중량
-    @ColumnInfo(name = "totalKG")
+    @ColumnInfo
     var kg: String = ""
 
     // 횟수
-    @ColumnInfo(name = "totalCount")
+    @ColumnInfo
     var count: String = ""
 
 
-    constructor(recordName: String, recordType: String, kg: String, count: String) {
+    constructor(
+        selectedDate: String,
+        recordName: String,
+        recordType: String,
+        kg: String,
+        count: String
+    ) {
+        this.selectedDate = selectedDate
         this.recordName = recordName
         this.recordType = recordType
         this.kg = kg
