@@ -97,6 +97,7 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
 
     override fun onBackPressed() {
         super.onBackPressed()
+        finish()
         startActivity(Intent(this, MainActivity::class.java))
     }
 

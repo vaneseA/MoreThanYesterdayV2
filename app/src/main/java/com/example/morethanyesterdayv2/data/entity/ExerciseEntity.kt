@@ -12,7 +12,6 @@ import com.example.morethanyesterdayv2.aboutRoom.RoomConverters
 @TypeConverters(RoomConverters::class) // TypeConverter 등록
 class ExerciseEntity {
 
-
     @ColumnInfo
     var selectedDate: String = ""
 
