@@ -15,11 +15,11 @@ class RecordEntity {
 
     //  운동이름
     @ColumnInfo(name = "exerciseName")
-    var recordName: String = ""
+    var exerciseName: String = ""
 
     // 운동타입
     @ColumnInfo(name = "exerciseType")
-    var recordType: String = ""
+    var exerciseType: String = ""
 
 
     // 중량
@@ -33,14 +33,14 @@ class RecordEntity {
 
     constructor(
         selectedDate: String,
-        recordName: String,
-        recordType: String,
+        exerciseName: String,
+        exerciseType: String,
         kg: String,
         count: String
     ) {
         this.selectedDate = selectedDate
-        this.recordName = recordName
-        this.recordType = recordType
+        this.exerciseName = exerciseName
+        this.exerciseType = exerciseType
         this.kg = kg
         this.count = count
     }

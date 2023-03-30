@@ -9,7 +9,7 @@ import com.example.morethanyesterdayv2.data.dao.RecordDAO
 
 
 //룸데이터를 추가할때 필요한클래스
-@Database(entities = arrayOf(RecordEntity::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(RecordEntity::class), version = 3, exportSchema = false)
 abstract class RecordRoomHelper : RoomDatabase() {
     abstract fun recordDAO(): RecordDAO
 

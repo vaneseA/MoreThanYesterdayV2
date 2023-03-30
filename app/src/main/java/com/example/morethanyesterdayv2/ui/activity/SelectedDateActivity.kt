@@ -45,14 +45,17 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
+        val exerciseName = intent?.getStringExtra("exerciseName") ?: ""
         val selectedDate = intent?.getStringExtra("selectedDate") ?: ""
         supportActionBar?.title = selectedDate
+
 
 
         viewModel = ViewModelProvider(this).get(SelectedDateViewModel::class.java)
         // 선택한 날짜에 해당하는 운동 목록 가져오기
         viewModel.loadExerciseListByDate(selectedDate)
+
+        viewModel.loadExerciseSetListByDateAndName(selectedDate, exerciseName)
 
         viewModel.getExerciseList().observe(this, { list ->
             // 선택한 날짜에 해당하는 운동 목록만 가져온다

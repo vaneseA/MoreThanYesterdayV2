@@ -18,4 +18,5 @@ interface RecordDAO {
 
     @Query("SELECT * FROM room_record WHERE selectedDate = :selectedDate AND exerciseName = :exerciseName ORDER BY id ASC")
     fun getRecordsBySelectedDateAndExerciseName(selectedDate: String, exerciseName: String): List<RecordEntity>
+
 }
