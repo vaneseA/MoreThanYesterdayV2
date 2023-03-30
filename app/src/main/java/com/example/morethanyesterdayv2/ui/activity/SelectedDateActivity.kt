@@ -1,10 +1,8 @@
 package com.example.morethanyesterdayv2.ui.activity
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -12,7 +10,7 @@ import com.example.morethanyesterdayv2.viewmodel.SelectedDateViewModel
 import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.ui.adapter.ParentAdapter
-import com.example.morethanyesterdayv2.aboutRoom.RoomHelper
+import com.example.morethanyesterdayv2.db.AppDatabase
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.ActivitySelectedDateBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
@@ -23,7 +21,7 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
 
 //  by lazy는 프로퍼티 초기화를 지연시켜서 액티비티나 프래그먼트의 뷰가 생성될 때 불필요한 리소스 초기화를 피하고 애플리케이션 성능을 향상시킬 수 있다
     val binding by lazy { ActivitySelectedDateBinding.inflate(layoutInflater) }
-    lateinit var helper: RoomHelper
+    lateinit var appDatabase: AppDatabase
     lateinit var parentAdapter: ParentAdapter
     val exerciseList = mutableListOf<ExerciseEntity>()
     val recordList = mutableListOf<RecordEntity>()
@@ -66,10 +64,10 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
 
 //        viewModel.loadExerciseSetListByDate(selectedDate)
 
-        helper =
-            Room.databaseBuilder(this, RoomHelper::class.java, "room_db")
+        appDatabase =
+            Room.databaseBuilder(this, AppDatabase::class.java, "room_db")
                 .build()
-        exerciseDAO = helper.exerciseDAO()
+        exerciseDAO = appDatabase.exerciseDAO()
 
         parentAdapter = ParentAdapter(exerciseList, this@SelectedDateActivity)
 

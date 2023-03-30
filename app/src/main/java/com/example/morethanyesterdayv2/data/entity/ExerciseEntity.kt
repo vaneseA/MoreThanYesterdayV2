@@ -5,7 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.example.morethanyesterdayv2.aboutRoom.RoomConverters
+import com.example.morethanyesterdayv2.db.RoomConverters
 
 
 @Entity(tableName = "room_exercise")

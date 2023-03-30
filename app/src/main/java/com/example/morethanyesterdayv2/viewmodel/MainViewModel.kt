@@ -2,7 +2,7 @@ package com.example.morethanyesterdayv2.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.morethanyesterdayv2.aboutRoom.RoomHelper
+import com.example.morethanyesterdayv2.db.AppDatabase
 import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import kotlinx.coroutines.Dispatchers
@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
-    private val exerciseDAO: ExerciseDAO = RoomHelper.getDatabase(application).exerciseDAO()
+    private val exerciseDAO: ExerciseDAO = AppDatabase.getDatabase(application).exerciseDAO()
     private val exerciseList = MutableLiveData<List<ExerciseEntity>>()
     var selectedDate: String = ""
     var fname: String = ""

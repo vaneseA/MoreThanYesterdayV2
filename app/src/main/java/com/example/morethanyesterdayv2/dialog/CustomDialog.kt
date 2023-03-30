@@ -13,14 +13,14 @@ import androidx.room.Room
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.data.dao.RecordDAO
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
-import com.example.morethanyesterdayv2.aboutRoom.RecordRoomHelper
+import com.example.morethanyesterdayv2.db.AppDatabase
 import com.example.morethanyesterdayv2.databinding.CustomAddSetDialogBinding
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-lateinit var recordRoomHelper: RecordRoomHelper
+lateinit var appDatabase: AppDatabase
 val recordSetList = mutableListOf<RecordEntity>()
 lateinit var recordDAO: RecordDAO
 
@@ -74,10 +74,10 @@ class CustomDialog(
 
         binding.dialogCancleBtn?.setOnClickListener { dismiss() }
         binding.dialogAddBtn?.setOnClickListener {
-            recordRoomHelper =
-                Room.databaseBuilder(it.context, RecordRoomHelper::class.java, "room_record_db")
+            appDatabase =
+                Room.databaseBuilder(it.context, AppDatabase::class.java, "room_db")
                     .build()
-            recordDAO = recordRoomHelper.recordDAO()
+            recordDAO = appDatabase.recordDAO()
             // 사용자가 입력한 kg 값을 문자열에서 실수로 변환하여 가져옴
             val kg = binding.userInputWeight?.text?.toString()?.toDoubleOrNull() ?: 0.0
 
@@ -86,9 +86,9 @@ class CustomDialog(
 
             // record 객체의 kg와 count 속성에 값을 대입
             val record = RecordEntity(
-                selectedDate =exerciseEntity?.selectedDate ?: "",
-                exerciseName = exerciseEntity?.exerciseName ?: "",
-                exerciseType = exerciseEntity?.exerciseType ?: "",
+                selectedDate = exerciseEntity?.selectedDate ?: "",
+                recordName = exerciseEntity?.exerciseName ?: "",
+                recordType = exerciseEntity?.exerciseType ?: "",
                 kg = kg.toString(),
                 count = count.toString()
             )

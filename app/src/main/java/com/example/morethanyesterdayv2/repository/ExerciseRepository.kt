@@ -1,15 +1,19 @@
 package com.example.morethanyesterdayv2.repository
 
-import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
-import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
-
-//class ExerciseRepository(private val exerciseDAO: ExerciseDAO) {
-//    fun getAllExercises(): List<ExerciseEntity> {
-//        val exercises = exerciseDAO.getAll()
-//        for (exercise in exercises) {
-//            val records = exerciseDAO.getRecordsByExerciseName(exercise.exerciseName)
-//            exercise.recordList = records
+//class ExerciseRepository(application: Application) {
+//    private val exerciseDAO: ExerciseDAO = RoomHelper.getDatabase(application).exerciseDAO()
+//
+//    // DAO를 이용하여 모든 운동 정보를 가져오는 메서드
+//    suspend fun getAll(): List<ExerciseEntity> {
+//        return withContext(Dispatchers.IO) {
+//            exerciseDAO.getAll()
 //        }
-//        return exercises
+//    }
+//
+//    // DAO를 이용하여 선택한 날짜에 해당하는 모든 운동 정보를 가져오는 메서드
+//    suspend fun getAllByDate(selectedDate: String): List<ExerciseEntity> {
+//        return withContext(Dispatchers.IO) {
+//            exerciseDAO.getAllByDate(selectedDate)
+//        }
 //    }
 //}

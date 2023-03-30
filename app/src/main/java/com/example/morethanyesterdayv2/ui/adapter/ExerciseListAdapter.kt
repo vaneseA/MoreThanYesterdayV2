@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import com.example.morethanyesterdayv2.aboutRoom.RoomHelper
+import com.example.morethanyesterdayv2.db.AppDatabase
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
 import com.example.morethanyesterdayv2.R
@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 class ExerciseListAdapter(private val context: Context, private val selectedDate: String) :
     RecyclerView.Adapter<ExerciseListAdapter.ViewHolder>() {
 
-    lateinit var helper: RoomHelper
+    lateinit var appDatabase: AppDatabase
     val exerciseList = mutableListOf<ExerciseEntity>()
     lateinit var exerciseDAO: ExerciseDAO
 
@@ -88,10 +88,10 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
                         + "을/를 추가하시겠습니까?"
             )
             .setPositiveButton("Yes") { dialog, _ ->
-                helper =
-                    Room.databaseBuilder(context, RoomHelper::class.java, "room_db")
+                appDatabase =
+                    Room.databaseBuilder(context, AppDatabase::class.java, "room_db")
                         .build()
-                exerciseDAO = helper.exerciseDAO()
+                exerciseDAO = appDatabase.exerciseDAO()
                 val exerciseInfo = ExerciseEntity(selectedDate,exerciseName, exerciseType)
                 insertExercise(exerciseInfo)
                 notifyDataSetChanged()

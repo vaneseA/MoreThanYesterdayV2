@@ -1,4 +1,4 @@
-package com.example.morethanyesterdayv2.aboutRoom
+package com.example.morethanyesterdayv2.db
 
 import androidx.room.TypeConverter
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
