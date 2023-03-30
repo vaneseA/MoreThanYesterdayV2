@@ -22,9 +22,6 @@ interface ExerciseDAO {
     @Delete
     fun delete(exerciseEntity: ExerciseEntity)
 
-    @Query("SELECT * FROM room_exercise WHERE selectedDate = :selectedDate")
-    fun getExercisesByDate(selectedDate: String): List<ExerciseEntity>
-
     @Query("SELECT * FROM room_exercise WHERE selectedDate=:selectedDate ORDER BY id ASC")
     fun getAllByDate(selectedDate: String): List<ExerciseEntity>
 }
