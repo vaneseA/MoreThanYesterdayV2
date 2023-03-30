@@ -130,6 +130,9 @@
             android:id="@+id/addSetBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/maincolor"
+            android:textColor="@color/white"
+            app:fontFamily="@font/jalnanche"
             android:text="세트 추가" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

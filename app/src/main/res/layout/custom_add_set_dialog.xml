@@ -194,6 +194,7 @@
         android:layout_marginTop="52dp"
         android:layout_marginEnd="80dp"
         android:backgroundTint="@color/maincolor"
+        android:textColor="@color/white"
         android:text="+ 세트 추가"
         app:fontFamily="@font/jalnanche"
         app:layout_constraintBottom_toBottomOf="parent"
