@@ -14,6 +14,7 @@ import com.example.morethanyesterdayv2.databinding.ActivityMainBinding
 import com.example.morethanyesterdayv2.ui.adapter.MainAdapter
 import com.example.morethanyesterdayv2.ui.adapter.ParentAdapter
 import com.example.morethanyesterdayv2.viewmodel.MainViewModel
+import com.example.morethanyesterdayv2.viewmodel.SelectedDateViewModel
 import java.io.FileInputStream
 
 class MainActivity : AppCompatActivity() {
@@ -51,7 +52,19 @@ class MainActivity : AppCompatActivity() {
             binding.goToWriteBtn.visibility = View.VISIBLE
             binding.diaryTextView.text = viewModel.selectedDate
             checkDay(year, month, dayOfMonth)
-            // RecordWriteAcitivity : 넘기고자 하는 Component
+
+
+            viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+            // 선택한 날짜에 해당하는 운동 목록 가져오기
+            viewModel.loadExerciseListByDate(viewModel.selectedDate)
+
+
+            viewModel.getExerciseList().observe(this, { list ->
+                // 선택한 날짜에 해당하는 운동 목록만 가져온다
+                exerciseList.clear()
+                exerciseList.addAll(list.filter { it.selectedDate == viewModel.selectedDate })
+                mainAdapter.notifyDataSetChanged()
+            })
         }
 
 
@@ -80,11 +93,13 @@ class MainActivity : AppCompatActivity() {
             str = String(fileData)
             binding.goToWriteBtn.visibility = View.INVISIBLE
             if (diaryContent.text == null) {
+
                 diaryContent.visibility = View.INVISIBLE
                 updateBtn.visibility = View.INVISIBLE
                 deleteBtn.visibility = View.INVISIBLE
                 diaryTextView.visibility = View.VISIBLE
                 saveBtn.visibility = View.VISIBLE
+
             }
         } catch (e: Exception) {
             e.printStackTrace()

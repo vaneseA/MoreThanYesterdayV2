@@ -1,10 +1,44 @@
 package com.example.morethanyesterdayv2.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
+import com.example.morethanyesterdayv2.aboutRoom.RoomHelper
+import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
+import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
-class MainViewModel : ViewModel() {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
+    private val exerciseDAO: ExerciseDAO = RoomHelper.getDatabase(application).exerciseDAO()
+    private val exerciseList = MutableLiveData<List<ExerciseEntity>>()
     var selectedDate: String = ""
     var fname: String = ""
-    // ... 추가적으로 ViewModel에서 유지할 변수 및 함수를 선언합니다.
+
+    fun getExerciseList(): LiveData<List<ExerciseEntity>> {
+        if (exerciseList.value == null) {
+            loadExerciseList()
+        }
+        return exerciseList
+    }
+
+    fun loadExerciseListByDate(selectedDate: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val list = exerciseDAO.getAllByDate(selectedDate)
+            withContext(Dispatchers.Main) {
+                exerciseList.value = list
+            }
+        }
+    }
+
+    fun loadExerciseList() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val list = exerciseDAO.getAll()
+            withContext(Dispatchers.Main) {
+                exerciseList.value = list
+            }
+        }
+    }
+
 }
