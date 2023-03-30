@@ -5,16 +5,21 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.morethanyesterdayv2.aboutRoom.RecordRoomHelper
 import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.morethanyesterdayv2.aboutRoom.RoomHelper
+import com.example.morethanyesterdayv2.data.dao.RecordDAO
+import com.example.morethanyesterdayv2.data.entity.RecordEntity
 
 class SelectedDateViewModel(application: Application) : AndroidViewModel(application) {
     private val exerciseDAO: ExerciseDAO = RoomHelper.getDatabase(application).exerciseDAO()
+    private val recordDAO: RecordDAO = RecordRoomHelper.getDatabase(application).recordDAO()
     private val exerciseList = MutableLiveData<List<ExerciseEntity>>()
+    private val recordList = MutableLiveData<List<RecordEntity>>()
     fun getExerciseList(): LiveData<List<ExerciseEntity>> {
         if (exerciseList.value == null) {
             loadExerciseList()
@@ -30,6 +35,15 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
             }
         }
     }
+
+//    fun loadExerciseSetListByDate(selectedDate: String) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val list = recordDAO.getRecordsBySelectedDate(selectedDate)
+//            withContext(Dispatchers.Main) {
+//                recordList.value = list
+//            }
+//        }
+//    }
 
     fun loadExerciseList() {
         viewModelScope.launch(Dispatchers.IO) {

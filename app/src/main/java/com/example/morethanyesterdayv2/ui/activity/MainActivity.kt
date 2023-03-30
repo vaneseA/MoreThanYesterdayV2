@@ -137,5 +137,7 @@ class MainActivity : AppCompatActivity() {
             exerciseList.addAll(list.filter { it.selectedDate == viewModel.selectedDate })
             mainAdapter.notifyDataSetChanged()
         })
+
+
     }
 }

@@ -30,14 +30,12 @@ class ChildAdapter(
 
     class Holder(val binding: SetRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
         var recordEntity: RecordEntity? = null
-        var position: Int? = null
 
         fun recordData(recordEntity: RecordEntity, position: Int) {
             binding.recordSetItem.text = recordEntity?.setNo.toString() + "번째 세트"
             binding.recordKgItem.text = recordEntity?.kg + "kg"
             binding.recordCountItem.text = recordEntity?.count + "회"
-            this.recordEntity = recordEntity
-            this.position = position
+
         }
 
     }

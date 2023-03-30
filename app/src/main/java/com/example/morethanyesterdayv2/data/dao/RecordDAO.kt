@@ -15,4 +15,7 @@ interface RecordDAO {
 
     @Delete
     fun delete(recordEntity: RecordEntity)
+
+    @Query("SELECT * FROM room_record WHERE selectedDate = :selectedDate ORDER BY id ASC")
+    fun getRecordsBySelectedDate(selectedDate: String): List<RecordEntity>
 }

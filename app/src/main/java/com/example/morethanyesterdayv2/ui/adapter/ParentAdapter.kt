@@ -47,11 +47,15 @@ class ParentAdapter(
             binding.bestKgArea.text = "최고 " + exerciseEntity.bestKg + "kg, "
             binding.totalCountArea.text = "총 " + exerciseEntity.totalCount + "회"
 
+            binding.nestedRV.setHasFixedSize(true)
+            binding.nestedRV.layoutManager = LinearLayoutManager(itemView.context)
+            val adapter = ChildAdapter(exerciseEntity.recordList, context)
+            binding.nestedRV.adapter = adapter
+
 
             binding.addSetBtn.setOnClickListener {
                 selectedDateActivity?.clickViewEvents(position, exerciseEntity)
             }
-
 
 
         }

@@ -13,6 +13,7 @@ import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.ui.adapter.ParentAdapter
 import com.example.morethanyesterdayv2.aboutRoom.RoomHelper
+import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.ActivitySelectedDateBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
 import com.example.morethanyesterdayv2.dialog.CustomDialog
@@ -25,6 +26,7 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
     lateinit var helper: RoomHelper
     lateinit var parentAdapter: ParentAdapter
     val exerciseList = mutableListOf<ExerciseEntity>()
+    val recordList = mutableListOf<RecordEntity>()
     lateinit var exerciseDAO: ExerciseDAO
 
     init {
@@ -58,6 +60,8 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
             exerciseList.addAll(list.filter { it.selectedDate == selectedDate })
             parentAdapter.notifyDataSetChanged()
         })
+
+//        viewModel.loadExerciseSetListByDate(selectedDate)
 
         helper =
             Room.databaseBuilder(this, RoomHelper::class.java, "room_db")
