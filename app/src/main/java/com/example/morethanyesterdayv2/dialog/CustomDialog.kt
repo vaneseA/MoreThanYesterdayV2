@@ -21,7 +21,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 lateinit var appDatabase: AppDatabase
-val recordSetList = mutableListOf<RecordEntity>()
 lateinit var recordDAO: RecordDAO
 
 class CustomDialog(
@@ -36,7 +35,6 @@ class CustomDialog(
     // 뷰 바인딩 정의
     private var _binding: CustomAddSetDialogBinding? = null
     private val binding get() = _binding!!
-
     private var addSetDialogInterface: AddSetDialogInterface? = null
     var exerciseEntity: ExerciseEntity? = null
     private var position: Int? = null
