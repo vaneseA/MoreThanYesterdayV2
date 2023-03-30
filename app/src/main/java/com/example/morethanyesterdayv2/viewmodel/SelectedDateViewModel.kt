@@ -15,7 +15,6 @@ import com.example.morethanyesterdayv2.aboutRoom.RoomHelper
 class SelectedDateViewModel(application: Application) : AndroidViewModel(application) {
     private val exerciseDAO: ExerciseDAO = RoomHelper.getDatabase(application).exerciseDAO()
     private val exerciseList = MutableLiveData<List<ExerciseEntity>>()
-
     fun getExerciseList(): LiveData<List<ExerciseEntity>> {
         if (exerciseList.value == null) {
             loadExerciseList()

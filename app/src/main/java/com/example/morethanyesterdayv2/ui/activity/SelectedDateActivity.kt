@@ -1,8 +1,10 @@
 package com.example.morethanyesterdayv2.ui.activity
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -92,8 +94,20 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
     }
     override fun onBackPressed() {
         super.onBackPressed()
+        val selectedDate = intent?.getStringExtra("selectedDate") ?: ""
         val mainActivity = MainActivity.getInstance()
-        mainActivity?.checkDay()
+        val intent = Intent().apply {
+            putExtra("selectedDate", selectedDate)
+            Log.d("selectedDatess",selectedDate)
+        }
+        setResult(Activity.RESULT_OK, intent)
+//        finish()
+        val year = selectedDate.substringBefore("년").toInt()
+        val month = selectedDate.substringAfter("년 ").substringBefore("월").toInt() - 1
+        val dayOfMonth = selectedDate.substringAfter("월 ").substringBefore("일").toInt()
+        startActivity(Intent(this,MainActivity::class.java))
+        mainActivity?.checkDay(2023,6,12)
+
     }
 
 }
