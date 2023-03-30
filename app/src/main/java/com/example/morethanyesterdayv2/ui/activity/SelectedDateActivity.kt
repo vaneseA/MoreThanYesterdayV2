@@ -90,5 +90,10 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
     override fun onYesButtonClick(id: Int) {
 
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val mainActivity = MainActivity.getInstance()
+        mainActivity?.checkDay()
+    }
 
 }

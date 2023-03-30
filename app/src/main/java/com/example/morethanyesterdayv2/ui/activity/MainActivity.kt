@@ -27,7 +27,16 @@ class MainActivity : AppCompatActivity() {
     lateinit var mainAdapter: MainAdapter
     val exerciseList = mutableListOf<ExerciseEntity>()
 
+    init {
+        instance = this
+    }
 
+    companion object {
+        private var instance: MainActivity? = null
+        fun getInstance(): MainActivity? {
+            return instance
+        }
+    }
     lateinit var fname: String
     lateinit var str: String
     lateinit var updateBtn: Button

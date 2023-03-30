@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_baseline_create_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_baseline_delete_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_dialog_rounded.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1345" />
         <entry key="app/src/main/res/drawable/radionbutton_female.xml" value="0.191" />
         <entry key="app/src/main/res/drawable/radionbutton_male.xml" value="0.191" />
         <entry key="app/src/main/res/drawable/underline.xml" value="0.1305" />
