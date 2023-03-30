@@ -16,6 +16,7 @@ import com.example.morethanyesterdayv2.ui.adapter.ParentAdapter
 import com.example.morethanyesterdayv2.viewmodel.MainViewModel
 import com.example.morethanyesterdayv2.viewmodel.SelectedDateViewModel
 import java.io.FileInputStream
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,6 +46,11 @@ class MainActivity : AppCompatActivity() {
 
 
         val intent = Intent(this, SelectedDateActivity::class.java)
+
+        // 오늘 날짜 자동 선택
+        val today = Calendar.getInstance()
+        handleCalendarSelection(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH))
+
 
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             viewModel.selectedDate = String.format("%d년 %d월 %d일", year, month + 1, dayOfMonth)
@@ -104,5 +110,23 @@ class MainActivity : AppCompatActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+    private fun handleCalendarSelection(year: Int, month: Int, dayOfMonth: Int) {
+        viewModel.selectedDate = String.format("%d년 %d월 %d일", year, month + 1, dayOfMonth)
+        binding.diaryTextView.visibility = View.VISIBLE
+        binding.goToWriteBtn.visibility = View.VISIBLE
+        binding.diaryTextView.text = viewModel.selectedDate
+        checkDay(year, month, dayOfMonth)
+
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        // 선택한 날짜에 해당하는 운동 목록 가져오기
+        viewModel.loadExerciseListByDate(viewModel.selectedDate)
+
+        viewModel.getExerciseList().observe(this, { list ->
+            // 선택한 날짜에 해당하는 운동 목록만 가져온다
+            exerciseList.clear()
+            exerciseList.addAll(list.filter { it.selectedDate == viewModel.selectedDate })
+            mainAdapter.notifyDataSetChanged()
+        })
     }
 }
