@@ -37,6 +37,7 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
             return instance
         }
     }
+
     private lateinit var viewModel: SelectedDateViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,8 +83,9 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
         val selectedDate = intent?.getStringExtra("selectedDate") ?: ""
         viewModel.loadExerciseListByDate(selectedDate)
     }
+
     fun clickViewEvents(position: Int, member: ExerciseEntity) {
-        val dialog = CustomDialog(this,position,member)
+        val dialog = CustomDialog(this, position, member)
         // 알림창이 띄워져있는 동안 배경 클릭 막기
         dialog.isCancelable = false
         dialog.show(supportFragmentManager, "CustomDialog")
@@ -92,22 +94,10 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
     override fun onYesButtonClick(id: Int) {
 
     }
+
     override fun onBackPressed() {
         super.onBackPressed()
-        val selectedDate = intent?.getStringExtra("selectedDate") ?: ""
-        val mainActivity = MainActivity.getInstance()
-        val intent = Intent().apply {
-            putExtra("selectedDate", selectedDate)
-            Log.d("selectedDatess",selectedDate)
-        }
-        setResult(Activity.RESULT_OK, intent)
-//        finish()
-        val year = selectedDate.substringBefore("년").toInt()
-        val month = selectedDate.substringAfter("년 ").substringBefore("월").toInt() - 1
-        val dayOfMonth = selectedDate.substringAfter("월 ").substringBefore("일").toInt()
-        startActivity(Intent(this,MainActivity::class.java))
-        mainActivity?.checkDay(2023,6,12)
-
+        startActivity(Intent(this, MainActivity::class.java))
     }
 
 }
