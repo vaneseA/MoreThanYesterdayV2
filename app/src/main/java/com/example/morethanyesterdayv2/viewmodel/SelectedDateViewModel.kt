@@ -36,14 +36,14 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-//    fun loadExerciseSetListByDate(selectedDate: String) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            val list = recordDAO.getRecordsBySelectedDate(selectedDate)
-//            withContext(Dispatchers.Main) {
-//                recordList.value = list
-//            }
-//        }
-//    }
+    fun loadExerciseSetListByDateAndName(selectedDate: String, exerciseName: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val list = recordDAO.getRecordsBySelectedDateAndExerciseName(selectedDate, exerciseName)
+            withContext(Dispatchers.Main) {
+                recordList.value = list
+            }
+        }
+    }
 
     fun loadExerciseList() {
         viewModelScope.launch(Dispatchers.IO) {
