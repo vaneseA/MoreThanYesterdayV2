@@ -26,7 +26,6 @@ class ParentAdapter(
     private val childList: List<RecordEntity>
 ) :
     RecyclerView.Adapter<ParentAdapter.Holder>(), AddSetDialogInterface {
-    private val _recordListLiveData = MutableLiveData<List<RecordEntity>>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =
@@ -36,7 +35,7 @@ class ParentAdapter(
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val parentItem = parentList[position]
-        holder.setData(parentItem, position)
+        holder.setData(parentItem, position, childList)
 
         holder.binding.nestedRV.adapter =
             ChildAdapter(childList.filter { it.exerciseId == parentItem.exerciseId })
@@ -48,7 +47,7 @@ class ParentAdapter(
     inner class Holder(val binding: RecordRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
         private val selectedDateActivity = SelectedDateActivity.getInstance()
 
-        fun setData(exerciseEntity: ExerciseEntity, position: Int) {
+        fun setData(exerciseEntity: ExerciseEntity, position: Int, childList: List<RecordEntity>) {
             val exerciseId = exerciseEntity.exerciseId
             binding.NameArea.text = exerciseEntity.exerciseName
             binding.TypeArea.text = exerciseEntity.exerciseType
