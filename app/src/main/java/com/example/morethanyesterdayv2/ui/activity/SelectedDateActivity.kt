@@ -69,18 +69,13 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
             parentAdapter.notifyDataSetChanged()
         })
 
-//        viewModel.loadExerciseSetListByDateAndName(selectedDate,exerciseName).observe(this, { list ->
-//            recordList.clear()
-//            recordList.addAll(list.filter { selectedDate == selectedDate})
-//            childAdpater.notifyDataSetChanged()
-//        })
 
         appDatabase =
             Room.databaseBuilder(this, AppDatabase::class.java, "room_db")
                 .build()
         exerciseDAO = appDatabase.exerciseDAO()
 
-        parentAdapter = ParentAdapter(exerciseList, this@SelectedDateActivity)
+        parentAdapter = ParentAdapter(exerciseList, this@SelectedDateActivity.application,this)
 
         with(binding) {
             recordRV.adapter = parentAdapter

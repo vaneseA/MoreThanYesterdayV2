@@ -1,5 +1,6 @@
 package com.example.morethanyesterdayv2.ui.adapter
 
+import android.app.Application
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,14 +12,17 @@ import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
+import com.example.morethanyesterdayv2.repository.SelectedDateRepository
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 
 
 class ParentAdapter(
     private val parentList: List<ExerciseEntity>,
+    application: Application,
     var context: Context
 ) :
     RecyclerView.Adapter<ParentAdapter.Holder>(), AddSetDialogInterface {
+    private val selectedDateRepository = SelectedDateRepository(application)
 
     private val _recordListLiveData = MutableLiveData<List<RecordEntity>>()
     val recordListLiveData: LiveData<List<RecordEntity>> = _recordListLiveData
@@ -49,7 +53,7 @@ class ParentAdapter(
 
             binding.nestedRV.setHasFixedSize(true)
             binding.nestedRV.layoutManager = LinearLayoutManager(itemView.context)
-            val adapter = ChildAdapter(exerciseEntity.recordList, context)
+            val adapter = ChildAdapter(exerciseEntity.recordList)
             binding.nestedRV.adapter = adapter
 
 
