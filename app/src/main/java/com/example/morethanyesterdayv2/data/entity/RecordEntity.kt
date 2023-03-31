@@ -35,6 +35,18 @@ class RecordEntity {
     var count: String = ""
 
 
+    @ColumnInfo(name = "totalSet")
+    var totalSet: Int = 0
+
+    @ColumnInfo(name = "totalKG")
+    var totalKG: String = ""
+
+    @ColumnInfo(name = "bestKg")
+    var bestKg: String = ""
+
+    @ColumnInfo(name = "totalCount")
+    var totalCount: String = ""
+
     constructor(
         exerciseId: String,
         selectedDate: String,

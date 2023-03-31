@@ -1,24 +1,15 @@
 package com.example.morethanyesterdayv2.ui.adapter
 
-import android.app.Application
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
-import com.example.morethanyesterdayv2.dialog.recordDAO
-import com.example.morethanyesterdayv2.repository.SelectedDateRepository
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-
 
 class ParentAdapter(
     private val parentList: List<ExerciseEntity>,

@@ -12,7 +12,7 @@ import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
 class ChildAdapter(
     var recordList: List<RecordEntity>
 ) :
-    RecyclerView.Adapter<ChildAdapter.Holder>(), AddSetDialogInterface {
+    RecyclerView.Adapter<ChildAdapter.Holder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =
@@ -39,6 +39,4 @@ class ChildAdapter(
 
     }
 
-    override fun onYesButtonClick(id: Int) {
-    }
 }
