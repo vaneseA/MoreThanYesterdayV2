@@ -20,12 +20,11 @@ class SelectedDateRepository(application: Application) {
 
 
     // DAO를 이용하여 선택한 날짜에 해당하는 특정 운동 정보를 가져오는 메서드
-    suspend fun getExerciseSetListByDateAndName(
-        selectedDate: String,
-        exerciseName: String
+    suspend fun getExerciseSetListById(
+        exerciseId:String
     ): List<RecordEntity> {
         return withContext(Dispatchers.IO) {
-            recordDAO.getRecordsBySelectedDateAndExerciseName(selectedDate, exerciseName)
+            recordDAO.getRecordsBySelectedExerciseId(exerciseId)
         }
     }
 

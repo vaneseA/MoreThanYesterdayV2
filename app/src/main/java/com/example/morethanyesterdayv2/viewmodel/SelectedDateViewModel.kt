@@ -46,9 +46,9 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
     // coroutine viewModelScope
     // UI에 반영하는 작업을 수행, 이 작업은 백그라운드 스레드에서 실행되며,
     // UI의 반응성과 앱의 안정성을 유지하기 위해 메인 스레드에서 UI를 업데이트.
-    fun loadExerciseSetListByDateAndName(selectedDate: String, exerciseName: String) {
+    fun loadExerciseSetListByExerciseId(exerciseId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val list = selectedDateRepository.getExerciseSetListByDateAndName(selectedDate, exerciseName)
+            val list = selectedDateRepository.getExerciseSetListById(exerciseId)
             withContext(Dispatchers.Main) {
                 recordList.value = list
             }

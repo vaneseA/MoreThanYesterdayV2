@@ -58,8 +58,7 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
 
         // 선택한 날짜에 해당하는 모든 운동 목록 가져오기
         viewModel.loadExerciseListByDate(selectedDate)
-        // 선택한 날짜에 해당하는 선택한 운동 목록 가져오기
-        viewModel.loadExerciseSetListByDateAndName(selectedDate, exerciseName)
+
 
 
         viewModel.getExerciseList().observe(this, { list ->
@@ -75,7 +74,7 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
                 .build()
         exerciseDAO = appDatabase.exerciseDAO()
 
-        parentAdapter = ParentAdapter(exerciseList, this@SelectedDateActivity.application,this)
+        parentAdapter = ParentAdapter(exerciseList, this@SelectedDateActivity.application, this)
 
         with(binding) {
             recordRV.adapter = parentAdapter
@@ -97,8 +96,8 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
         viewModel.loadExerciseListByDate(selectedDate)
     }
 
-    fun clickViewEvents(position: Int, member: ExerciseEntity) {
-        val dialog = CustomDialog(this, position, member)
+    fun clickViewEvents(position: Int, exerciseEntity: ExerciseEntity, exerciseId: String) {
+        val dialog = CustomDialog(this, position, exerciseEntity, exerciseId)
         // 알림창이 띄워져있는 동안 배경 클릭 막기
         dialog.isCancelable = false
         dialog.show(supportFragmentManager, "CustomDialog")

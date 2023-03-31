@@ -42,7 +42,7 @@ class ExerciseEntity {
     var totalCount: String = ""
 
     @ColumnInfo
-    var recordList: List<RecordEntity> = emptyList() // recordList 추가
+    var recordList: List<RecordEntity> = emptyList()
 
 
     constructor(selectedDate: String, exerciseName: String, exerciseType: String, exerciseId: String) {

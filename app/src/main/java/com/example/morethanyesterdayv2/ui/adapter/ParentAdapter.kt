@@ -54,18 +54,13 @@ class ParentAdapter(
             binding.totalKgArea.text = "총 " + exerciseEntity.totalKG + "kg, "
             binding.bestKgArea.text = "최고 " + exerciseEntity.bestKg + "kg, "
             binding.totalCountArea.text = "총 " + exerciseEntity.totalCount + "회"
+
             binding.nestedRV.setHasFixedSize(true)
             binding.nestedRV.layoutManager = LinearLayoutManager(itemView.context)
-            val adapter = ChildAdapter(exerciseEntity.recordList)
+            val adapter = ChildAdapter(exerciseEntity.recordList,exerciseEntity.exerciseId)
             binding.nestedRV.adapter = adapter
-
-            binding.nestedRV.setOnClickListener {
-                val intent = Intent(context, SelectedDateActivity::class.java)
-                intent.putExtra("selectedDate", exerciseEntity.selectedDate)
-                context.startActivity(intent)
-            }
             binding.addSetBtn.setOnClickListener {
-                selectedDateActivity?.clickViewEvents(position, exerciseEntity)
+                selectedDateActivity?.clickViewEvents(position, exerciseEntity, exerciseEntity.exerciseId)
             }
 
 
@@ -73,15 +68,6 @@ class ParentAdapter(
     }
 
     override fun onYesButtonClick(id: Int) {
-    }
-
-    suspend fun getExerciseSetListByDateAndName(
-        selectedDate: String,
-        exerciseName: String
-    ): List<RecordEntity> {
-        return withContext(Dispatchers.IO) {
-            recordDAO.getRecordsBySelectedDateAndExerciseName(selectedDate, exerciseName)
-        }
     }
 
 }

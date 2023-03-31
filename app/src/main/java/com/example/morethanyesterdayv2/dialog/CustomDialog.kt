@@ -27,6 +27,7 @@ class CustomDialog(
     addSetDialogInterface: SelectedDateActivity,
     position: Int,
     exerciseEntity: ExerciseEntity,
+    exerciseId: String
 ) : DialogFragment() {
 
 
@@ -43,7 +44,6 @@ class CustomDialog(
         this.exerciseEntity = exerciseEntity
         this.position = position
         this.addSetDialogInterface = addSetDialogInterface
-
 
     }
 

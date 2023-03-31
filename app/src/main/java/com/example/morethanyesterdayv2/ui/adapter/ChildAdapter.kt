@@ -10,7 +10,8 @@ import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
 
 
 class ChildAdapter(
-    var recordList: List<RecordEntity>
+    var recordList: List<RecordEntity>,
+    var exerciseId: String
 ) :
     RecyclerView.Adapter<ChildAdapter.Holder>(), AddSetDialogInterface {
 
