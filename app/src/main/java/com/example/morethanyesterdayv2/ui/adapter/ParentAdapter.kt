@@ -36,10 +36,6 @@ class ParentAdapter(
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val parentItem = parentList[position]
         holder.setData(parentItem, position, childList)
-
-        holder.binding.nestedRV.adapter =
-            ChildAdapter(childList.filter { it.exerciseId == parentItem.exerciseId })
-        holder.binding.nestedRV.layoutManager = LinearLayoutManager(context)
     }
 
     override fun getItemCount(): Int = parentList.size
