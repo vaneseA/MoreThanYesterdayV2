@@ -53,7 +53,7 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
         // 선택한 날짜에 해당하는 운동 목록 가져오기
         viewModel.loadExerciseListByDate(selectedDate)
 
-        viewModel.loadExerciseSetListByDateAndName(selectedDate, exerciseName)
+
 
         viewModel.getExerciseList().observe(this, { list ->
             // 선택한 날짜에 해당하는 운동 목록만 가져온다
@@ -62,7 +62,7 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
             parentAdapter.notifyDataSetChanged()
         })
 
-//        viewModel.loadExerciseSetListByDate(selectedDate)
+        viewModel.loadExerciseSetListByDateAndName(selectedDate, exerciseName)
 
         appDatabase =
             Room.databaseBuilder(this, AppDatabase::class.java, "room_db")

@@ -10,7 +10,10 @@ import kotlinx.coroutines.withContext
 class ExerciseRepository(application: Application) {
     private val exerciseDAO: ExerciseDAO = AppDatabase.getDatabase(application).exerciseDAO()
 
+
     // DAO를 이용하여 모든 운동 정보를 가져오는 메서드
+    // MainViewModel의 ListExerciseList()에서 list로서 사용중.
+    // SelectedDateViewModel의 ListExerciseList()에서 list로서 사용중.
     suspend fun getAll(): List<ExerciseEntity> {
         return withContext(Dispatchers.IO) {
             exerciseDAO.getAll()
@@ -18,6 +21,8 @@ class ExerciseRepository(application: Application) {
     }
 
     // DAO를 이용하여 선택한 날짜에 해당하는 모든 운동 정보를 가져오는 메서드
+    // MainViewModel의 loadExerciseListByDate()에서 list로서 사용중.
+    // SelectedDateViewModel의 loadExerciseListByDate()에서 list로서 사용중.
     suspend fun getAllByDate(selectedDate: String): List<ExerciseEntity> {
         return withContext(Dispatchers.IO) {
             exerciseDAO.getAllByDate(selectedDate)

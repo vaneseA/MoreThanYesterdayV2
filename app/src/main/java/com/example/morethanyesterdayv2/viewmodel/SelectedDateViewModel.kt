@@ -13,8 +13,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.morethanyesterdayv2.data.dao.RecordDAO
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
+import com.example.morethanyesterdayv2.repository.ExerciseRepository
+import com.example.morethanyesterdayv2.repository.SelectedDateRepository
 
 class SelectedDateViewModel(application: Application) : AndroidViewModel(application) {
+    private val exerciseRepository = ExerciseRepository(application)
+    private val selectedDateRepository = SelectedDateRepository(application)
     private val exerciseDAO: ExerciseDAO = AppDatabase.getDatabase(application).exerciseDAO()
     private val recordDAO: RecordDAO = AppDatabase.getDatabase(application).recordDAO()
     private val exerciseList = MutableLiveData<List<ExerciseEntity>>()
@@ -28,7 +32,7 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
 
     fun loadExerciseListByDate(selectedDate: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val list = exerciseDAO.getAllByDate(selectedDate)
+            val list = exerciseRepository.getAllByDate(selectedDate)
             withContext(Dispatchers.Main) {
                 exerciseList.value = list
             }
@@ -37,7 +41,7 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
 
     fun loadExerciseSetListByDateAndName(selectedDate: String, exerciseName: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val list = recordDAO.getRecordsBySelectedDateAndExerciseName(selectedDate, exerciseName)
+            val list = selectedDateRepository.getExerciseSetListByDateAndName(selectedDate, exerciseName)
             withContext(Dispatchers.Main) {
                 recordList.value = list
             }
@@ -46,7 +50,7 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
 
     fun loadExerciseList() {
         viewModelScope.launch(Dispatchers.IO) {
-            val list = exerciseDAO.getAll()
+            val list = exerciseRepository.getAll()
             withContext(Dispatchers.Main) {
                 exerciseList.value = list
             }
