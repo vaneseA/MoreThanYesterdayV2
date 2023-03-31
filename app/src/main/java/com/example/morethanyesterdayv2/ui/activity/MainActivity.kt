@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
             return instance
         }
     }
+
     lateinit var fname: String
     lateinit var str: String
     lateinit var updateBtn: Button
@@ -58,7 +59,11 @@ class MainActivity : AppCompatActivity() {
 
         // 오늘 날짜 자동 선택
         val today = Calendar.getInstance()
-        handleCalendarSelection(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH))
+        handleCalendarSelection(
+            today.get(Calendar.YEAR),
+            today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH)
+        )
 
 
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
@@ -94,6 +99,7 @@ class MainActivity : AppCompatActivity() {
         binding.mainRecordRV.layoutManager = LinearLayoutManager(this@MainActivity)
     }
 
+
     // 달력 내용 조회, 수정
     fun checkDay(cYear: Int, cMonth: Int, cDay: Int) {
         viewModel.fname = "" + cYear + "-" + (cMonth + 1) + "" + "-" + cDay + ".txt"
@@ -120,6 +126,7 @@ class MainActivity : AppCompatActivity() {
             e.printStackTrace()
         }
     }
+
     private fun handleCalendarSelection(year: Int, month: Int, dayOfMonth: Int) {
         viewModel.selectedDate = String.format("%d년 %d월 %d일", year, month + 1, dayOfMonth)
         binding.diaryTextView.visibility = View.VISIBLE

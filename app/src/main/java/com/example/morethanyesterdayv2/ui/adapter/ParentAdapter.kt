@@ -2,6 +2,7 @@ package com.example.morethanyesterdayv2.ui.adapter
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
@@ -50,12 +51,16 @@ class ParentAdapter(
             binding.totalKgArea.text = "총 " + exerciseEntity.totalKG + "kg, "
             binding.bestKgArea.text = "최고 " + exerciseEntity.bestKg + "kg, "
             binding.totalCountArea.text = "총 " + exerciseEntity.totalCount + "회"
-
             binding.nestedRV.setHasFixedSize(true)
             binding.nestedRV.layoutManager = LinearLayoutManager(itemView.context)
             val adapter = ChildAdapter(exerciseEntity.recordList)
             binding.nestedRV.adapter = adapter
 
+            binding.nestedRV.setOnClickListener {
+                val intent = Intent(context, SelectedDateActivity::class.java)
+                intent.putExtra("selectedDate", exerciseEntity.selectedDate)
+                context.startActivity(intent)
+            }
 
             binding.addSetBtn.setOnClickListener {
                 selectedDateActivity?.clickViewEvents(position, exerciseEntity)
