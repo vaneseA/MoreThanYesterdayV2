@@ -19,6 +19,7 @@ import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class ExerciseListAdapter(private val context: Context, private val selectedDate: String) :
     RecyclerView.Adapter<ExerciseListAdapter.ViewHolder>() {
@@ -92,7 +93,10 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
                     Room.databaseBuilder(context, AppDatabase::class.java, "room_db")
                         .build()
                 exerciseDAO = appDatabase.exerciseDAO()
-                val exerciseInfo = ExerciseEntity(selectedDate,exerciseName, exerciseType)
+
+                //랜덤ID부여
+                var exerciseId = UUID.randomUUID().toString()
+                val exerciseInfo = ExerciseEntity(selectedDate,exerciseName, exerciseType, exerciseId)
                 insertExercise(exerciseInfo)
                 notifyDataSetChanged()
                 dialog.dismiss()

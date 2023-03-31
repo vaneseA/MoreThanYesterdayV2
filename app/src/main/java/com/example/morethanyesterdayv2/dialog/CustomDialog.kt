@@ -84,6 +84,7 @@ class CustomDialog(
 
             // record 객체의 kg와 count 속성에 값을 대입
             val record = RecordEntity(
+                exerciseId = exerciseEntity?.exerciseId ?: "",
                 selectedDate = exerciseEntity?.selectedDate ?: "",
                 exerciseName = exerciseEntity?.exerciseName ?: "",
                 exerciseType = exerciseEntity?.exerciseType ?: "",

@@ -24,6 +24,9 @@ class ExerciseEntity {
     var id: Long? = null
 
     @ColumnInfo
+    var exerciseId: String = ""
+
+    @ColumnInfo
     var exerciseType: String = ""
 
     @ColumnInfo
@@ -42,10 +45,11 @@ class ExerciseEntity {
     var recordList: List<RecordEntity> = emptyList() // recordList 추가
 
 
-    constructor(selectedDate: String, exerciseName: String, exerciseType: String) {
+    constructor(selectedDate: String, exerciseName: String, exerciseType: String, exerciseId: String) {
 
         this.selectedDate = selectedDate
         this.exerciseName = exerciseName
         this.exerciseType = exerciseType
+        this.exerciseId = exerciseId
     }
 }

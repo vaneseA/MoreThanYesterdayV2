@@ -10,6 +10,10 @@ class RecordEntity {
     @ColumnInfo(name = "id")
     var setNo: Long? = null
 
+
+    @ColumnInfo(name = "exerciseId")
+    var exerciseId: String = ""
+
     @ColumnInfo(name = "selectedDate")
     var selectedDate: String = ""
 
@@ -32,12 +36,14 @@ class RecordEntity {
 
 
     constructor(
+        exerciseId: String,
         selectedDate: String,
         exerciseName: String,
         exerciseType: String,
         kg: String,
         count: String
     ) {
+        this.exerciseId = exerciseId
         this.selectedDate = selectedDate
         this.exerciseName = exerciseName
         this.exerciseType = exerciseType

@@ -13,8 +13,11 @@ import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
+import com.example.morethanyesterdayv2.dialog.recordDAO
 import com.example.morethanyesterdayv2.repository.SelectedDateRepository
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 class ParentAdapter(
@@ -61,7 +64,6 @@ class ParentAdapter(
                 intent.putExtra("selectedDate", exerciseEntity.selectedDate)
                 context.startActivity(intent)
             }
-
             binding.addSetBtn.setOnClickListener {
                 selectedDateActivity?.clickViewEvents(position, exerciseEntity)
             }
@@ -72,4 +74,14 @@ class ParentAdapter(
 
     override fun onYesButtonClick(id: Int) {
     }
+
+    suspend fun getExerciseSetListByDateAndName(
+        selectedDate: String,
+        exerciseName: String
+    ): List<RecordEntity> {
+        return withContext(Dispatchers.IO) {
+            recordDAO.getRecordsBySelectedDateAndExerciseName(selectedDate, exerciseName)
+        }
+    }
+
 }
