@@ -50,13 +50,13 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
 
 
         viewModel = ViewModelProvider(this).get(SelectedDateViewModel::class.java)
-        // 선택한 날짜에 해당하는 운동 목록 가져오기
+        // 선택한 날짜에 해당하는 모든 운동 목록 가져오기
         viewModel.loadExerciseListByDate(selectedDate)
 
 
 
         viewModel.getExerciseList().observe(this, { list ->
-            // 선택한 날짜에 해당하는 운동 목록만 가져온다
+            // 선택한 날짜에 해당하는 모든 운동 목록만 가져온다
             exerciseList.clear()
             exerciseList.addAll(list.filter { it.selectedDate == selectedDate })
             parentAdapter.notifyDataSetChanged()
