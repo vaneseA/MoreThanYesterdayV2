@@ -54,7 +54,10 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
             }
         }
     }
-
+    // 비동기적으로 DAO를 이용하여 그 날짜와 특정 운동 정보를 가져와(getAll())
+    // coroutine viewModelScope
+    // UI에 반영하는 작업을 수행, 이 작업은 백그라운드 스레드에서 실행되며,
+    // UI의 반응성과 앱의 안정성을 유지하기 위해 메인 스레드에서 UI를 업데이트.
     fun loadExerciseList() {
         viewModelScope.launch(Dispatchers.IO) {
             val list = exerciseRepository.getAll()

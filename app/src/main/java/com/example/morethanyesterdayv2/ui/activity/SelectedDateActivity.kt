@@ -3,6 +3,7 @@ package com.example.morethanyesterdayv2.ui.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -15,14 +16,16 @@ import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.ActivitySelectedDateBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
 import com.example.morethanyesterdayv2.dialog.CustomDialog
+import com.example.morethanyesterdayv2.ui.adapter.ChildAdapter
 
 
 class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
 
-//  by lazy는 프로퍼티 초기화를 지연시켜서 액티비티나 프래그먼트의 뷰가 생성될 때 불필요한 리소스 초기화를 피하고 애플리케이션 성능을 향상시킬 수 있다
+    //  by lazy는 프로퍼티 초기화를 지연시켜서 액티비티나 프래그먼트의 뷰가 생성될 때 불필요한 리소스 초기화를 피하고 애플리케이션 성능을 향상시킬 수 있다
     val binding by lazy { ActivitySelectedDateBinding.inflate(layoutInflater) }
     lateinit var appDatabase: AppDatabase
     lateinit var parentAdapter: ParentAdapter
+    lateinit var childAdpater: ChildAdapter
     val exerciseList = mutableListOf<ExerciseEntity>()
     val recordList = mutableListOf<RecordEntity>()
     lateinit var exerciseDAO: ExerciseDAO
@@ -44,15 +47,19 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
         setContentView(binding.root)
 
         val exerciseName = intent?.getStringExtra("exerciseName") ?: ""
+        Log.d("dddddd", exerciseName)
         val selectedDate = intent?.getStringExtra("selectedDate") ?: ""
+        Log.d("dddddd", selectedDate)
         supportActionBar?.title = selectedDate
 
 
 
         viewModel = ViewModelProvider(this).get(SelectedDateViewModel::class.java)
+
         // 선택한 날짜에 해당하는 모든 운동 목록 가져오기
         viewModel.loadExerciseListByDate(selectedDate)
-
+        // 선택한 날짜에 해당하는 선택한 운동 목록 가져오기
+        viewModel.loadExerciseSetListByDateAndName(selectedDate, exerciseName)
 
 
         viewModel.getExerciseList().observe(this, { list ->
@@ -62,7 +69,11 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
             parentAdapter.notifyDataSetChanged()
         })
 
-        viewModel.loadExerciseSetListByDateAndName(selectedDate, exerciseName)
+//        viewModel.loadExerciseSetListByDateAndName(selectedDate,exerciseName).observe(this, { list ->
+//            recordList.clear()
+//            recordList.addAll(list.filter { selectedDate == selectedDate})
+//            childAdpater.notifyDataSetChanged()
+//        })
 
         appDatabase =
             Room.databaseBuilder(this, AppDatabase::class.java, "room_db")
@@ -86,6 +97,8 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
 
     fun refreshAdapter() {
         val selectedDate = intent?.getStringExtra("selectedDate") ?: ""
+        val exseciseName = intent?.getStringExtra("selectedDate") ?: ""
+        Log.d("dddddd", exseciseName)
         viewModel.loadExerciseListByDate(selectedDate)
     }
 
