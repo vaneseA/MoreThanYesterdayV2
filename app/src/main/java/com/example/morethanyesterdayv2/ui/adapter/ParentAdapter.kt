@@ -22,14 +22,11 @@ import kotlinx.coroutines.withContext
 
 class ParentAdapter(
     private val parentList: List<ExerciseEntity>,
-    application: Application,
-    var context: Context
+    var context: Context,
+    private val childList: List<RecordEntity>
 ) :
     RecyclerView.Adapter<ParentAdapter.Holder>(), AddSetDialogInterface {
-    private val selectedDateRepository = SelectedDateRepository(application)
-
     private val _recordListLiveData = MutableLiveData<List<RecordEntity>>()
-    val recordListLiveData: LiveData<List<RecordEntity>> = _recordListLiveData
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =
@@ -40,6 +37,10 @@ class ParentAdapter(
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val parentItem = parentList[position]
         holder.setData(parentItem, position)
+
+        holder.binding.nestedRV.adapter =
+            ChildAdapter(childList.filter { it.exerciseId == parentItem.exerciseId })
+        holder.binding.nestedRV.layoutManager = LinearLayoutManager(context)
     }
 
     override fun getItemCount(): Int = parentList.size
@@ -48,6 +49,7 @@ class ParentAdapter(
         private val selectedDateActivity = SelectedDateActivity.getInstance()
 
         fun setData(exerciseEntity: ExerciseEntity, position: Int) {
+            val exerciseId = exerciseEntity.exerciseId
             binding.NameArea.text = exerciseEntity.exerciseName
             binding.TypeArea.text = exerciseEntity.exerciseType
             binding.totalSetArea.text = "총 " + exerciseEntity.totalSet.toString() + "set, "
@@ -55,12 +57,18 @@ class ParentAdapter(
             binding.bestKgArea.text = "최고 " + exerciseEntity.bestKg + "kg, "
             binding.totalCountArea.text = "총 " + exerciseEntity.totalCount + "회"
 
+            binding.nestedRV.adapter =
+                ChildAdapter(childList.filter { it.exerciseId == exerciseId })
+            binding.nestedRV.layoutManager = LinearLayoutManager(context)
+
             binding.nestedRV.setHasFixedSize(true)
             binding.nestedRV.layoutManager = LinearLayoutManager(itemView.context)
-            val adapter = ChildAdapter(exerciseEntity.recordList,exerciseEntity.exerciseId)
-            binding.nestedRV.adapter = adapter
             binding.addSetBtn.setOnClickListener {
-                selectedDateActivity?.clickViewEvents(position, exerciseEntity, exerciseEntity.exerciseId)
+                selectedDateActivity?.clickViewEvents(
+                    position,
+                    exerciseEntity,
+                    exerciseId
+                )
             }
 
 

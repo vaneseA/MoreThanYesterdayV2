@@ -16,7 +16,7 @@ import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.ActivitySelectedDateBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
 import com.example.morethanyesterdayv2.dialog.CustomDialog
-import com.example.morethanyesterdayv2.ui.adapter.ChildAdapter
+
 
 
 class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
@@ -25,7 +25,6 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
     val binding by lazy { ActivitySelectedDateBinding.inflate(layoutInflater) }
     lateinit var appDatabase: AppDatabase
     lateinit var parentAdapter: ParentAdapter
-    lateinit var childAdpater: ChildAdapter
     val exerciseList = mutableListOf<ExerciseEntity>()
     val recordList = mutableListOf<RecordEntity>()
     lateinit var exerciseDAO: ExerciseDAO
@@ -74,7 +73,7 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
                 .build()
         exerciseDAO = appDatabase.exerciseDAO()
 
-        parentAdapter = ParentAdapter(exerciseList, this@SelectedDateActivity.application, this)
+        parentAdapter = ParentAdapter(exerciseList, this@SelectedDateActivity, recordList)
 
         with(binding) {
             recordRV.adapter = parentAdapter
