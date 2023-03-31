@@ -18,7 +18,6 @@ import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
 import com.example.morethanyesterdayv2.dialog.CustomDialog
 
 
-
 class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
 
     //  by lazy는 프로퍼티 초기화를 지연시켜서 액티비티나 프래그먼트의 뷰가 생성될 때 불필요한 리소스 초기화를 피하고 애플리케이션 성능을 향상시킬 수 있다
@@ -73,7 +72,8 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
                 .build()
         exerciseDAO = appDatabase.exerciseDAO()
 
-        parentAdapter = ParentAdapter(exerciseList, this@SelectedDateActivity, recordList)
+        parentAdapter =
+            ParentAdapter(exerciseList, this@SelectedDateActivity, application, recordList)
 
         with(binding) {
             recordRV.adapter = parentAdapter

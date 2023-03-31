@@ -1,6 +1,8 @@
 package com.example.morethanyesterdayv2.ui.adapter
 
+import android.app.Application
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,15 +11,18 @@ import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
+import com.example.morethanyesterdayv2.repository.SelectedDateRepository
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
+
 
 class ParentAdapter(
     private val parentList: List<ExerciseEntity>,
     var context: Context,
+    application: Application,
     private val childList: List<RecordEntity>
 ) :
     RecyclerView.Adapter<ParentAdapter.Holder>(), AddSetDialogInterface {
-
+    private val selectedDateRepository = SelectedDateRepository(application)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =
             RecordRvItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -27,6 +32,7 @@ class ParentAdapter(
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val parentItem = parentList[position]
         holder.setData(parentItem, position, childList)
+        Log.d("ParentAdapter", "childList size: ${childList.size}")
     }
 
     override fun getItemCount(): Int = parentList.size
@@ -36,6 +42,7 @@ class ParentAdapter(
 
         fun setData(exerciseEntity: ExerciseEntity, position: Int, childList: List<RecordEntity>) {
             val exerciseId = exerciseEntity.exerciseId
+
             binding.NameArea.text = exerciseEntity.exerciseName
             binding.TypeArea.text = exerciseEntity.exerciseType
             binding.totalSetArea.text = "총 " + exerciseEntity.totalSet.toString() + "set, "
@@ -45,6 +52,7 @@ class ParentAdapter(
 
             binding.nestedRV.adapter =
                 ChildAdapter(childList.filter { it.exerciseId == exerciseId })
+            Log.d("ParentAdapter", "exerciseId: ${exerciseId}")
             binding.nestedRV.layoutManager = LinearLayoutManager(context)
 
             binding.nestedRV.setHasFixedSize(true)

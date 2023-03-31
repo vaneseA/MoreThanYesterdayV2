@@ -67,26 +67,26 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-//    fun deleteExercise(entity: ExerciseEntity) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            exerciseDAO.delete(entity)
-//            loadExerciseList()
-//        }
-//    }
-//
-//    fun updateExercise(entity: ExerciseEntity) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            exerciseDAO.update(entity)
-//            loadExerciseList()
-//        }
-//    }
-//
-//    fun insertExercise(entity: ExerciseEntity) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            exerciseDAO.insert(entity)
-//            loadExerciseList()
-//        }
-//    }
+    fun deleteExercise(entity: ExerciseEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            exerciseDAO.delete(entity)
+            loadExerciseList()
+        }
+    }
+
+    fun updateExercise(entity: ExerciseEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            exerciseDAO.update(entity)
+            loadExerciseList()
+        }
+    }
+
+    fun insertExercise(entity: ExerciseEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            exerciseDAO.insert(entity)
+            loadExerciseList()
+        }
+    }
 
 
 }
