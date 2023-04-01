@@ -1,5 +1,6 @@
 package com.example.morethanyesterdayv2.data.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
@@ -18,6 +19,6 @@ interface RecordDAO {
     fun delete(recordEntity: RecordEntity)
 
     @Query("SELECT * FROM room_record WHERE exerciseId = :exerciseId")
-    fun loadExerciseSetListByExerciseId(exerciseId: String): List<RecordEntity>
+    fun loadExerciseSetListLiveDataByExerciseId(exerciseId: String): LiveData<List<RecordEntity>>
 
 }

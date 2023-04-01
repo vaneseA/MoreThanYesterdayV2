@@ -48,9 +48,9 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
     // UI의 반응성과 앱의 안정성을 유지하기 위해 메인 스레드에서 UI를 업데이트.
     fun loadExerciseSetListByExerciseId(exerciseId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val list = selectedDateRepository.getExerciseSetListById(exerciseId)
+            val list: LiveData<List<RecordEntity>> = selectedDateRepository.getExerciseSetListLiveDataById(exerciseId)
             withContext(Dispatchers.Main) {
-                recordList.value = list
+                recordList.postValue(list.value)
             }
         }
     }

@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
@@ -23,8 +24,6 @@ class ParentAdapter(
     RecyclerView.Adapter<ParentAdapter.Holder>(), AddSetDialogInterface {
     private val selectedRepository: SelectedDateRepository
     init {
-        val database = AppDatabase.getDatabase(application)
-//        val exerciseSetDao = database.exerciseDAO()
         selectedRepository = SelectedDateRepository(application)
     }
 
@@ -54,11 +53,11 @@ class ParentAdapter(
             binding.totalCountArea.text = "총 " + exerciseEntity.totalCount + "회"
 
 
-            // Load child list by exerciseId
-            val childExerciseSetList = selectedRepository.getExerciseSetListById(exerciseId)
-            binding.nestedRV.adapter = ChildAdapter(childExerciseSetList)
-            binding.nestedRV.layoutManager = LinearLayoutManager(context)
-            binding.nestedRV.setHasFixedSize(true)
+            selectedRepository.getExerciseSetListLiveDataById(exerciseId).observe(itemView.context as LifecycleOwner) { childExerciseSetList ->
+                binding.nestedRV.adapter = ChildAdapter(childExerciseSetList)
+                binding.nestedRV.layoutManager = LinearLayoutManager(context)
+                binding.nestedRV.setHasFixedSize(true)
+            }
 
 
             binding.addSetBtn.setOnClickListener {
