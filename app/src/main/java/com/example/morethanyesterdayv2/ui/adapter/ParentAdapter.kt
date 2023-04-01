@@ -49,6 +49,7 @@ class ParentAdapter(
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val parentItem = parentList[position]
         holder.setData(parentItem, position, childList)
+
     }
 
     override fun getItemCount(): Int = parentList.size
@@ -58,12 +59,13 @@ class ParentAdapter(
         fun setData(exerciseEntity: ExerciseEntity, position: Int, childList: List<RecordEntity>) {
             val exerciseId = exerciseEntity.exerciseId
             val selectedDate = exerciseEntity.selectedDate
-            val getTotalCount = getRecordCountByExerciseId(exerciseId)
-            Log.d("getTotalCount",getTotalCount.toString())
+
+//            val totalCount = getRecordCountByExerciseId(exerciseId)
+//                Log.d("getTotalCount", totalCount.toString())
+//                binding.totalSetArea.text = "총 ${totalCount}set, "
+
             binding.NameArea.text = exerciseEntity.exerciseName
             binding.TypeArea.text = exerciseEntity.exerciseType
-
-            binding.totalSetArea.text = "총 ${getTotalCount}set, "
             binding.totalKgArea.text = "총 ${exerciseEntity.totalKG}kg, "
             binding.bestKgArea.text = "최고 ${exerciseEntity.bestKg}kg, "
             binding.totalCountArea.text = "총 ${exerciseEntity.totalCount}회"
@@ -94,7 +96,7 @@ class ParentAdapter(
     override fun onYesButtonClick(id: Int) {
     }
 
-    fun getRecordCountByExerciseId(exerciseId: String?): LiveData<Int> {
+    fun getRecordCountByExerciseId(exerciseId: String?): Int {
         return recordDAO.getRecordCountByExerciseId(exerciseId)
     }
 }

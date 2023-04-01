@@ -22,5 +22,5 @@ interface RecordDAO {
 
     //ROOM에서 exerciseId로 된 값이 몇 개인지 카운트하는 쿼리
     @Query("SELECT COUNT(*) FROM room_record WHERE id = :exerciseId")
-    fun getRecordCountByExerciseId(exerciseId: String?): LiveData<Int>
+    fun getRecordCountByExerciseId(exerciseId: String?): Int
 }
