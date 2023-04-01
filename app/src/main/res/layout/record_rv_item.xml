@@ -128,11 +128,15 @@
 
         <Button
             android:id="@+id/addSetBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/maincolor"
+            android:layout_marginStart="-8dp"
+            android:layout_width="390dp"
+            android:layout_height="28dp"
+            android:backgroundTint="@color/main_color"
             android:textColor="@color/white"
             app:fontFamily="@font/jalnanche"
+            android:textSize="16dp"
+            android:gravity="center"
+            android:background="@drawable/rounded_button"
             android:text="세트 추가" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

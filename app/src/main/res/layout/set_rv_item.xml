@@ -44,7 +44,7 @@
     android:layout_width="33dp"
     android:layout_height="33dp"
     android:layout_marginStart="270dp"
-    android:backgroundTint="@color/maincolor"
+    android:backgroundTint="@color/main_color"
     android:text="-"
     android:textSize="11dp"
     android:textColor="@color/white"
