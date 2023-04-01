@@ -10,7 +10,10 @@ import com.example.morethanyesterdayv2.db.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class SelectedDateRepository(application: Application) {
+class SelectedDateRepository(
+    application: Application
+) {
+
     private val exerciseDAO: ExerciseDAO = AppDatabase.getDatabase(application).exerciseDAO()
     private val recordDAO: RecordDAO = AppDatabase.getDatabase(application).recordDAO()
 
@@ -24,7 +27,7 @@ class SelectedDateRepository(application: Application) {
         exerciseId:String
     ): List<RecordEntity> {
         return withContext(Dispatchers.IO) {
-            recordDAO.getRecordsBySelectedExerciseId(exerciseId)
+            recordDAO.loadExerciseSetListByExerciseId(exerciseId)
         }
     }
 

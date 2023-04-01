@@ -24,4 +24,8 @@ interface ExerciseDAO {
 
     @Query("SELECT * FROM room_exercise WHERE selectedDate=:selectedDate ORDER BY id ASC")
     fun getAllByDate(selectedDate: String): List<ExerciseEntity>
+
+
+
+
 }
