@@ -36,10 +36,10 @@ class ChildAdapter(
     class Holder(val binding: SetRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
         var recordEntity: RecordEntity? = null
         fun recordData(recordEntity: RecordEntity, position: Int) {
-            binding.recordSetItem.text = (position + 1).toString() + "번째 세트"
+            binding.recordSetItem.text = "${(position + 1)}번째 세트"
             //여기서 담아서 custom에 보내면되겠다.
-            binding.recordKgItem.text = recordEntity?.kg + "kg"
-            binding.recordCountItem.text = recordEntity?.count + "회"
+            binding.recordKgItem.text = "${(recordEntity?.kg)}kg"
+            binding.recordCountItem.text = "${(recordEntity?.count)}회"
             binding.removeButton.setOnClickListener {
                 recordEntity?.let {
                     deleteRecord(it)
