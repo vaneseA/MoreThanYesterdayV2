@@ -1,5 +1,6 @@
 package com.example.morethanyesterdayv2.dialog
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -93,8 +94,8 @@ class CustomDialog(
             )
             insertRecord(record)
             dialog?.dismiss()
-
         }
+//        binding.dialogSet.text = (position?.plus(1)).toString() + "번째 세트 추가"
 
         binding.plusFiveBtn?.setOnClickListener {
             customDialogViewModel.updateValue(

@@ -31,7 +31,7 @@ class ChildAdapter(
         var recordEntity: RecordEntity? = null
 
         fun recordData(recordEntity: RecordEntity, position: Int) {
-            binding.recordSetItem.text = recordEntity?.setNo.toString() + "번째 세트"
+            binding.recordSetItem.text = (position + 1).toString() + "번째 세트"
             binding.recordKgItem.text = recordEntity?.kg + "kg"
             binding.recordCountItem.text = recordEntity?.count + "회"
 
