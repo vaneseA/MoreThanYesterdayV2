@@ -12,6 +12,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
+import com.example.morethanyesterdayv2.R
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.data.dao.RecordDAO
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
@@ -43,6 +44,7 @@ class CustomDialog(
     var exerciseEntity: ExerciseEntity? = null
     private var position: Int? = null
     private var exerciseId: String? = null
+
     init {
         this.exerciseEntity = exerciseEntity
         this.position = position
@@ -64,11 +66,18 @@ class CustomDialog(
         customDialogViewModel = ViewModelProvider(this).get(CustomDialogViewModel::class.java)
 
         customDialogViewModel.currentWeightValue.observe(this, Observer {
-            binding.userInputWeight?.text = it.toString()
+            binding.userInputWeight?.setText(it.toString())
         })
         customDialogViewModel.currentCountValue.observe(this, Observer {
-            binding.userInputCount?.text = it.toString()
+            binding.userInputCount?.setText(it.toString())
         })
+
+        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.radio_kg -> binding.kgOrLb.text = "kg"
+                R.id.radio_lb -> binding.kgOrLb.text = "lb"
+            }
+        }
 
         binding.dialogExerciseName?.text = exerciseEntity?.exerciseName
         binding.dialogExerciseType?.text = exerciseEntity?.exerciseType
@@ -106,31 +115,27 @@ class CustomDialog(
             context?.startActivity(intent)
             (context as SelectedDateActivity).finish()
         }
-        var setCount= ""
+        var setCount = ""
         binding.dialogSet.text = setCount
         binding.plusFiveBtn?.setOnClickListener {
-            customDialogViewModel.updateValue(
-                actionType = ActionType.WEIGHTPLUS,
-                5
-            )
+            val currentWeight = binding.userInputWeight.text.toString().toDoubleOrNull() ?: 0.0
+            val newValue = currentWeight + 5
+            binding.userInputWeight.setText(newValue.toString())
         }
         binding.minusFiveBtn?.setOnClickListener {
-            customDialogViewModel.updateValue(
-                actionType = ActionType.WEIGHTMINUS,
-                5
-            )
+            val currentWeight = binding.userInputWeight.text.toString().toDoubleOrNull() ?: 0.0
+            val newValue = currentWeight - 5
+            binding.userInputWeight.setText(newValue.toString())
         }
         binding.plusOneBtn?.setOnClickListener {
-            customDialogViewModel.updateValue(
-                actionType = ActionType.COUNTPLUS,
-                1
-            )
+            val currentCount = binding.userInputCount.text.toString().toInt()
+            val newValue = currentCount + 1
+            binding.userInputCount.setText(newValue.toString())
         }
         binding.minusOneBtn?.setOnClickListener {
-            customDialogViewModel.updateValue(
-                actionType = ActionType.COUNTMINUS,
-                1
-            )
+            val currentCount = binding.userInputCount.text.toString().toInt()
+            val newValue = currentCount - 1
+            binding.userInputCount.setText(newValue.toString())
         }
 
         return view

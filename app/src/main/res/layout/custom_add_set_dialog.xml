@@ -8,7 +8,7 @@
     android:background="@drawable/bg_dialog_rounded">
 
 
-    <TextView
+    <EditText
         android:id="@+id/userInputWeight"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
@@ -16,15 +16,32 @@
         android:layout_marginEnd="8dp"
         android:digits="0123456789."
         android:inputType="number"
+        android:background="@drawable/value_border"
         android:gravity="center"
         app:fontFamily="@font/jalnanche"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintEnd_toStartOf="@+id/kg_or_lb"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialogSet" />
 
 
     <TextView
+        android:id="@+id/show_other_weight"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="8dp"
+        android:text="kg"
+        android:gravity="center"
+        app:fontFamily="@font/jalnanche"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/kg_or_lb"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialogSet"
+        app:layout_constraintVertical_bias="0.221" />
+
+    <EditText
         android:id="@+id/userInputCount"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
@@ -33,6 +50,7 @@
         android:gravity="center"
         android:inputType="number"
         android:maxLength="3"
+        android:background="@drawable/value_border"
         app:fontFamily="@font/jalnanche"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +65,7 @@
         android:layout_height="wrap_content"
         android:text="회"
         android:textSize="24dp"
+        android:layout_marginStart="3dp"
         app:fontFamily="@font/jalnanche"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,10 +75,10 @@
         app:layout_constraintVertical_bias="0.511" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/kg_or_lb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="26dp"
         android:text="kg"
         android:textSize="24dp"
         app:fontFamily="@font/jalnanche"
@@ -69,6 +88,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialogSet"
         app:layout_constraintVertical_bias="0.505" />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -125,7 +145,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dialogExerciseName" />
 
     <RadioGroup
-        android:id="@+id/radio_group_set"
+        android:id="@+id/radio_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
@@ -137,37 +157,37 @@
         app:layout_constraintTop_toBottomOf="@+id/dialogExerciseName">
 
         <RadioButton
-            android:id="@+id/rbProfileSet_Female"
+            android:id="@+id/radio_kg"
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="@drawable/radionbutton_kg"
+            android:background="@drawable/radio_kg_btn"
             android:button="@android:color/transparent"
             android:ems="4"
+            android:checked="true"
             android:fontFamily="@font/jalnanche"
             android:gravity="center"
             android:padding="4dp"
             android:text="kg"
             android:textColor="@color/selector_text_color_radiobutton"
-            app:layout_constraintEnd_toStartOf="@+id/lb"
+            app:layout_constraintEnd_toStartOf="@+id/radio_lb"
             app:layout_constraintStart_toEndOf="@+id/dialogSet"
             tools:layout_editor_absoluteY="128dp" />
 
         <RadioButton
-            android:id="@+id/lb"
+            android:id="@+id/radio_lb"
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:background="@drawable/radionbutton_lb"
+            android:background="@drawable/radio_lb_btn"
             android:button="@android:color/transparent"
-            android:checked="true"
             android:ems="4"
             android:fontFamily="@font/jalnanche"
             android:gravity="center"
             android:text="lb"
             android:textColor="@color/selector_text_color_radiobutton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/rbProfileSet_Female"
+            app:layout_constraintStart_toEndOf="@+id/radio_kg"
             tools:layout_editor_absoluteY="128dp" />
 
     </RadioGroup>
@@ -211,7 +231,7 @@
         app:layout_constraintBottom_toTopOf="@+id/dialogAddBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/userInputWeight"
-        app:layout_constraintTop_toBottomOf="@+id/radio_group_set" />
+        app:layout_constraintTop_toBottomOf="@+id/radio_group" />
 
     <TextView
         android:id="@+id/minusOneBtn"
@@ -233,7 +253,7 @@
         app:layout_constraintBottom_toTopOf="@+id/dialogCancleBtn"
         app:layout_constraintEnd_toStartOf="@+id/userInputCount"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radio_group_set" />
+        app:layout_constraintTop_toBottomOf="@+id/radio_group" />
 
     <TextView
         android:id="@+id/minusFiveBtn"

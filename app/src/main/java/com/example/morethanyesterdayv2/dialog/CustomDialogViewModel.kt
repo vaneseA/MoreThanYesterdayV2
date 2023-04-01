@@ -28,32 +28,17 @@ class CustomDialogViewModel(application: Application) : AndroidViewModel(applica
     private val _currentCountValue = MutableLiveData<Int>()
 
 
-
     val currentWeightValue: LiveData<Int>
         get() = _currentWeightValue
 
     val currentCountValue: LiveData<Int>
         get() = _currentCountValue
 
-    //초기값 설정
-    init {
-        _currentWeightValue.value = 0
-        _currentCountValue.value = 0
-    }
-
-    fun updateValue(actionType: ActionType, input: Int){
-        when(actionType){
-            ActionType.WEIGHTPLUS ->
-                _currentWeightValue.value = _currentWeightValue.value?.plus(input)
-            ActionType.WEIGHTMINUS ->
-                _currentWeightValue.value = _currentWeightValue.value?.minus(input)
-            ActionType.COUNTPLUS ->
-                _currentCountValue.value = _currentCountValue.value?.plus(input)
-            ActionType.COUNTMINUS ->
-                _currentCountValue.value = _currentCountValue.value?.minus(input)
-
-        }
-    }
+//    //초기값 설정
+//    init {
+//        _currentWeightValue.value = 0
+//        _currentCountValue.value = 0
+//    }
 
 
 
