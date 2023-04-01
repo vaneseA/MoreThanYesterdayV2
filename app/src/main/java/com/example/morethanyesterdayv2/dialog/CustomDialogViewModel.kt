@@ -1,8 +1,10 @@
 package com.example.morethanyesterdayv2.dialog
-import android.util.Log
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.morethanyesterdayv2.data.dao.RecordDAO
+import com.example.morethanyesterdayv2.db.AppDatabase
 
 enum class ActionType {
     COUNTPLUS,COUNTMINUS,WEIGHTPLUS,WEIGHTMINUS
@@ -11,8 +13,8 @@ enum class ActionType {
 //데이터의 변경
 // 뷰모델은 데이터의 변경사항을 알려주는 라이브 데이터를 가지고 있고
 
-class CustomDialogViewModel : ViewModel() {
-
+class CustomDialogViewModel(application: Application) : AndroidViewModel(application) {
+    private val recordDAO: RecordDAO = AppDatabase.getDatabase(application).recordDAO()
     companion object {
         const val TAG: String = "로그"
     }
@@ -52,5 +54,7 @@ class CustomDialogViewModel : ViewModel() {
 
         }
     }
+
+
 
 }

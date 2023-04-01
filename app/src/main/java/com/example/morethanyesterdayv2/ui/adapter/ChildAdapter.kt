@@ -1,6 +1,7 @@
 package com.example.morethanyesterdayv2.ui.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +10,8 @@ import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.SetRvItemBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
 import com.example.morethanyesterdayv2.dialog.recordDAO
+import com.example.morethanyesterdayv2.ui.activity.SelectExerciseActivity
+import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,13 +39,17 @@ class ChildAdapter(
     class Holder(val binding: SetRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
         var recordEntity: RecordEntity? = null
         fun recordData(recordEntity: RecordEntity, position: Int) {
-            binding.recordSetItem.text = "${(position + 1)}번째 세트"
-            //여기서 담아서 custom에 보내면되겠다.
+            var childPosition = (position + 1)
+            binding.recordSetItem.text = "${childPosition}번째 세트"
             binding.recordKgItem.text = "${(recordEntity?.kg)}kg"
             binding.recordCountItem.text = "${(recordEntity?.count)}회"
             binding.removeButton.setOnClickListener {
                 recordEntity?.let {
                     deleteRecord(it)
+                    (binding.root.context as? SelectedDateActivity)?.finish()
+                    val intent = Intent(binding.root.context, SelectedDateActivity::class.java)
+                    intent.putExtra("selectedDate", recordEntity.selectedDate)
+                    binding.root.context.startActivity(intent)
                 }
             }
 

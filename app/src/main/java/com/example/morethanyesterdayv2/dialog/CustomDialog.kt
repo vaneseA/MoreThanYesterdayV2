@@ -42,12 +42,12 @@ class CustomDialog(
     private var addSetDialogInterface: AddSetDialogInterface? = null
     var exerciseEntity: ExerciseEntity? = null
     private var position: Int? = null
-
+    private var exerciseId: String? = null
     init {
         this.exerciseEntity = exerciseEntity
         this.position = position
         this.addSetDialogInterface = addSetDialogInterface
-
+        this.exerciseId = exerciseId
     }
 
     override fun onCreateView(
@@ -106,7 +106,8 @@ class CustomDialog(
             context?.startActivity(intent)
             (context as SelectedDateActivity).finish()
         }
-
+        var setCount= ""
+        binding.dialogSet.text = setCount
         binding.plusFiveBtn?.setOnClickListener {
             customDialogViewModel.updateValue(
                 actionType = ActionType.WEIGHTPLUS,

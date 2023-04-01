@@ -2,9 +2,11 @@ package com.example.morethanyesterdayv2.ui.adapter
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
@@ -36,6 +38,7 @@ class ParentAdapter(
         recordDAO = appDatabase.recordDAO()
 
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =
             RecordRvItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -55,19 +58,23 @@ class ParentAdapter(
         fun setData(exerciseEntity: ExerciseEntity, position: Int, childList: List<RecordEntity>) {
             val exerciseId = exerciseEntity.exerciseId
             val selectedDate = exerciseEntity.selectedDate
+            val getTotalCount = getRecordCountByExerciseId(exerciseId)
+            Log.d("getTotalCount",getTotalCount.toString())
             binding.NameArea.text = exerciseEntity.exerciseName
             binding.TypeArea.text = exerciseEntity.exerciseType
-            binding.totalSetArea.text = "총 ${exerciseEntity.totalSet}set, "
+
+            binding.totalSetArea.text = "총 ${getTotalCount}set, "
             binding.totalKgArea.text = "총 ${exerciseEntity.totalKG}kg, "
             binding.bestKgArea.text = "최고 ${exerciseEntity.bestKg}kg, "
             binding.totalCountArea.text = "총 ${exerciseEntity.totalCount}회"
 
 
-            selectedRepository.getExerciseSetListLiveDataById(exerciseId).observe(itemView.context as LifecycleOwner) { childExerciseSetList ->
-                binding.nestedRV.adapter = ChildAdapter(childExerciseSetList,recordDAO)
-                binding.nestedRV.layoutManager = LinearLayoutManager(context)
-                binding.nestedRV.setHasFixedSize(true)
-            }
+            selectedRepository.getExerciseSetListLiveDataById(exerciseId)
+                .observe(itemView.context as LifecycleOwner) { childExerciseSetList ->
+                    binding.nestedRV.adapter = ChildAdapter(childExerciseSetList, recordDAO)
+                    binding.nestedRV.layoutManager = LinearLayoutManager(context)
+                    binding.nestedRV.setHasFixedSize(true)
+                }
 
 
             binding.addSetBtn.setOnClickListener {
@@ -87,4 +94,7 @@ class ParentAdapter(
     override fun onYesButtonClick(id: Int) {
     }
 
+    fun getRecordCountByExerciseId(exerciseId: String?): LiveData<Int> {
+        return recordDAO.getRecordCountByExerciseId(exerciseId)
+    }
 }

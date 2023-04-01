@@ -2,7 +2,6 @@ package com.example.morethanyesterdayv2.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
 
 
@@ -21,4 +20,7 @@ interface RecordDAO {
     @Query("SELECT * FROM room_record WHERE exerciseId = :exerciseId")
     fun loadExerciseSetListLiveDataByExerciseId(exerciseId: String): LiveData<List<RecordEntity>>
 
+    //ROOM에서 exerciseId로 된 값이 몇 개인지 카운트하는 쿼리
+    @Query("SELECT COUNT(*) FROM room_record WHERE id = :exerciseId")
+    fun getRecordCountByExerciseId(exerciseId: String?): LiveData<Int>
 }
