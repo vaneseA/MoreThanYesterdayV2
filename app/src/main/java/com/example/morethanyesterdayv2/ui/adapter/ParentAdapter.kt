@@ -7,11 +7,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
+import com.example.morethanyesterdayv2.data.dao.RecordDAO
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
 import com.example.morethanyesterdayv2.db.AppDatabase
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
+import com.example.morethanyesterdayv2.dialog.recordDAO
 import com.example.morethanyesterdayv2.repository.SelectedDateRepository
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 
@@ -23,14 +26,21 @@ class ParentAdapter(
 ) :
     RecyclerView.Adapter<ParentAdapter.Holder>(), AddSetDialogInterface {
     private val selectedRepository: SelectedDateRepository
-    init {
-        selectedRepository = SelectedDateRepository(application)
-    }
+    private lateinit var exerciseDAO: ExerciseDAO
+    private lateinit var recordDAO: RecordDAO
 
+    init {
+        val appDatabase = AppDatabase.getDatabase(context.applicationContext as Application)
+        selectedRepository = SelectedDateRepository(application)
+        exerciseDAO = appDatabase.exerciseDAO()
+        recordDAO = appDatabase.recordDAO()
+
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =
             RecordRvItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding)
+
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
@@ -42,7 +52,6 @@ class ParentAdapter(
 
     inner class Holder(val binding: RecordRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
         private val selectedDateActivity = SelectedDateActivity.getInstance()
-
         fun setData(exerciseEntity: ExerciseEntity, position: Int, childList: List<RecordEntity>) {
             val exerciseId = exerciseEntity.exerciseId
             val selectedDate = exerciseEntity.selectedDate
@@ -55,7 +64,7 @@ class ParentAdapter(
 
 
             selectedRepository.getExerciseSetListLiveDataById(exerciseId).observe(itemView.context as LifecycleOwner) { childExerciseSetList ->
-                binding.nestedRV.adapter = ChildAdapter(childExerciseSetList)
+                binding.nestedRV.adapter = ChildAdapter(childExerciseSetList,recordDAO)
                 binding.nestedRV.layoutManager = LinearLayoutManager(context)
                 binding.nestedRV.setHasFixedSize(true)
             }

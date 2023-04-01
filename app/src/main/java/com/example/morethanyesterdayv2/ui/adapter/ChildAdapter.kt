@@ -4,15 +4,21 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.morethanyesterdayv2.data.dao.RecordDAO
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.SetRvItemBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
+import com.example.morethanyesterdayv2.dialog.recordDAO
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class ChildAdapter(
-    var recordList: List<RecordEntity>
+    var recordList: List<RecordEntity>,
+    var recordDAO: RecordDAO
 ) :
-    RecyclerView.Adapter<ChildAdapter.Holder>(){
+    RecyclerView.Adapter<ChildAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding =
@@ -29,14 +35,24 @@ class ChildAdapter(
 
     class Holder(val binding: SetRvItemBinding) : RecyclerView.ViewHolder(binding.root) {
         var recordEntity: RecordEntity? = null
-
         fun recordData(recordEntity: RecordEntity, position: Int) {
             binding.recordSetItem.text = (position + 1).toString() + "번째 세트"
+            //여기서 담아서 custom에 보내면되겠다.
             binding.recordKgItem.text = recordEntity?.kg + "kg"
             binding.recordCountItem.text = recordEntity?.count + "회"
+            binding.removeButton.setOnClickListener {
+                recordEntity?.let {
+                    deleteRecord(it)
+                }
+            }
 
         }
 
-    }
+        private fun deleteRecord(record: RecordEntity) {
+            CoroutineScope(Dispatchers.IO).launch {
+                recordDAO.delete(record)
+            }
+        }
 
+    }
 }
