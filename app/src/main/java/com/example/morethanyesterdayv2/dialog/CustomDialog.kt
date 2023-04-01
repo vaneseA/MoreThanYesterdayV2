@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,8 @@ class CustomDialog(
     addSetDialogInterface: SelectedDateActivity,
     position: Int,
     exerciseEntity: ExerciseEntity,
-    exerciseId: String
+    exerciseId: String,
+    selectedDate: String
 ) : DialogFragment() {
 
 
@@ -72,7 +74,8 @@ class CustomDialog(
         binding.dialogExerciseType?.text = exerciseEntity?.exerciseType
 
         binding.dialogCancleBtn?.setOnClickListener { dismiss() }
-        binding.dialogAddBtn?.setOnClickListener {
+        binding.dialogAddBtn?.setOnClickListener() {
+            val selectedDateActivity = SelectedDateActivity.getInstance()
             appDatabase =
                 Room.databaseBuilder(it.context, AppDatabase::class.java, "room_db")
                     .build()
@@ -94,6 +97,15 @@ class CustomDialog(
             )
             insertRecord(record)
             dialog?.dismiss()
+            // SelectExerciseActivity를 종료하고 SelectedActivity로 이동
+
+            val intent = Intent(context, SelectedDateActivity::class.java)
+            val selectedDate = selectedDateActivity?.intent?.getStringExtra("selectedDate")
+
+            Log.d("selectedDate", selectedDate.toString())
+            intent.putExtra("selectedDate", selectedDate)
+            context?.startActivity(intent)
+            (context as SelectedDateActivity).finish()
         }
 //        binding.dialogSet.text = (position?.plus(1)).toString() + "번째 세트 추가"
 

@@ -95,11 +95,16 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
         viewModel.loadExerciseListByDate(selectedDate)
     }
 
-    fun clickViewEvents(position: Int, exerciseEntity: ExerciseEntity, exerciseId: String) {
-        val dialog = CustomDialog(this, position, exerciseEntity, exerciseId)
+    fun clickViewEvents(position: Int, exerciseEntity: ExerciseEntity, exerciseId: String, selectedDate: String) {
+        val selectedDate = intent.getStringExtra("selectedDate")
+        val dialog = selectedDate?.let {
+            CustomDialog(this, position, exerciseEntity, exerciseId,
+                it
+            )
+        }
         // 알림창이 띄워져있는 동안 배경 클릭 막기
-        dialog.isCancelable = false
-        dialog.show(supportFragmentManager, "CustomDialog")
+        dialog?.isCancelable = false
+        dialog?.show(supportFragmentManager, "CustomDialog")
     }
 
     override fun onYesButtonClick(id: Int) {

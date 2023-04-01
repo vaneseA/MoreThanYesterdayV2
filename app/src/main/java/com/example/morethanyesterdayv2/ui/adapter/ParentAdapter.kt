@@ -45,6 +45,7 @@ class ParentAdapter(
 
         fun setData(exerciseEntity: ExerciseEntity, position: Int, childList: List<RecordEntity>) {
             val exerciseId = exerciseEntity.exerciseId
+            val selectedDate = exerciseEntity.selectedDate
             binding.NameArea.text = exerciseEntity.exerciseName
             binding.TypeArea.text = exerciseEntity.exerciseType
             binding.totalSetArea.text = "총 " + exerciseEntity.totalSet.toString() + "set, "
@@ -64,7 +65,8 @@ class ParentAdapter(
                 selectedDateActivity?.clickViewEvents(
                     position,
                     exerciseEntity,
-                    exerciseId
+                    exerciseId,
+                    selectedDate
                 )
             }
 
