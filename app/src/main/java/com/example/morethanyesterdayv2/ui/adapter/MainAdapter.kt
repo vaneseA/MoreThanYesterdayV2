@@ -33,10 +33,10 @@ class MainAdapter(
         fun setData(exerciseEntity: ExerciseEntity, position: Int) {
             binding.mainExerciseName.text = exerciseEntity.exerciseName
             binding.mainExerciseType.text = exerciseEntity.exerciseType
-            binding.mainTotalSet.text = "총 " + exerciseEntity.totalSet.toString() + "set, "
-            binding.mainTotalKg.text = "총 " + exerciseEntity.totalKG + "kg, "
-            binding.mainBestKg.text = "최고 " + exerciseEntity.bestKg + "kg, "
-            binding.mainTotalCount.text = "총 " + exerciseEntity.totalCount + "회"
+            binding.mainTotalSet.text = "총 ${exerciseEntity.totalSet}set, "
+            binding.mainTotalKg.text = "총 ${exerciseEntity.totalKG}kg, "
+            binding.mainBestKg.text = "최고 ${exerciseEntity.bestKg}kg, "
+            binding.mainTotalCount.text = "총 ${exerciseEntity.totalCount}회"
         }
     }
 

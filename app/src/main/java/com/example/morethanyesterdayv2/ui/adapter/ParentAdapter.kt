@@ -48,10 +48,10 @@ class ParentAdapter(
             val selectedDate = exerciseEntity.selectedDate
             binding.NameArea.text = exerciseEntity.exerciseName
             binding.TypeArea.text = exerciseEntity.exerciseType
-            binding.totalSetArea.text = "총 " + exerciseEntity.totalSet.toString() + "set, "
-            binding.totalKgArea.text = "총 " + exerciseEntity.totalKG + "kg, "
-            binding.bestKgArea.text = "최고 " + exerciseEntity.bestKg + "kg, "
-            binding.totalCountArea.text = "총 " + exerciseEntity.totalCount + "회"
+            binding.totalSetArea.text = "총 ${exerciseEntity.totalSet}set, "
+            binding.totalKgArea.text = "총 ${exerciseEntity.totalKG}kg, "
+            binding.bestKgArea.text = "최고 ${exerciseEntity.bestKg}kg, "
+            binding.totalCountArea.text = "총 ${exerciseEntity.totalCount}회"
 
 
             selectedRepository.getExerciseSetListLiveDataById(exerciseId).observe(itemView.context as LifecycleOwner) { childExerciseSetList ->

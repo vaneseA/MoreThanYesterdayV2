@@ -13,6 +13,8 @@
         <entry key="app/src/main/res/drawable/ic_baseline_remove_circle_outline_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/radionbutton_female.xml" value="0.191" />
+        <entry key="app/src/main/res/drawable/radionbutton_kg.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/radionbutton_lb.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/radionbutton_male.xml" value="0.191" />
         <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/underline.xml" value="0.1305" />

@@ -97,7 +97,6 @@ class CustomDialog(
             )
             insertRecord(record)
             dialog?.dismiss()
-            // SelectExerciseActivity를 종료하고 SelectedActivity로 이동
 
             val intent = Intent(context, SelectedDateActivity::class.java)
             val selectedDate = selectedDateActivity?.intent?.getStringExtra("selectedDate")
@@ -107,7 +106,6 @@ class CustomDialog(
             context?.startActivity(intent)
             (context as SelectedDateActivity).finish()
         }
-//        binding.dialogSet.text = (position?.plus(1)).toString() + "번째 세트 추가"
 
         binding.plusFiveBtn?.setOnClickListener {
             customDialogViewModel.updateValue(
