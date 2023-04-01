@@ -61,9 +61,9 @@ class ParentAdapter(
             val selectedDate = exerciseEntity.selectedDate
 
 //            val totalCount = getRecordCountByExerciseId(exerciseId)
-//                Log.d("getTotalCount", totalCount.toString())
-//                binding.totalSetArea.text = "총 ${totalCount}set, "
 
+//            binding.totalCountArea.text = "총 ${totalCount}회"
+//            Log.d("counter",totalCount.toString())
             binding.NameArea.text = exerciseEntity.exerciseName
             binding.TypeArea.text = exerciseEntity.exerciseType
             binding.totalKgArea.text = "총 ${exerciseEntity.totalKG}kg, "
@@ -96,7 +96,7 @@ class ParentAdapter(
     override fun onYesButtonClick(id: Int) {
     }
 
-    fun getRecordCountByExerciseId(exerciseId: String?): Int {
+    fun getRecordCountByExerciseId(exerciseId: String?): String {
         return recordDAO.getRecordCountByExerciseId(exerciseId)
     }
 }
