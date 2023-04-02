@@ -246,16 +246,6 @@ class CustomDialog(
         return view
     }
 
-    private fun convertWeight() {
-        val weightInKg = binding.userInputKg.text.toString().toDoubleOrNull() ?: return
-
-        val weightInLb = weightInKg * 2.20462
-        val weightInKgFormatted = "%.0f".format(weightInKg)
-        val weightInLbFormatted = "%.0f".format(weightInLb)
-
-
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
