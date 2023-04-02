@@ -43,6 +43,8 @@ class CustomDialogViewModel(application: Application) : AndroidViewModel(applica
 //        _currentCountValue.value = 0
 //    }
 
-
+    fun getRecordCountByExerciseId(exerciseId: String): LiveData<Int> {
+        return recordDAO.getRecordCountByExerciseId(exerciseId)
+    }
 
 }

@@ -38,7 +38,7 @@ class CustomDialog(
 ) : DialogFragment() {
 
 
-    lateinit var customDialogViewModel: CustomDialogViewModel
+    lateinit var viewModel: CustomDialogViewModel
 
     // 뷰 바인딩 정의
     private var _binding: CustomAddSetDialogBinding? = null
@@ -63,19 +63,27 @@ class CustomDialog(
         _binding = CustomAddSetDialogBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        // AppDatabase와 RecordDAO 초기화
+        appDatabase = Room.databaseBuilder(
+            view.context,
+            AppDatabase::class.java,
+            "room_record"
+        ).build()
+        recordDAO = appDatabase.recordDAO()
+
         // 레이아웃 배경을 투명하게 해줌, 필수 아님
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        customDialogViewModel = ViewModelProvider(this).get(CustomDialogViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(CustomDialogViewModel::class.java)
 
-        customDialogViewModel.currentKg.observe(this, Observer {
+        viewModel.currentKg.observe(this, Observer {
             binding.userInputKg?.setText(it.toString())
         })
-        customDialogViewModel.currentLb.observe(this, Observer {
+        viewModel.currentLb.observe(this, Observer {
             binding.userInputLb?.setText(it.toString())
         })
 
-        customDialogViewModel.currentCountValue.observe(this, Observer {
+        viewModel.currentCountValue.observe(this, Observer {
             binding.userInputCount?.setText(it.toString())
         })
         binding.userInputLb.visibility = View.GONE
@@ -154,16 +162,19 @@ class CustomDialog(
                 Room.databaseBuilder(it.context, AppDatabase::class.java, "room_db")
                     .build()
             recordDAO = appDatabase.recordDAO()
+
             // 사용자가 입력한 count 값을 문자열에서 정수로 변환하여 가져옴
             val count = binding.userInputCount?.text?.toString()?.toIntOrNull() ?: 0
             // record 객체의 kg와 count 속성에 값을 대입
+
             val record = RecordEntity(
                 exerciseId = exerciseEntity?.exerciseId ?: "",
                 selectedDate = exerciseEntity?.selectedDate ?: "",
                 exerciseName = exerciseEntity?.exerciseName ?: "",
                 exerciseType = exerciseEntity?.exerciseType ?: "",
                 kg = getWeightValue(),
-                count = count.toString()
+                count = count.toString(),
+                totalCount = count
             )
             insertRecord(record)
             dialog?.dismiss()

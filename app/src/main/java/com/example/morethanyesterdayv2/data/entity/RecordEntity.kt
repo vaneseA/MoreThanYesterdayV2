@@ -45,7 +45,7 @@ class RecordEntity {
     var bestKg: String = ""
 
     @ColumnInfo(name = "totalCount")
-    var totalCount: String = ""
+    var totalCount: Int = 0
 
     constructor(
         exerciseId: String,
@@ -53,7 +53,8 @@ class RecordEntity {
         exerciseName: String,
         exerciseType: String,
         kg: String,
-        count: String
+        count: String,
+        totalCount: Int
     ) {
         this.exerciseId = exerciseId
         this.selectedDate = selectedDate
@@ -61,5 +62,6 @@ class RecordEntity {
         this.exerciseType = exerciseType
         this.kg = kg
         this.count = count
+        this.totalCount = totalCount
     }
 }
