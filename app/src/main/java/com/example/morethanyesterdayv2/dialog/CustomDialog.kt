@@ -4,10 +4,13 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -71,17 +74,54 @@ class CustomDialog(
         customDialogViewModel.currentCountValue.observe(this, Observer {
             binding.userInputCount?.setText(it.toString())
         })
-        binding.showOtherWeight.visibility = View.GONE
+        var isKgSelected = true
+        binding.userInputWeight.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
-            binding.showOtherWeight.visibility = if (checkedId == R.id.radio_kg) View.GONE else View.VISIBLE
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // kgOrLb 와 lbOrKg 텍스트에 따라 값 변환
+                val userInputValue = s?.toString()?.toFloatOrNull() ?: return // 유효하지 않은 값이면 무시
 
-            when (checkedId) {
-                R.id.radio_kg -> binding.kgOrLb.text = "kg"
-                R.id.radio_lb -> binding.kgOrLb.text = "lb"
+                if (isKgSelected) {
+                    val convertToLb = userInputValue / 0.45359237f
+                    binding.showOtherWeight.text = String.format("%.1f", convertToLb)
+                } else {
+                    val convertToKg = userInputValue * 0.45359237f
+                    binding.showOtherWeight.text = String.format("%.1f", convertToKg)
+                }
             }
-        }
 
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+
+//        binding.radioLb.setOnClickListener {
+//            // kgOrLb 와 lbOrKg 텍스트 변경
+//            binding.kgOrLb.text = "lg"
+//            binding.lbOrKg.text = "kg"
+//
+//            // userInputWeight 값 업데이트
+//            val userInputValue = binding.userInputWeight.text.toString().toFloat()
+//            val convertToLb = userInputValue / 2.2046f
+//
+//            binding.showOtherWeight.text = String.format("%.1f", convertToLb)
+//            binding.userInputWeight.setText(binding.showOtherWeight.text)
+//            Toast.makeText(requireContext(), "변환시, 소수점으로 인해 \n약간의 무게 차이가 있으니 참고바랍니다.", Toast.LENGTH_LONG)
+//                .show()
+//        }
+//        binding.radioKg.setOnClickListener {
+//            // kgOrLb 와 lbOrKg 텍스트 변경
+//            binding.kgOrLb.text = "kg"
+//            binding.lbOrKg.text = "lg"
+//
+//            // userInputWeight 값 업데이트
+//            val userInputValue = binding.userInputWeight.text.toString().toFloat()
+//            val convertToKg = userInputValue * 2.2046f
+//            binding.showOtherWeight.text = String.format("%.1f", convertToKg)
+//            binding.userInputWeight.setText(binding.showOtherWeight.text)
+//            Toast.makeText(requireContext(), "변환시, 소수점으로 인해 \n약간의 무게 차이가 있으니 참고바랍니다.", Toast.LENGTH_LONG)
+//                .show()
+//        }
         binding.dialogExerciseName?.text = exerciseEntity?.exerciseName
         binding.dialogExerciseType?.text = exerciseEntity?.exerciseType
 
@@ -143,6 +183,7 @@ class CustomDialog(
 
         return view
     }
+
     private fun convertWeight() {
         val weightInKg = binding.userInputWeight.text.toString().toDoubleOrNull() ?: return
 
@@ -174,8 +215,6 @@ fun insertRecord(record: RecordEntity) {
         recordDAO.insert(record)
     }
 }
-
-
 
 
 interface AddSetDialogInterface {
