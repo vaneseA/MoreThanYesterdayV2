@@ -71,8 +71,11 @@ class CustomDialog(
         customDialogViewModel.currentCountValue.observe(this, Observer {
             binding.userInputCount?.setText(it.toString())
         })
+        binding.showOtherWeight.visibility = View.GONE
 
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            binding.showOtherWeight.visibility = if (checkedId == R.id.radio_kg) View.GONE else View.VISIBLE
+
             when (checkedId) {
                 R.id.radio_kg -> binding.kgOrLb.text = "kg"
                 R.id.radio_lb -> binding.kgOrLb.text = "lb"
@@ -128,23 +131,42 @@ class CustomDialog(
             binding.userInputWeight.setText(newValue.toString())
         }
         binding.plusOneBtn?.setOnClickListener {
-            val currentCount = binding.userInputCount.text.toString().toInt()
+            val currentCount = binding.userInputCount.text.toString().toIntOrNull() ?: 0
             val newValue = currentCount + 1
             binding.userInputCount.setText(newValue.toString())
         }
         binding.minusOneBtn?.setOnClickListener {
-            val currentCount = binding.userInputCount.text.toString().toInt()
+            val currentCount = binding.userInputCount.text.toString().toIntOrNull() ?: 0
             val newValue = currentCount - 1
             binding.userInputCount.setText(newValue.toString())
         }
 
         return view
     }
+    private fun convertWeight() {
+        val weightInKg = binding.userInputWeight.text.toString().toDoubleOrNull() ?: return
+
+        val weightInLb = weightInKg * 2.20462
+        val weightInKgFormatted = "%.0f".format(weightInKg)
+        val weightInLbFormatted = "%.0f".format(weightInLb)
+
+        when (binding.radioGroup.checkedRadioButtonId) {
+            R.id.radio_kg -> {
+                binding.kgOrLb.text = "kg"
+                binding.showOtherWeight.text = weightInLbFormatted + " lb"
+            }
+            R.id.radio_lb -> {
+                binding.kgOrLb.text = "lb"
+                binding.showOtherWeight.text = weightInKgFormatted + " kg"
+            }
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 }
 
 fun insertRecord(record: RecordEntity) {
@@ -152,6 +174,9 @@ fun insertRecord(record: RecordEntity) {
         recordDAO.insert(record)
     }
 }
+
+
+
 
 interface AddSetDialogInterface {
     fun onYesButtonClick(id: Int)

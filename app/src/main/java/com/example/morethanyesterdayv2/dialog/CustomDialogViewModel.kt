@@ -34,7 +34,7 @@ class CustomDialogViewModel(application: Application) : AndroidViewModel(applica
     val currentCountValue: LiveData<Int>
         get() = _currentCountValue
 
-//    //초기값 설정
+    //초기값 설정
 //    init {
 //        _currentWeightValue.value = 0
 //        _currentCountValue.value = 0
