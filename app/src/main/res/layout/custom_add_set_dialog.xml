@@ -9,7 +9,7 @@
 
 
     <EditText
-        android:id="@+id/userInputWeight"
+        android:id="@+id/userInputKg"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -24,12 +24,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialogSet" />
 
-
-    <TextView
-        android:id="@+id/show_other_weight"
+    <EditText
+        android:id="@+id/userInputLb"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
+        android:background="@drawable/value_border"
+        android:digits="0123456789."
+        android:gravity="center"
+        android:inputType="number"
+        app:fontFamily="@font/jalnanche"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/kg_or_lb"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialogSet" />
+
+    <TextView
+        android:id="@+id/show_kg"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        app:fontFamily="@font/jalnanche"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/kg_or_lb"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialogSet"
+        app:layout_constraintVertical_bias="0.115" />
+
+    <TextView
+        android:id="@+id/show_lb"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:gravity="center"
         app:fontFamily="@font/jalnanche"
@@ -84,7 +112,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/userInputCount"
         app:layout_constraintHorizontal_bias="0.295"
-        app:layout_constraintStart_toEndOf="@+id/minusFiveBtn"
+        app:layout_constraintStart_toEndOf="@+id/minus_five_kg_btn"
         app:layout_constraintTop_toBottomOf="@+id/dialogSet"
         />
 
@@ -98,7 +126,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toStartOf="@+id/radio_group"
         app:layout_constraintHorizontal_bias="0.163"
-        app:layout_constraintStart_toEndOf="@+id/show_other_weight"
+        app:layout_constraintStart_toEndOf="@+id/show_kg"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.584"
         tools:ignore="MissingConstraints" />
@@ -244,7 +272,7 @@
         app:fontFamily="@font/jalnanche"
         app:layout_constraintBottom_toTopOf="@+id/dialogAddBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/plusFiveBtn"
+        app:layout_constraintStart_toEndOf="@+id/plus_five_kg_btn"
         app:layout_constraintTop_toBottomOf="@+id/radio_group" />
 
     <TextView
@@ -255,11 +283,11 @@
         app:fontFamily="@font/jalnanche"
         app:layout_constraintBottom_toBottomOf="@+id/dialogAddBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/minusFiveBtn"
+        app:layout_constraintStart_toEndOf="@+id/minus_five_kg_btn"
         app:layout_constraintTop_toTopOf="@+id/plusOneBtn" />
 
     <TextView
-        android:id="@+id/plusFiveBtn"
+        android:id="@+id/plus_five_kg_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="+ 5.0"
@@ -270,7 +298,7 @@
         app:layout_constraintTop_toBottomOf="@+id/radio_group" />
 
     <TextView
-        android:id="@+id/minusFiveBtn"
+        android:id="@+id/minus_five_kg_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="- 5.0"
@@ -278,6 +306,27 @@
         app:layout_constraintBottom_toBottomOf="@+id/dialogCancleBtn"
         app:layout_constraintEnd_toStartOf="@+id/userInputCount"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/plusFiveBtn" />
+        app:layout_constraintTop_toTopOf="@+id/plus_five_kg_btn" />
+    <TextView
+        android:id="@+id/plus_five_lb_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ 5.0"
+        app:fontFamily="@font/jalnanche"
+        app:layout_constraintBottom_toTopOf="@+id/dialogCancleBtn"
+        app:layout_constraintEnd_toStartOf="@+id/userInputCount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radio_group" />
+
+    <TextView
+        android:id="@+id/minus_five_lb_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- 5.0"
+        app:fontFamily="@font/jalnanche"
+        app:layout_constraintBottom_toBottomOf="@+id/dialogCancleBtn"
+        app:layout_constraintEnd_toStartOf="@+id/userInputCount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/plus_five_kg_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

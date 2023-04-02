@@ -24,12 +24,15 @@ class CustomDialogViewModel(application: Application) : AndroidViewModel(applica
 
     //내부에서도 설정하는 자료형은 뮤터블로
     //변경가능하도록 설정
-    private val _currentWeightValue = MutableLiveData<Int>()
+    private val _currentKg = MutableLiveData<Int>()
+    private val _currentLb = MutableLiveData<Int>()
     private val _currentCountValue = MutableLiveData<Int>()
 
 
-    val currentWeightValue: LiveData<Int>
-        get() = _currentWeightValue
+    val currentKg: LiveData<Int>
+        get() = _currentKg
+    val currentLb: LiveData<Int>
+        get() = _currentLb
 
     val currentCountValue: LiveData<Int>
         get() = _currentCountValue
