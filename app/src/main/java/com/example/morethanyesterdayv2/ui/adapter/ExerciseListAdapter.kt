@@ -112,7 +112,7 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
             .setNegativeButton("No") { dialog, _ ->
                 dialog.dismiss()
             } .create().apply {
-                // Setting rounded background for the dialog
+                // 모서리 둥글게
                 window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 window?.setBackgroundDrawableResource(R.drawable.bg_dialog_rounded)}.show()
 
