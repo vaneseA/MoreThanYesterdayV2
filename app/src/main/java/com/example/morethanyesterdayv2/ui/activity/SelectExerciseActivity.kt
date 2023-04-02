@@ -1,5 +1,7 @@
 package com.example.morethanyesterdayv2.ui.activity
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +21,7 @@ class SelectExerciseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySelectExerciseBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         val selectedDate = intent?.getStringExtra("selectedDate") ?: ""
         Log.d("selectedDate", selectedDate)

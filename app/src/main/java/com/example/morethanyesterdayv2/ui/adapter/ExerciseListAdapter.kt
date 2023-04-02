@@ -2,6 +2,8 @@ package com.example.morethanyesterdayv2.ui.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -82,6 +84,8 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
         exerciseType: String,
         selectedDate: String
     ) {
+
+
         AlertDialog.Builder(context)
             .setTitle(selectedDate)
             .setMessage("$exerciseName 을/를 추가하시겠습니까?")
@@ -107,7 +111,11 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
             }
             .setNegativeButton("No") { dialog, _ ->
                 dialog.dismiss()
-            }.create().show()
+            } .create().apply {
+                // Setting rounded background for the dialog
+                window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                window?.setBackgroundDrawableResource(R.drawable.bg_dialog_rounded)}.show()
+
     }
 
 
