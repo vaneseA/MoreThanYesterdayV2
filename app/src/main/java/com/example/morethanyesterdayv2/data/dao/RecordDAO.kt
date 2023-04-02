@@ -27,4 +27,6 @@ interface RecordDAO {
     //ROOM에서 kg중 bestKg를 추출하는 쿼리
     @Query("SELECT MAX(kg) FROM room_record WHERE exerciseId = :exerciseId")
     fun getMaxKgByExerciseId(exerciseId: String): Int?
+
+
 }

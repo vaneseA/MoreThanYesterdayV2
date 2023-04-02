@@ -172,10 +172,13 @@ class CustomDialog(
                 selectedDate = exerciseEntity?.selectedDate ?: "",
                 exerciseName = exerciseEntity?.exerciseName ?: "",
                 exerciseType = exerciseEntity?.exerciseType ?: "",
-                kg = getWeightValue(),
-                count = count.toString(),
-                totalCount = count
+                kg = getWeightValue().toDoubleOrNull()!!,
+                count = count,
+                totalCount = (viewModel.getTotalCountById(exerciseEntity?.exerciseId)?.toInt()
+                    ?: 0) + count
             )
+//            totalCount = (exerciseEntity?.totalCount?.toIntOrNull() ?: 0) + count
+
             insertRecord(record)
             dialog?.dismiss()
 

@@ -25,6 +25,9 @@ interface ExerciseDAO {
     @Query("SELECT * FROM room_exercise WHERE selectedDate=:selectedDate ORDER BY id ASC")
     fun getAllByDate(selectedDate: String): List<ExerciseEntity>
 
+    //ROOM에서 totalCount를 추출하는 쿼리
+    @Query("SELECT totalCount FROM room_record WHERE exerciseId = :id")
+    fun getTotalCountById(id: String?): Int?
 
 
 

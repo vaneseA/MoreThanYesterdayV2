@@ -3,6 +3,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
 import com.example.morethanyesterdayv2.data.dao.RecordDAO
 import com.example.morethanyesterdayv2.db.AppDatabase
 
@@ -15,6 +16,7 @@ enum class ActionType {
 
 class CustomDialogViewModel(application: Application) : AndroidViewModel(application) {
     private val recordDAO: RecordDAO = AppDatabase.getDatabase(application).recordDAO()
+    private val exerciseDAO: ExerciseDAO = AppDatabase.getDatabase(application).exerciseDAO()
     companion object {
         const val TAG: String = "로그"
     }
@@ -45,6 +47,9 @@ class CustomDialogViewModel(application: Application) : AndroidViewModel(applica
 
     fun getRecordCountByExerciseId(exerciseId: String): LiveData<Int> {
         return recordDAO.getRecordCountByExerciseId(exerciseId)
+    }
+     fun getTotalCountById(exerciseId: String?): Int? {
+        return exerciseDAO.getTotalCountById(exerciseId)
     }
 
 }

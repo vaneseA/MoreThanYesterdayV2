@@ -28,18 +28,18 @@ class RecordEntity {
 
     // 중량
     @ColumnInfo
-    var kg: String = ""
+    var kg: Double = 0.0
 
     // 횟수
     @ColumnInfo
-    var count: String = ""
+    var count: Int = 0
 
 
     @ColumnInfo(name = "totalSet")
     var totalSet: Int = 0
 
     @ColumnInfo(name = "totalKG")
-    var totalKG: String = ""
+    var totalKG: Int = 0
 
     @ColumnInfo(name = "bestKg")
     var bestKg: String = ""
@@ -52,8 +52,8 @@ class RecordEntity {
         selectedDate: String,
         exerciseName: String,
         exerciseType: String,
-        kg: String,
-        count: String,
+        kg: Double,
+        count: Int,
         totalCount: Int
     ) {
         this.exerciseId = exerciseId
