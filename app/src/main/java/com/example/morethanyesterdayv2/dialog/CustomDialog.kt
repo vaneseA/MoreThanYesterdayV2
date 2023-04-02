@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -77,21 +78,20 @@ class CustomDialog(
         customDialogViewModel.currentCountValue.observe(this, Observer {
             binding.userInputCount?.setText(it.toString())
         })
-        binding.showLb.visibility = View.GONE
         binding.userInputLb.visibility = View.GONE
-        binding.showLb.visibility = View.GONE
+        binding.showKg.visibility = View.GONE
         binding.userInputLb.visibility = View.GONE
         binding.plusFiveLbBtn.visibility = View.GONE
         binding.minusFiveLbBtn.visibility = View.GONE
-        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
+        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
             if (checkedId != -1) {
                 when (binding.radioGroup.checkedRadioButtonId) {
                     R.id.radio_kg -> {
                         binding.kgOrLb.text = "kg"
                         binding.lbOrKg.text = "lb"
-                        binding.showKg.visibility = View.VISIBLE
+                        binding.showKg.visibility = View.GONE
                         binding.userInputKg.visibility = View.VISIBLE
-                        binding.showLb.visibility = View.GONE
+                        binding.showLb.visibility = View.VISIBLE
                         binding.userInputLb.visibility = View.GONE
                         binding.plusFiveLbBtn.visibility = View.GONE
                         binding.minusFiveLbBtn.visibility = View.GONE
@@ -101,9 +101,9 @@ class CustomDialog(
                     R.id.radio_lb -> {
                         binding.kgOrLb.text = "lb"
                         binding.lbOrKg.text = "kg"
-                        binding.showKg.visibility = View.GONE
+                        binding.showKg.visibility = View.VISIBLE
                         binding.userInputKg.visibility = View.GONE
-                        binding.showLb.visibility = View.VISIBLE
+                        binding.showLb.visibility = View.GONE
                         binding.userInputLb.visibility = View.VISIBLE
                         binding.plusFiveLbBtn.visibility = View.VISIBLE
                         binding.minusFiveLbBtn.visibility = View.VISIBLE
@@ -123,7 +123,7 @@ class CustomDialog(
                 val userInputKg = s?.toString()?.toFloatOrNull() ?: return // 유효하지 않은 값이면 무시
                 if (isKgSelected) {
                     val convertToLb = userInputKg / 0.45359237f
-                    binding.showKg.text = String.format("%.1f", convertToLb)
+                    binding.showLb.text = String.format("%.1f", convertToLb)
                 }
             }
 
@@ -137,7 +137,7 @@ class CustomDialog(
                 val userInputLb = s?.toString()?.toFloatOrNull() ?: return
                 if (isLbSelected) {
                     val convertToLb = userInputLb * 0.45359237f
-                    binding.showLb.text = String.format("%.1f", convertToLb)
+                    binding.showKg.text = String.format("%.1f", convertToLb)
                 }
             }
 
@@ -154,19 +154,15 @@ class CustomDialog(
                 Room.databaseBuilder(it.context, AppDatabase::class.java, "room_db")
                     .build()
             recordDAO = appDatabase.recordDAO()
-            // 사용자가 입력한 kg 값을 문자열에서 실수로 변환하여 가져옴
-            val kgValue = binding.userInputKg?.text?.toString()?.toDoubleOrNull() ?: 0.0
-            val lbToKg = binding.showKg?.text?.toString()?.toDoubleOrNull() ?: 0.0
             // 사용자가 입력한 count 값을 문자열에서 정수로 변환하여 가져옴
             val count = binding.userInputCount?.text?.toString()?.toIntOrNull() ?: 0
-
             // record 객체의 kg와 count 속성에 값을 대입
             val record = RecordEntity(
                 exerciseId = exerciseEntity?.exerciseId ?: "",
                 selectedDate = exerciseEntity?.selectedDate ?: "",
                 exerciseName = exerciseEntity?.exerciseName ?: "",
                 exerciseType = exerciseEntity?.exerciseType ?: "",
-                kg = kgValue.toString(),
+                kg = getWeightValue(),
                 count = count.toString()
             )
             insertRecord(record)
@@ -216,6 +212,27 @@ class CustomDialog(
 
 
         return view
+    }
+
+    //라디오 버튼에 따라 저장하는 값을 달리하는 함수
+    private fun getWeightValue(): String {
+        // 사용자가 입력한 kg 값을 문자열에서 실수로 변환하여 가져옴
+        val kgValue = binding.userInputKg?.text?.toString()?.toDoubleOrNull() ?: 0.0
+        val lbToKg = binding.showKg?.text?.toString()?.toDoubleOrNull() ?: 0.0
+        val lbValue = binding.userInputLb?.text?.toString()?.toDoubleOrNull() ?: 0.0
+        return if (binding.radioKg.isChecked) {
+            kgValue.toString()
+        } else if (binding.radioLb.isChecked) {
+            Toast.makeText(
+                requireContext(),
+                "${lbValue}lb는 \n${lbToKg}kg으로 치환하여 저장되었습니다.",
+                Toast.LENGTH_LONG
+            )
+                .show()
+            lbToKg.toString()
+        } else {
+            "0"
+        }
     }
 
     override fun onDestroyView() {
