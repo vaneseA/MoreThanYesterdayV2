@@ -66,9 +66,9 @@ class ParentAdapter(
 //            Log.d("counter",totalCount.toString())
             binding.NameArea.text = exerciseEntity.exerciseName
             binding.TypeArea.text = exerciseEntity.exerciseType
-            binding.totalKgArea.text = "총 ${exerciseEntity.totalKG}kg, "
-            binding.bestKgArea.text = "최고 ${exerciseEntity.bestKg}kg, "
-            binding.totalCountArea.text = "총 ${exerciseEntity.totalCount}회"
+//            binding.totalKgArea.text = "총 ${exerciseEntity.totalKG}kg, "
+//            binding.bestKgArea.text = "최고 ${Record.maxKg}kg, "
+//            binding.totalCountArea.text = "총 ${exerciseEntity.totalCount}회"
 
 
             selectedRepository.getExerciseSetListLiveDataById(exerciseId)
@@ -96,7 +96,4 @@ class ParentAdapter(
     override fun onYesButtonClick(id: Int) {
     }
 
-    fun getRecordCountByExerciseId(exerciseId: String): Int? {
-        return recordDAO.getRecordCountByExerciseId(exerciseId)
-    }
 }

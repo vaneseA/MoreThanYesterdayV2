@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 class RecordEntity {
     @PrimaryKey(autoGenerate = true)// no에 값이 없을 때 자동증가된 숫자 값을 db에 입력해준다.
     @ColumnInfo(name = "id")
-    var setNo: Long? = null
+    var id: Long? = null
 
 
     @ColumnInfo(name = "exerciseId")
@@ -41,8 +41,8 @@ class RecordEntity {
     @ColumnInfo(name = "totalKG")
     var totalKG: Int = 0
 
-    @ColumnInfo(name = "bestKg")
-    var bestKg: String = ""
+    @ColumnInfo(name = "maxKg")
+    var maxKg: Double = 0.0
 
     @ColumnInfo(name = "totalCount")
     var totalCount: Int = 0
@@ -54,7 +54,8 @@ class RecordEntity {
         exerciseType: String,
         kg: Double,
         count: Int,
-        totalCount: Int
+        totalCount: Int,
+        maxKg: Double
     ) {
         this.exerciseId = exerciseId
         this.selectedDate = selectedDate
@@ -63,5 +64,6 @@ class RecordEntity {
         this.kg = kg
         this.count = count
         this.totalCount = totalCount
+        this.maxKg = maxKg
     }
 }

@@ -30,18 +30,6 @@ class ExerciseEntity {
     var exerciseType: String = ""
 
     @ColumnInfo
-    var totalSet: Int = 0
-
-    @ColumnInfo
-    var totalKG: String = ""
-
-    @ColumnInfo
-    var bestKg: String = ""
-
-    @ColumnInfo
-    var totalCount: String = ""
-
-    @ColumnInfo
     var recordList: List<RecordEntity> = emptyList()
 
 

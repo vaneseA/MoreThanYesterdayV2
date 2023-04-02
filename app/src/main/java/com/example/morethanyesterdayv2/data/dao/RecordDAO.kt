@@ -28,5 +28,6 @@ interface RecordDAO {
     @Query("SELECT MAX(kg) FROM room_record WHERE exerciseId = :exerciseId")
     fun getMaxKgByExerciseId(exerciseId: String): Int?
 
-
+    @Query("UPDATE room_record SET maxKg = :maxKg WHERE exerciseId = :exerciseId")
+    fun updateMaxKgByExerciseId(exerciseId: String, maxKg: Double)
 }

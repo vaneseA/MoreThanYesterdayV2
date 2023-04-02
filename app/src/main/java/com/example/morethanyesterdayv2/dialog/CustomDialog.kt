@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.example.morethanyesterdayv2.R
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
@@ -25,6 +26,7 @@ import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 lateinit var appDatabase: AppDatabase
 lateinit var recordDAO: RecordDAO
@@ -156,39 +158,53 @@ class CustomDialog(
         binding.dialogExerciseType?.text = exerciseEntity?.exerciseType
 
         binding.dialogCancleBtn?.setOnClickListener { dismiss() }
-        binding.dialogAddBtn?.setOnClickListener() {
+        binding.dialogAddBtn?.setOnClickListener {
             val selectedDateActivity = SelectedDateActivity.getInstance()
-            appDatabase =
-                Room.databaseBuilder(it.context, AppDatabase::class.java, "room_db")
-                    .build()
+            appDatabase = Room.databaseBuilder(it.context, AppDatabase::class.java, "room_db")
+                .build()
             recordDAO = appDatabase.recordDAO()
 
             // 사용자가 입력한 count 값을 문자열에서 정수로 변환하여 가져옴
             val count = binding.userInputCount?.text?.toString()?.toIntOrNull() ?: 0
-            // record 객체의 kg와 count 속성에 값을 대입
 
-            val record = RecordEntity(
-                exerciseId = exerciseEntity?.exerciseId ?: "",
-                selectedDate = exerciseEntity?.selectedDate ?: "",
-                exerciseName = exerciseEntity?.exerciseName ?: "",
-                exerciseType = exerciseEntity?.exerciseType ?: "",
-                kg = getWeightValue().toDoubleOrNull()!!,
-                count = count,
-                totalCount = (viewModel.getTotalCountById(exerciseEntity?.exerciseId)?.toInt()
-                    ?: 0) + count
-            )
-//            totalCount = (exerciseEntity?.totalCount?.toIntOrNull() ?: 0) + count
+            // MaxKg 값을 가져옴
+            lifecycleScope.launch {
+                val maxKg = withContext(Dispatchers.IO) {
+                    recordDAO.getMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "")
+                }
 
-            insertRecord(record)
-            dialog?.dismiss()
+                // record 객체의 kg와 count 속성에 값을 대입
+                val kg = getWeightValue().toDoubleOrNull() ?: 0.0
+                if (maxKg != null) {
+                    if (maxKg < kg) {
+                        withContext(Dispatchers.IO) {
+                            recordDAO.updateMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "", kg)
+                        }
+                    }
+                }
 
-            val intent = Intent(context, SelectedDateActivity::class.java)
-            val selectedDate = selectedDateActivity?.intent?.getStringExtra("selectedDate")
+                val record = RecordEntity(
+                    exerciseId = exerciseEntity?.exerciseId ?: "",
+                    selectedDate = exerciseEntity?.selectedDate ?: "",
+                    exerciseName = exerciseEntity?.exerciseName ?: "",
+                    exerciseType = exerciseEntity?.exerciseType ?: "",
+                    kg = getWeightValue().toDoubleOrNull() ?: 0.0,
+                    count = count,
+                    totalCount = count,
+                    maxKg = maxKg?.toDouble() ?: 0.0
+                )
 
-            Log.d("selectedDate", selectedDate.toString())
-            intent.putExtra("selectedDate", selectedDate)
-            context?.startActivity(intent)
-            (context as SelectedDateActivity).finish()
+                insertRecord(record)
+                dialog?.dismiss()
+
+                val intent = Intent(context, SelectedDateActivity::class.java)
+                val selectedDate = selectedDateActivity?.intent?.getStringExtra("selectedDate")
+
+                Log.d("selectedDate", selectedDate.toString())
+                intent.putExtra("selectedDate", selectedDate)
+                context?.startActivity(intent)
+                (context as SelectedDateActivity).finish()
+            }
         }
         var setCount = ""
         binding.dialogSet.text = setCount
