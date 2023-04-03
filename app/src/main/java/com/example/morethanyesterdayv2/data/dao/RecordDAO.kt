@@ -24,10 +24,13 @@ interface RecordDAO {
     @Query("SELECT COUNT(*) FROM room_record WHERE id = :exerciseId")
     fun getRecordCountByExerciseId(exerciseId: String?): LiveData<Int>
 
-    //ROOM에서 kg중 bestKg를 추출하는 쿼리
+    //ROOM에서 kg중 maxKg를 추출하는 쿼리
     @Query("SELECT MAX(kg) FROM room_record WHERE exerciseId = :exerciseId")
     fun getMaxKgByExerciseId(exerciseId: String): Int?
 
+
+    //ROOM에서 maxKg를 업데이트하는 쿼리
     @Query("UPDATE room_record SET maxKg = :maxKg WHERE exerciseId = :exerciseId")
     fun updateMaxKgByExerciseId(exerciseId: String, maxKg: Double)
+
 }

@@ -29,6 +29,7 @@ interface ExerciseDAO {
     @Query("SELECT totalCount FROM room_record WHERE exerciseId = :id")
     fun getTotalCountById(id: String?): Int?
 
+    //ROOM에서 maxKg를 업데이트하는 쿼리
     @Query("UPDATE room_exercise SET maxKg = :maxKg WHERE exerciseId = :exerciseId")
     fun updateMaxKgByExerciseId(exerciseId: String, maxKg: Double)
 
