@@ -263,9 +263,13 @@ class CustomDialog(
                 (context as SelectedDateActivity).finish()
             }
         }
-
-//        var totalSet = "{$totalSet}번째 세트"
-//        binding.dialogSet.text = totalSet
+        lifecycleScope.launch {
+            // recordDAO을 이용해 ROOM 안에 있는 totalSet 값을 가져옴
+            val totalSet = withContext(Dispatchers.IO) {
+                recordDAO.getRecordCountByExerciseId(exerciseEntity?.exerciseId ?: "") + 1
+            }
+        binding.dialogSet.text = "${totalSet}번째 세트"
+        }
         binding.plusFiveKgBtn?.setOnClickListener {
             val currentKg = binding.userInputKg.text.toString().toDoubleOrNull() ?: 0.0
             val newValue = currentKg + 5
