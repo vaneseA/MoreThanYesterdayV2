@@ -70,6 +70,7 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
                         txtName.text.toString(),
                         exerciseType,
                         selectedDate,
+                        maxKg=0.0
                     )
                 }
             }
@@ -82,7 +83,8 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
         position: Int,
         exerciseName: String,
         exerciseType: String,
-        selectedDate: String
+        selectedDate: String,
+        maxKg:Double
     ) {
 
 
@@ -97,7 +99,7 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
 
                 //랜덤ID부여
                 var exerciseId = UUID.randomUUID().toString()
-                val exerciseInfo = ExerciseEntity(selectedDate,exerciseName, exerciseType, exerciseId)
+                val exerciseInfo = ExerciseEntity(selectedDate,exerciseName, exerciseType, exerciseId, maxKg)
                 insertExercise(exerciseInfo)
                 notifyDataSetChanged()
                 dialog.dismiss()

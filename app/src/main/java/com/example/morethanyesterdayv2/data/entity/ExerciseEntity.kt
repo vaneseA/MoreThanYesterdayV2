@@ -29,15 +29,25 @@ class ExerciseEntity {
     @ColumnInfo
     var exerciseType: String = ""
 
+    @ColumnInfo(name = "maxKg")
+    var maxKg: Double = 0.0
+
     @ColumnInfo
     var recordList: List<RecordEntity> = emptyList()
 
 
-    constructor(selectedDate: String, exerciseName: String, exerciseType: String, exerciseId: String) {
+    constructor(
+        selectedDate: String,
+        exerciseName: String,
+        exerciseType: String,
+        exerciseId: String,
+        maxKg: Double
+    ) {
 
         this.selectedDate = selectedDate
         this.exerciseName = exerciseName
         this.exerciseType = exerciseType
         this.exerciseId = exerciseId
+        this.maxKg = maxKg
     }
 }
