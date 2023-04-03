@@ -41,7 +41,7 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view: View = inflater.inflate(R.layout.exercise_rv_item, parent, false)
-        return ViewHolder(view,selectedDate)
+        return ViewHolder(view, selectedDate)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -51,12 +51,13 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
     override fun getItemCount(): Int = exerciseDataList.size
 
 
-    inner class ViewHolder(view: View, private val selectedDate: String) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View, private val selectedDate: String) :
+        RecyclerView.ViewHolder(view) {
 
         private val txtName: TextView = itemView.findViewById(R.id.exerciseNameArea)
         private val txtType: TextView = itemView.findViewById(R.id.exerciseTypeArea)
 
-        fun bind(item: ExerciseData,) {
+        fun bind(item: ExerciseData) {
             txtName.text = item.name
             txtType.text = item.type
             var exerciseType = item.type
@@ -70,7 +71,8 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
                         txtName.text.toString(),
                         exerciseType,
                         selectedDate,
-                        maxKg=0.0
+                        totalCount = 0,
+                        maxKg = 0.0
                     )
                 }
             }
@@ -84,7 +86,8 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
         exerciseName: String,
         exerciseType: String,
         selectedDate: String,
-        maxKg:Double
+        totalCount: Int,
+        maxKg: Double
     ) {
 
 
@@ -99,7 +102,14 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
 
                 //랜덤ID부여
                 var exerciseId = UUID.randomUUID().toString()
-                val exerciseInfo = ExerciseEntity(selectedDate,exerciseName, exerciseType, exerciseId, maxKg)
+                val exerciseInfo = ExerciseEntity(
+                    selectedDate,
+                    exerciseName,
+                    exerciseType,
+                    exerciseId,
+                    totalCount = 0,
+                    maxKg = 0.0
+                )
                 insertExercise(exerciseInfo)
                 notifyDataSetChanged()
                 dialog.dismiss()
@@ -113,10 +123,11 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
             }
             .setNegativeButton("No") { dialog, _ ->
                 dialog.dismiss()
-            } .create().apply {
+            }.create().apply {
                 // 모서리 둥글게
                 window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                window?.setBackgroundDrawableResource(R.drawable.bg_dialog_rounded)}.show()
+                window?.setBackgroundDrawableResource(R.drawable.bg_dialog_rounded)
+            }.show()
 
     }
 

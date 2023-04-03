@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.example.morethanyesterdayv2.R
+import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.data.dao.RecordDAO
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
@@ -30,6 +31,7 @@ import kotlinx.coroutines.withContext
 
 lateinit var appDatabase: AppDatabase
 lateinit var recordDAO: RecordDAO
+lateinit var exerciseDAO: ExerciseDAO
 
 class CustomDialog(
     addSetDialogInterface: SelectedDateActivity,
@@ -69,9 +71,10 @@ class CustomDialog(
         appDatabase = Room.databaseBuilder(
             view.context,
             AppDatabase::class.java,
-            "room_record"
+            "room_db"
         ).build()
         recordDAO = appDatabase.recordDAO()
+        exerciseDAO =appDatabase.exerciseDAO()
 
         // 레이아웃 배경을 투명하게 해줌, 필수 아님
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -191,8 +194,16 @@ class CustomDialog(
                     totalCount = count,
                     maxKg = kg?.toDouble() ?: 0.0
                 )
+                val exercise = ExerciseEntity(
+                    exerciseId = exerciseEntity?.exerciseId ?: "",
+                    selectedDate = exerciseEntity?.selectedDate ?: "",
+                    exerciseName = exerciseEntity?.exerciseName ?: "",
+                    exerciseType = exerciseEntity?.exerciseType ?: "",
+                    totalCount = count,
+                    maxKg = maxKg?.toDouble() ?: 0.0
+                )
 
-                insertRecord(record)
+                insertRecord(record,exercise)
                 dialog?.dismiss()
 
                 val intent = Intent(context, SelectedDateActivity::class.java)
@@ -270,9 +281,10 @@ class CustomDialog(
 
 }
 
-fun insertRecord(record: RecordEntity) {
+fun insertRecord(record: RecordEntity, exercise: ExerciseEntity) {
     CoroutineScope(Dispatchers.IO).launch {
         recordDAO.insert(record)
+        exerciseDAO.update(exercise)
     }
 }
 
