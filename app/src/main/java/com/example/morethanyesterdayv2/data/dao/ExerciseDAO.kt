@@ -36,5 +36,4 @@ interface ExerciseDAO {
     //ROOM에서 totalCount 업데이트하는 쿼리
     @Query("UPDATE room_exercise SET totalCount = :totalCount WHERE exerciseId = :exerciseId")
     fun updateTotalCountByExerciseId(exerciseId: String, totalCount: Int)
-
 }

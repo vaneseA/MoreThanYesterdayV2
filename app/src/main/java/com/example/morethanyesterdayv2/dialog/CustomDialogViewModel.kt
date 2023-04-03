@@ -45,9 +45,4 @@ class CustomDialogViewModel(application: Application) : AndroidViewModel(applica
 //        _currentCountValue.value = 0
 //    }
 
-
-     fun getTotalCountById(exerciseId: String?): Int? {
-        return exerciseDAO.getTotalCountById(exerciseId)
-    }
-
 }
