@@ -22,7 +22,11 @@ interface RecordDAO {
 
     //ROOM에서 exerciseId로 된 값이 몇 개인지 카운트하는 쿼리
     @Query("SELECT COUNT(*) FROM room_record WHERE id = :exerciseId")
-    fun getRecordCountByExerciseId(exerciseId: String?): LiveData<Int>
+    fun getRecordCountByExerciseId(exerciseId: String?): Int
+
+    //ROOM에서 exerciseId로 된 제일 높은 totalCount를 얻는 쿼리
+    @Query("SELECT MAX(totalCount) FROM room_record WHERE id = :exerciseId")
+    fun getTotalCountByExerciseId(exerciseId: String?): Int
 
     //ROOM에서 kg중 maxKg를 추출하는 쿼리
     @Query("SELECT MAX(kg) FROM room_record WHERE exerciseId = :exerciseId")

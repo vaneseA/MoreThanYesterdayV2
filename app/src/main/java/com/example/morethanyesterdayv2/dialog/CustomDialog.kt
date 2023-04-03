@@ -74,7 +74,7 @@ class CustomDialog(
             "room_db"
         ).build()
         recordDAO = appDatabase.recordDAO()
-        exerciseDAO =appDatabase.exerciseDAO()
+        exerciseDAO = appDatabase.exerciseDAO()
 
         // 레이아웃 배경을 투명하게 해줌, 필수 아님
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -167,15 +167,21 @@ class CustomDialog(
                 .build()
             recordDAO = appDatabase.recordDAO()
 
-            // 사용자가 입력한 count 값을 문자열에서 정수로 변환하여 가져옴
-            val count = binding.userInputCount?.text?.toString()?.toIntOrNull() ?: 0
 
             // MaxKg 값을 가져옴
             lifecycleScope.launch {
                 val maxKg = withContext(Dispatchers.IO) {
                     recordDAO.getMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "")
                 }
+                val totalSet = withContext(Dispatchers.IO) {
+                    recordDAO.getTotalCountByExerciseId(exerciseEntity?.exerciseId ?: "")
+                }
+                val totalCount = withContext(Dispatchers.IO) {
+                    recordDAO.getRecordCountByExerciseId(exerciseEntity?.exerciseId ?: "")
+                }
 
+                // 사용자가 입력한 count 값을 문자열에서 정수로 변환하여 가져옴
+                val count = binding.userInputCount?.text?.toString()?.toIntOrNull() ?: 0
                 // record 객체의 kg와 count 속성에 값을 대입
                 val kg = getWeightValue().toDoubleOrNull() ?: 0.0
                 // maxKg 업데이트
@@ -183,9 +189,14 @@ class CustomDialog(
                     if (maxKg < kg) {
                         withContext(Dispatchers.IO) {
                             recordDAO.updateMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "", kg)
-                            exerciseDAO.updateMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "", kg)
+                            exerciseDAO.updateMaxKgByExerciseId(
+                                exerciseEntity?.exerciseId ?: "",
+                                kg
+                            )
+
                         }
                     }
+
                 } else {
                     withContext(Dispatchers.IO) {
                         exerciseDAO.update(
@@ -194,7 +205,7 @@ class CustomDialog(
                                 selectedDate = exerciseEntity?.selectedDate ?: "",
                                 exerciseName = exerciseEntity?.exerciseName ?: "",
                                 exerciseType = exerciseEntity?.exerciseType ?: "",
-                                totalCount = count,
+                                totalCount = totalCount + count,
                                 maxKg = kg?.toDouble() ?: 0.0
                             )
                         )
@@ -208,7 +219,7 @@ class CustomDialog(
                     exerciseType = exerciseEntity?.exerciseType ?: "",
                     kg = getWeightValue().toDoubleOrNull() ?: 0.0,
                     count = count,
-                    totalCount = count,
+                    totalCount = totalCount + count,
                     maxKg = kg?.toDouble() ?: 0.0
                 )
                 val exercise = ExerciseEntity(
@@ -216,11 +227,13 @@ class CustomDialog(
                     selectedDate = exerciseEntity?.selectedDate ?: "",
                     exerciseName = exerciseEntity?.exerciseName ?: "",
                     exerciseType = exerciseEntity?.exerciseType ?: "",
-                    totalCount = count,
+                    totalCount = totalCount + count,
                     maxKg = kg?.toDouble() ?: 0.0
                 )
-
-                insertRecord(record,exercise)
+                exerciseDAO.updateTotalCountByExerciseId(
+                    exerciseEntity?.exerciseId ?: "", totalCount
+                )
+                insertRecord(record, exercise)
                 dialog?.dismiss()
 
                 val intent = Intent(context, SelectedDateActivity::class.java)
