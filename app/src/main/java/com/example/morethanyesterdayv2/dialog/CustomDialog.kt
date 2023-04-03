@@ -178,9 +178,26 @@ class CustomDialog(
 
                 // record 객체의 kg와 count 속성에 값을 대입
                 val kg = getWeightValue().toDoubleOrNull() ?: 0.0
-                if (maxKg == null || maxKg < kg) { // maxKg가 null이거나 kg가 더 클 때만 업데이트
+                // maxKg 업데이트
+                if (maxKg != null) {
+                    if (maxKg < kg) {
+                        withContext(Dispatchers.IO) {
+                            recordDAO.updateMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "", kg)
+                            exerciseDAO.updateMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "", kg)
+                        }
+                    }
+                } else {
                     withContext(Dispatchers.IO) {
-                        recordDAO.updateMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "", kg)
+                        exerciseDAO.update(
+                            ExerciseEntity(
+                                exerciseId = exerciseEntity?.exerciseId ?: "",
+                                selectedDate = exerciseEntity?.selectedDate ?: "",
+                                exerciseName = exerciseEntity?.exerciseName ?: "",
+                                exerciseType = exerciseEntity?.exerciseType ?: "",
+                                totalCount = count,
+                                maxKg = kg?.toDouble() ?: 0.0
+                            )
+                        )
                     }
                 }
 
@@ -200,7 +217,7 @@ class CustomDialog(
                     exerciseName = exerciseEntity?.exerciseName ?: "",
                     exerciseType = exerciseEntity?.exerciseType ?: "",
                     totalCount = count,
-                    maxKg = maxKg?.toDouble() ?: 0.0
+                    maxKg = kg?.toDouble() ?: 0.0
                 )
 
                 insertRecord(record,exercise)

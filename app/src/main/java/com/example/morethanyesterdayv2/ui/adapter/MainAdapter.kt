@@ -48,7 +48,7 @@ class MainAdapter(
             binding.mainExerciseType.text = exerciseEntity.exerciseType
             binding.mainTotalSet.text = ""
 //            binding.mainTotalKg.text = "총 ${exerciseEntity.totalKG}kg, "
-//            binding.mainBestKg.text = "최고 ${exerciseEntity.bestKg}kg, "
+            binding.mainBestKg.text = "최고 ${exerciseEntity.maxKg}kg, "
 //            binding.mainTotalCount.text = "총 ${exerciseEntity.totalCount}회"
             this.exerciseEntity = exerciseEntity // exerciseEntity를 초기화
         }

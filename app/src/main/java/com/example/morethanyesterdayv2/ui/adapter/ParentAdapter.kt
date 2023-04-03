@@ -67,7 +67,7 @@ class ParentAdapter(
             binding.NameArea.text = exerciseEntity.exerciseName
             binding.TypeArea.text = exerciseEntity.exerciseType
 //            binding.totalKgArea.text = "총 ${exerciseEntity.totalKG}kg, "
-//            binding.bestKgArea.text = "최고 ${Record.maxKg}kg, "
+            binding.bestKgArea.text = "최고 ${exerciseEntity.maxKg}kg, "
 //            binding.totalCountArea.text = "총 ${exerciseEntity.totalCount}회"
 
 

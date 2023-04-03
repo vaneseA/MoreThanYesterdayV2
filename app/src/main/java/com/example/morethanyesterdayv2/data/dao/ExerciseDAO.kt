@@ -29,6 +29,7 @@ interface ExerciseDAO {
     @Query("SELECT totalCount FROM room_record WHERE exerciseId = :id")
     fun getTotalCountById(id: String?): Int?
 
-
+    @Query("UPDATE room_exercise SET maxKg = :maxKg WHERE exerciseId = :exerciseId")
+    fun updateMaxKgByExerciseId(exerciseId: String, maxKg: Double)
 
 }
