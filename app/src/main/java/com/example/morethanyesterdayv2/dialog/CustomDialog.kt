@@ -175,11 +175,9 @@ class CustomDialog(
 
                 // record 객체의 kg와 count 속성에 값을 대입
                 val kg = getWeightValue().toDoubleOrNull() ?: 0.0
-                if (maxKg != null) {
-                    if (maxKg < kg) {
-                        withContext(Dispatchers.IO) {
-                            recordDAO.updateMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "", kg)
-                        }
+                if (maxKg == null || maxKg < kg) { // maxKg가 null이거나 kg가 더 클 때만 업데이트
+                    withContext(Dispatchers.IO) {
+                        recordDAO.updateMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "", kg)
                     }
                 }
 
@@ -191,7 +189,7 @@ class CustomDialog(
                     kg = getWeightValue().toDoubleOrNull() ?: 0.0,
                     count = count,
                     totalCount = count,
-                    maxKg = maxKg?.toDouble() ?: 0.0
+                    maxKg = kg?.toDouble() ?: 0.0
                 )
 
                 insertRecord(record)
