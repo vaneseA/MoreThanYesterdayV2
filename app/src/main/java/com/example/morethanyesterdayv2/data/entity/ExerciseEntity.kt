@@ -29,14 +29,21 @@ class ExerciseEntity {
     @ColumnInfo
     var exerciseType: String = ""
 
+    // 총 세트
     @ColumnInfo(name = "totalSet")
     var totalSet: Int = 0
 
-    @ColumnInfo(name = "totalCount")
-    var totalCount: Int
+    // 총 무게
+    @ColumnInfo(name = "totalKG")
+    var totalKg: Double = 0.0
 
+    // 최고 무게
     @ColumnInfo(name = "maxKg")
     var maxKg: Double = 0.0
+
+    // 총 횟수
+    @ColumnInfo(name = "totalCount")
+    var totalCount: Int = 0
 
     @ColumnInfo
     var recordList: List<RecordEntity> = emptyList()
@@ -48,8 +55,9 @@ class ExerciseEntity {
         exerciseType: String,
         exerciseId: String,
         totalSet: Int,
-        totalCount: Int,
+        totalKg: Double,
         maxKg: Double,
+        totalCount: Int,
 
     ) {
 
@@ -58,7 +66,8 @@ class ExerciseEntity {
         this.exerciseType = exerciseType
         this.exerciseId = exerciseId
         this.totalSet = totalSet
-        this.totalCount = totalCount
+        this.totalKg = totalKg
         this.maxKg = maxKg
+        this.totalCount = totalCount
     }
 }

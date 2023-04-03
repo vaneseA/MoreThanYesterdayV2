@@ -107,6 +107,7 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
                     exerciseName,
                     exerciseType,
                     exerciseId,
+                    totalKg = 0.0,
                     totalSet= 0,
                     totalCount = 0,
                     maxKg = 0.0

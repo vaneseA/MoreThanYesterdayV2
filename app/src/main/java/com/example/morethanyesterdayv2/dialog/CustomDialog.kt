@@ -172,13 +172,27 @@ class CustomDialog(
             // 사용자가 입력한 count 값을 문자열에서 정수로 변환하여 가져옴
             val count = binding.userInputCount?.text?.toString()?.toIntOrNull() ?: 0
 
-            // MaxKg 값을 가져옴
+
             lifecycleScope.launch {
+                // recordDAO을 이용해 ROOM 안에 있는 MaxKg 값을 가져옴
                 val maxKg = withContext(Dispatchers.IO) {
                     recordDAO.getMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "")
                 }
-                // record 객체의 kg와 count 속성에 값을 대입
+                // recordDAO을 이용해 ROOM 안에 있는 totalSet 값을 가져옴
+                val totalSet = withContext(Dispatchers.IO) {
+                    recordDAO.getRecordCountByExerciseId(exerciseEntity?.exerciseId ?: "")
+                }
+                // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
+                val totalCount = withContext(Dispatchers.IO) {
+                    recordDAO.getTotalCountByExerciseId(exerciseEntity?.exerciseId ?: "")
+                }
+                // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
+                val totalKg = withContext(Dispatchers.IO) {
+                    recordDAO.getTotalKgByExerciseId(exerciseEntity?.exerciseId ?: "")
+                }
+                //라디오 버튼에 따라 저장하는 값을 달리하는 함수를 적용한 kg값
                 val kg = getWeightValue().toDoubleOrNull() ?: 0.0
+
                 // maxKg 업데이트
                 if (maxKg != null) {
                     if (maxKg < kg) {
@@ -190,7 +204,7 @@ class CustomDialog(
                             )
                         }
                     }
-                }else{
+                } else {
                     withContext(Dispatchers.IO) {
                         recordDAO.updateMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "", kg)
                         exerciseDAO.updateMaxKgByExerciseId(
@@ -206,8 +220,9 @@ class CustomDialog(
                     exerciseType = exerciseEntity?.exerciseType ?: "",
                     kg = getWeightValue().toDoubleOrNull() ?: 0.0,
                     count = count,
-                    totalSet = (recordEntity?.totalSet ?: 0)  + 1,
-                    totalCount = count,
+                    totalSet = totalSet + 1,
+                    totalKg = totalKg + kg,
+                    totalCount = totalCount + count,
                     maxKg = kg?.toDouble() ?: 0.0
                 )
                 val exercise = ExerciseEntity(
@@ -215,11 +230,27 @@ class CustomDialog(
                     selectedDate = exerciseEntity?.selectedDate ?: "",
                     exerciseName = exerciseEntity?.exerciseName ?: "",
                     exerciseType = exerciseEntity?.exerciseType ?: "",
-                    totalSet = (exerciseEntity?.totalSet ?: 0) + 1,
-                    totalCount = count,
+                    totalSet = totalSet + 1,
+                    totalKg = totalKg + kg,
+                    totalCount = totalCount + count,
                     maxKg = kg?.toDouble() ?: 0.0
                 )
 
+
+                withContext(Dispatchers.IO) {
+                    exerciseDAO.updateTotalCountByExerciseId(
+                        exerciseEntity?.exerciseId ?: "",
+                        totalCount + count
+                    )
+                    exerciseDAO.updateTotalSetByExerciseId(
+                        exerciseEntity?.exerciseId ?: "",
+                        totalSet + 1
+                    )
+                    exerciseDAO.updateTotalKgByExerciseId(
+                        exerciseEntity?.exerciseId ?: "",
+                        totalKg+kg
+                    )
+                }
                 insertAndUpdateRecord(record, exercise)
                 dialog?.dismiss()
 
@@ -233,8 +264,8 @@ class CustomDialog(
             }
         }
 
-        var setCount = ""
-        binding.dialogSet.text = setCount
+//        var totalSet = "{$totalSet}번째 세트"
+//        binding.dialogSet.text = totalSet
         binding.plusFiveKgBtn?.setOnClickListener {
             val currentKg = binding.userInputKg.text.toString().toDoubleOrNull() ?: 0.0
             val newValue = currentKg + 5

@@ -34,19 +34,21 @@ class RecordEntity {
     @ColumnInfo
     var count: Int = 0
 
-
+    // 총 세트
     @ColumnInfo(name = "totalSet")
     var totalSet: Int = 0
 
-    @ColumnInfo(name = "totalCount")
-    var totalCount: Int = 0
-
+    // 총 무게
     @ColumnInfo(name = "totalKG")
-    var totalKG: Int = 0
+    var totalKg: Double = 0.0
 
+    // 최고 무게
     @ColumnInfo(name = "maxKg")
     var maxKg: Double = 0.0
 
+    // 총 횟수
+    @ColumnInfo(name = "totalCount")
+    var totalCount: Int = 0
 
     constructor(
         exerciseId: String,
@@ -56,8 +58,9 @@ class RecordEntity {
         kg: Double,
         count: Int,
         totalSet: Int,
+        totalKg: Double,
+        maxKg: Double,
         totalCount: Int,
-        maxKg: Double
     ) {
         this.exerciseId = exerciseId
         this.selectedDate = selectedDate
@@ -66,7 +69,8 @@ class RecordEntity {
         this.kg = kg
         this.count = count
         this.totalSet = totalSet
-        this.totalCount = totalCount
+        this.totalKg = totalKg
         this.maxKg = maxKg
+        this.totalCount = totalCount
     }
 }

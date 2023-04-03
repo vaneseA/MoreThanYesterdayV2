@@ -26,14 +26,22 @@ interface ExerciseDAO {
     fun getAllByDate(selectedDate: String): List<ExerciseEntity>
 
     //ROOM에서 totalCount를 추출하는 쿼리
-    @Query("SELECT totalCount FROM room_record WHERE exerciseId = :id")
-    fun getTotalCountById(id: String?): Int?
+    @Query("SELECT totalCount FROM room_record WHERE exerciseId = :exerciseId")
+    fun getTotalCountById(exerciseId: String?): Int?
 
     //ROOM에서 maxKg를 업데이트하는 쿼리
     @Query("UPDATE room_exercise SET maxKg = :maxKg WHERE exerciseId = :exerciseId")
     fun updateMaxKgByExerciseId(exerciseId: String, maxKg: Double)
 
+    //ROOM에서 totalSet를 업데이트하는 쿼리
+    @Query("UPDATE room_exercise SET totalSet = :totalSet WHERE exerciseId = :exerciseId")
+    fun updateTotalSetByExerciseId(exerciseId: String, totalSet : Int)
+
     //ROOM에서 totalCount 업데이트하는 쿼리
     @Query("UPDATE room_exercise SET totalCount = :totalCount WHERE exerciseId = :exerciseId")
     fun updateTotalCountByExerciseId(exerciseId: String, totalCount: Int)
+
+    //ROOM에서 totalKg 업데이트하는 쿼리
+    @Query("UPDATE room_exercise SET totalKg = :totalKg WHERE exerciseId = :exerciseId")
+    fun updateTotalKgByExerciseId(exerciseId: String, totalKg: Double)
 }

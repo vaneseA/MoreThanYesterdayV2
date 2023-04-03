@@ -59,16 +59,13 @@ class ParentAdapter(
         fun setData(exerciseEntity: ExerciseEntity, position: Int, childList: List<RecordEntity>) {
             val exerciseId = exerciseEntity.exerciseId
             val selectedDate = exerciseEntity.selectedDate
-//            var totalCount = getRecordCountByExerciseId(exerciseId)
-//            val totalCount = getRecordCountByExerciseId(exerciseId)
 
-//            binding.totalCountArea.text = "총 ${totalCount}회"
-//            Log.d("counter",totalCount.toString())
+            binding.totalSetArea.text = "총 ${exerciseEntity.totalSet}set, "
             binding.NameArea.text = exerciseEntity.exerciseName
             binding.TypeArea.text = exerciseEntity.exerciseType
-//            binding.totalKgArea.text = "총 ${exerciseEntity.totalKG}kg, "
+            binding.totalKgArea.text = "총 ${exerciseEntity.totalKg}kg, "
             binding.bestKgArea.text = "최고 ${exerciseEntity.maxKg}kg, "
-//            binding.totalCountArea.text = "총 ${exerciseEntity.totalCount}회"
+            binding.totalCountArea.text = "총 ${exerciseEntity.totalCount}회"
 
 
             selectedRepository.getExerciseSetListLiveDataById(exerciseId)
