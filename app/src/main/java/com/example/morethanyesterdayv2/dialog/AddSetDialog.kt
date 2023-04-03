@@ -33,7 +33,7 @@ lateinit var appDatabase: AppDatabase
 lateinit var recordDAO: RecordDAO
 lateinit var exerciseDAO: ExerciseDAO
 
-class CustomDialog(
+class AddSetDialog(
     addSetDialogInterface: SelectedDateActivity,
     position: Int,
     exerciseEntity: ExerciseEntity,

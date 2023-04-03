@@ -15,7 +15,7 @@ import com.example.morethanyesterdayv2.db.AppDatabase
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.ActivitySelectedDateBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
-import com.example.morethanyesterdayv2.dialog.CustomDialog
+import com.example.morethanyesterdayv2.dialog.AddSetDialog
 
 
 class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
@@ -98,7 +98,7 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
     fun clickViewEvents(position: Int, exerciseEntity: ExerciseEntity, exerciseId: String, selectedDate: String) {
         val selectedDate = intent.getStringExtra("selectedDate")
         val dialog = selectedDate?.let {
-            CustomDialog(this, position, exerciseEntity, exerciseId,
+            AddSetDialog(this, position, exerciseEntity, exerciseId,
                 it
             )
         }
