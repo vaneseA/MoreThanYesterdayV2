@@ -31,39 +31,57 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    <!-- 운동명 -->
-                    <TextView
-                        android:id="@+id/NameArea"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:paddingHorizontal="10dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="5dp"
-                        android:text="운동명"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                    <!-- 운동부위 -->
-                    <TextView
-                        android:id="@+id/TypeArea"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:paddingHorizontal="10dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="5dp"
-                        android:text="운동부위"
-                        android:textColor="@color/gray"
-                        android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <LinearLayout
+                        android:id="@+id/type_area_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <!-- 운동명 -->
+                        <TextView
+                            android:id="@+id/NameArea"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:paddingHorizontal="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="5dp"
+                            android:text="운동명"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                        <!-- 운동부위 -->
+                        <TextView
+                            android:id="@+id/TypeArea"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:paddingHorizontal="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="5dp"
+                            android:text="운동부위"
+                            android:textColor="@color/gray"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
+                    </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/menu_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="170dp"
+                    android:layout_marginBottom="0dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_baseline_more_vert_24" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -124,20 +142,20 @@
 
             android:layout_marginTop="8dp"
 
-            tools:listitem="@layout/set_rv_item"/>
+            tools:listitem="@layout/set_rv_item" />
 
         <Button
             android:id="@+id/addSetBtn"
-            android:layout_marginStart="-8dp"
             android:layout_width="390dp"
             android:layout_height="28dp"
-            android:backgroundTint="@color/main_color"
-            android:textColor="@color/white"
-            app:fontFamily="@font/jalnanche"
-            android:textSize="16dp"
-            android:gravity="center"
+            android:layout_marginStart="-8dp"
             android:background="@drawable/rounded_button"
-            android:text="세트 추가" />
+            android:backgroundTint="@color/main_color"
+            android:gravity="center"
+            android:text="세트 추가"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            app:fontFamily="@font/jalnanche" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
 
