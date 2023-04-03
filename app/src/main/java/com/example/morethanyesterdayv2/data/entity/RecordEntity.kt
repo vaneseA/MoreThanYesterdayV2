@@ -38,14 +38,15 @@ class RecordEntity {
     @ColumnInfo(name = "totalSet")
     var totalSet: Int = 0
 
+    @ColumnInfo(name = "totalCount")
+    var totalCount: Int = 0
+
     @ColumnInfo(name = "totalKG")
     var totalKG: Int = 0
 
     @ColumnInfo(name = "maxKg")
     var maxKg: Double = 0.0
 
-    @ColumnInfo(name = "totalCount")
-    var totalCount: Int = 0
 
     constructor(
         exerciseId: String,
@@ -54,6 +55,7 @@ class RecordEntity {
         exerciseType: String,
         kg: Double,
         count: Int,
+        totalSet: Int,
         totalCount: Int,
         maxKg: Double
     ) {
@@ -63,6 +65,7 @@ class RecordEntity {
         this.exerciseType = exerciseType
         this.kg = kg
         this.count = count
+        this.totalSet = totalSet
         this.totalCount = totalCount
         this.maxKg = maxKg
     }

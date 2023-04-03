@@ -29,10 +29,11 @@ class ExerciseEntity {
     @ColumnInfo
     var exerciseType: String = ""
 
+    @ColumnInfo(name = "totalSet")
+    var totalSet: Int = 0
 
     @ColumnInfo(name = "totalCount")
     var totalCount: Int
-
 
     @ColumnInfo(name = "maxKg")
     var maxKg: Double = 0.0
@@ -46,6 +47,7 @@ class ExerciseEntity {
         exerciseName: String,
         exerciseType: String,
         exerciseId: String,
+        totalSet: Int,
         totalCount: Int,
         maxKg: Double,
 
@@ -55,6 +57,7 @@ class ExerciseEntity {
         this.exerciseName = exerciseName
         this.exerciseType = exerciseType
         this.exerciseId = exerciseId
+        this.totalSet = totalSet
         this.totalCount = totalCount
         this.maxKg = maxKg
     }
