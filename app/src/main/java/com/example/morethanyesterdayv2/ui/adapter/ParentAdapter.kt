@@ -58,9 +58,10 @@ class ParentAdapter(
         fun setData(exerciseEntity: ExerciseEntity, position: Int, childList: List<RecordEntity>) {
             val exerciseId = exerciseEntity.exerciseId
             val selectedDate = exerciseEntity.selectedDate
+            val exerciseName = exerciseEntity.exerciseName
 
             binding.totalSetArea.text = "총 ${exerciseEntity.totalSet}set, "
-            binding.NameArea.text = exerciseEntity.exerciseName
+            binding.NameArea.text = exerciseName
             binding.TypeArea.text = exerciseEntity.exerciseType
             binding.totalKgArea.text = "총 ${exerciseEntity.totalKg}kg, "
             binding.bestKgArea.text = "최고 ${exerciseEntity.maxKg}kg, "
@@ -95,7 +96,8 @@ class ParentAdapter(
                                 position,
                                 exerciseEntity,
                                 exerciseId,
-                                selectedDate
+                                selectedDate,
+                                exerciseName
                             )
 
                             true

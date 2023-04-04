@@ -90,35 +90,41 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface, DeleteD
         }
     }
 
-    fun refreshAdapter() {
-        val selectedDate = intent?.getStringExtra("selectedDate") ?: ""
-        val exseciseName = intent?.getStringExtra("selectedDate") ?: ""
-        Log.d("dddddd", exseciseName)
-        viewModel.loadExerciseListByDate(selectedDate)
-    }
 
-    fun showAddSetDialog(position: Int, exerciseEntity: ExerciseEntity, exerciseId: String, selectedDate: String) {
+
+    fun showAddSetDialog(
+        position: Int,
+        exerciseEntity: ExerciseEntity,
+        exerciseId: String,
+        selectedDate: String
+    ) {
         val selectedDate = intent.getStringExtra("selectedDate")
         val dialog = selectedDate?.let {
-            AddSetDialog(this, position, exerciseEntity, exerciseId,
+            AddSetDialog(
+                this, position, exerciseEntity, exerciseId,
                 it
             )
         }
         // 알림창이 띄워져있는 동안 배경 클릭 막기
         dialog?.isCancelable = false
-        dialog?.show(supportFragmentManager, "CustomDialog")
+        dialog?.show(supportFragmentManager, "AddSetDialog")
     }
 
-    fun showDeleteDialog(position: Int, exerciseEntity: ExerciseEntity, exerciseId: String, selectedDate: String) {
+    fun showDeleteDialog(
+        position: Int,
+        exerciseEntity: ExerciseEntity,
+        exerciseId: String,
+        selectedDate: String,
+        exerciseName: String
+    ) {
         val selectedDate = intent.getStringExtra("selectedDate")
         val dialog = selectedDate?.let {
-            DeleteDialog(this, position, exerciseEntity, exerciseId,
-                it
+            DeleteDialog(
+                this, position, exerciseEntity, exerciseId,
+                it, exerciseName
             )
         }
-        // 알림창이 띄워져있는 동안 배경 클릭 막기
-        dialog?.isCancelable = false
-        dialog?.show(supportFragmentManager, "CustomDialog")
+        dialog?.show(supportFragmentManager, "DeleteDialog")
     }
 
     override fun onYesButtonClick(id: Int) {

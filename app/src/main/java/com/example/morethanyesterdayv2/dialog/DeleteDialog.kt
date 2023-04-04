@@ -25,10 +25,9 @@ class DeleteDialog(
     position: Int,
     exerciseEntity: ExerciseEntity,
     exerciseId: String,
-    selectedDate: String
+    selectedDate: String,
+    exerciseName: String,
 ) : DialogFragment() {
-
-    lateinit var viewModel: DeleteDialogViewModel
 
     // 뷰 바인딩 정의
     private var _binding: DeleteDialogBinding? = null
@@ -38,6 +37,9 @@ class DeleteDialog(
     var recordEntity: RecordEntity? = null
     private var position: Int? = null
     private var exerciseId: String? = null
+    private var selectedDate: String? = null
+    private var exerciseName: String? = null
+
 
     init {
         this.exerciseEntity = exerciseEntity
@@ -45,6 +47,8 @@ class DeleteDialog(
         this.position = position
         this.deleteDialogInterface = deleteDialogInterface
         this.exerciseId = exerciseId
+        this.selectedDate = selectedDate
+        this.exerciseName = exerciseName
     }
 
     override fun onCreateView(
@@ -65,7 +69,8 @@ class DeleteDialog(
         exerciseDAO = appDatabase.exerciseDAO()
         // 레이아웃 배경을 투명하게 해줌, 필수 아님
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
+        binding.selectedDateForDelete.text = selectedDate
+        binding.exerciseNameForDelete.text = "$exerciseName \n\n삭제하시겠습니까?"
         binding.noBtnForDelete.setOnClickListener { dialog?.dismiss() }
         binding.yesBtnForDelete.setOnClickListener {
             val selectedDateActivity = SelectedDateActivity.getInstance()

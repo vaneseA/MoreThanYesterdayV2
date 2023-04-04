@@ -93,7 +93,7 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
 
         AlertDialog.Builder(context)
             .setTitle(selectedDate)
-            .setMessage("$exerciseName 을/를 추가하시겠습니까?")
+            .setMessage("$exerciseName  \n\n추가하시겠습니까?")
             .setPositiveButton("Yes") { dialog, _ ->
                 appDatabase =
                     Room.databaseBuilder(context, AppDatabase::class.java, "room_db")
