@@ -2,12 +2,10 @@ package com.example.morethanyesterdayv2.ui.adapter
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.R
@@ -18,7 +16,6 @@ import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.RecordRvItemBinding
 import com.example.morethanyesterdayv2.db.AppDatabase
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
-import com.example.morethanyesterdayv2.dialog.recordDAO
 import com.example.morethanyesterdayv2.repository.SelectedDateRepository
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 
@@ -79,7 +76,7 @@ class ParentAdapter(
 
 
             binding.addSetBtn.setOnClickListener {
-                selectedDateActivity?.clickViewEvents(
+                selectedDateActivity?.showAddSetDialog(
                     position,
                     exerciseEntity,
                     exerciseId,
@@ -93,7 +90,14 @@ class ParentAdapter(
                 popupMenu.setOnMenuItemClickListener { item ->
                     when (item.itemId) {
                         R.id.action_delete -> {
-                            // 처리할 내용
+
+                            selectedDateActivity?.showDeleteDialog(
+                                position,
+                                exerciseEntity,
+                                exerciseId,
+                                selectedDate
+                            )
+
                             true
                         }
                         R.id.action_move -> {

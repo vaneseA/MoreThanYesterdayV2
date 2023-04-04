@@ -16,9 +16,11 @@ import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.ActivitySelectedDateBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
 import com.example.morethanyesterdayv2.dialog.AddSetDialog
+import com.example.morethanyesterdayv2.dialog.DeleteDialog
+import com.example.morethanyesterdayv2.dialog.DeleteDialogInterface
 
 
-class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
+class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface, DeleteDialogInterface {
 
     //  by lazy는 프로퍼티 초기화를 지연시켜서 액티비티나 프래그먼트의 뷰가 생성될 때 불필요한 리소스 초기화를 피하고 애플리케이션 성능을 향상시킬 수 있다
     val binding by lazy { ActivitySelectedDateBinding.inflate(layoutInflater) }
@@ -95,10 +97,22 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface {
         viewModel.loadExerciseListByDate(selectedDate)
     }
 
-    fun clickViewEvents(position: Int, exerciseEntity: ExerciseEntity, exerciseId: String, selectedDate: String) {
+    fun showAddSetDialog(position: Int, exerciseEntity: ExerciseEntity, exerciseId: String, selectedDate: String) {
         val selectedDate = intent.getStringExtra("selectedDate")
         val dialog = selectedDate?.let {
             AddSetDialog(this, position, exerciseEntity, exerciseId,
+                it
+            )
+        }
+        // 알림창이 띄워져있는 동안 배경 클릭 막기
+        dialog?.isCancelable = false
+        dialog?.show(supportFragmentManager, "CustomDialog")
+    }
+
+    fun showDeleteDialog(position: Int, exerciseEntity: ExerciseEntity, exerciseId: String, selectedDate: String) {
+        val selectedDate = intent.getStringExtra("selectedDate")
+        val dialog = selectedDate?.let {
+            DeleteDialog(this, position, exerciseEntity, exerciseId,
                 it
             )
         }
