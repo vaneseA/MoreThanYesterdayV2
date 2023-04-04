@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.databinding.ActivityMainBinding
+import com.example.morethanyesterdayv2.dialog.AddSetDialog
+import com.example.morethanyesterdayv2.dialog.PasteDialog
 import com.example.morethanyesterdayv2.ui.adapter.MainAdapter
 import com.example.morethanyesterdayv2.ui.adapter.ParentAdapter
 import com.example.morethanyesterdayv2.viewmodel.MainViewModel
@@ -18,7 +20,7 @@ import com.example.morethanyesterdayv2.viewmodel.SelectedDateViewModel
 import java.io.FileInputStream
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel // ViewModel 객체 선언
@@ -87,7 +89,9 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
-
+        binding.pasteBtn.setOnClickListener {
+            pasteDialog()
+        }
         binding.goToWriteBtn.setOnClickListener {
             intent.putExtra("selectedDate", viewModel.selectedDate)
             startActivity(intent)
@@ -126,6 +130,21 @@ class MainActivity : AppCompatActivity() {
             e.printStackTrace()
         }
     }
+    fun pasteDialog(
+//        position: Int,
+//        exerciseEntity: ExerciseEntity,
+//        exerciseId: String,
+//        selectedDate: String
+    ) {
+        val selectedDate = intent.getStringExtra("selectedDate")
+        val dialog = selectedDate?.let {
+            PasteDialog()
+//                this, position, exerciseEntity, exerciseId,selectedDate)
+        }
+        // 알림창이 띄워져있는 동안 배경 클릭 막기
+        dialog?.isCancelable = false
+        dialog?.show(supportFragmentManager, "PasteDialog")
+    }
 
     private fun handleCalendarSelection(year: Int, month: Int, dayOfMonth: Int) {
         viewModel.selectedDate = String.format("%d년 %d월 %d일", year, month + 1, dayOfMonth)
@@ -146,5 +165,9 @@ class MainActivity : AppCompatActivity() {
         })
 
 
+    }
+
+    override fun onYesButtonClick(id: Int) {
+        TODO("Not yet implemented")
     }
 }
