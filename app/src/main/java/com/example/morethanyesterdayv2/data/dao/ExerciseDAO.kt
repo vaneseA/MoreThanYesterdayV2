@@ -35,7 +35,7 @@ interface ExerciseDAO {
 
     //ROOM에서 totalSet를 업데이트하는 쿼리
     @Query("UPDATE room_exercise SET totalSet = :totalSet WHERE exerciseId = :exerciseId")
-    fun updateTotalSetByExerciseId(exerciseId: String, totalSet : Int)
+    fun updateTotalSetByExerciseId(exerciseId: String, totalSet: Int)
 
     //ROOM에서 totalCount 업데이트하는 쿼리
     @Query("UPDATE room_exercise SET totalCount = :totalCount WHERE exerciseId = :exerciseId")
@@ -44,4 +44,9 @@ interface ExerciseDAO {
     //ROOM에서 totalKg 업데이트하는 쿼리
     @Query("UPDATE room_exercise SET totalKg = :totalKg WHERE exerciseId = :exerciseId")
     fun updateTotalKgByExerciseId(exerciseId: String, totalKg: Double)
+
+    //"room_exercise" 테이블에서 "exerciseId" 필드가 입력받은 "exerciseId" 값과 일치하는 레코드를 삭제하는 쿼리
+    @Query("DELETE FROM room_exercise WHERE exerciseId = :exerciseId")
+    fun deleteByExerciseId(exerciseId: String): List<ExerciseEntity>
 }
+

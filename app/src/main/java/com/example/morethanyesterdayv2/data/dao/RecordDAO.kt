@@ -2,6 +2,7 @@ package com.example.morethanyesterdayv2.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
 
 
@@ -17,6 +18,8 @@ interface RecordDAO {
     @Delete
     fun delete(recordEntity: RecordEntity)
 
+
+    //room_record 테이블에서 exerciseId 필드 값이 exerciseId 매개변수 값과 일치하는 모든 레코드를 가져오는 쿼리
     @Query("SELECT * FROM room_record WHERE exerciseId = :exerciseId")
     fun loadExerciseSetListLiveDataByExerciseId(exerciseId: String): LiveData<List<RecordEntity>>
 
@@ -39,4 +42,8 @@ interface RecordDAO {
     //ROOM에서 maxKg를 업데이트하는 쿼리
     @Query("UPDATE room_record SET maxKg = :maxKg WHERE exerciseId = :exerciseId")
     fun updateMaxKgByExerciseId(exerciseId: String, maxKg: Double)
+
+    //"room_exercise" 테이블에서 "exerciseId" 필드가 입력받은 "exerciseId" 값과 일치하는 레코드를 삭제하는 쿼리
+    @Query("DELETE FROM room_record WHERE exerciseId = :exerciseId")
+    fun deleteByExerciseId(exerciseId: String): List<ExerciseEntity>
 }

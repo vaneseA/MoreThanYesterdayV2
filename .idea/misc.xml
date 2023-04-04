@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/layout/activity_selected_day.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/custom_add_set_dialog.xml" value="0.25" />
         <entry key="app/src/main/res/layout/custom_mylike_dialog.xml" value="0.24114583333333334" />
+        <entry key="app/src/main/res/layout/delete_dialog.xml" value="0.2490740740740741" />
         <entry key="app/src/main/res/layout/exercise_card_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/exercise_rv_item.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/exercise_set_row_item.xml" value="0.24114583333333334" />
@@ -36,6 +37,7 @@
         <entry key="app/src/main/res/layout/main_rv_item.xml" value="0.259375" />
         <entry key="app/src/main/res/layout/record_rv_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/set_rv_item.xml" value="0.45" />
+        <entry key="app/src/main/res/menu/menu_popup.xml" value="0.15833333333333333" />
       </map>
     </option>
   </component>

@@ -5,10 +5,12 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.morethanyesterdayv2.R
 import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
 import com.example.morethanyesterdayv2.data.dao.RecordDAO
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
@@ -84,8 +86,24 @@ class ParentAdapter(
                     selectedDate
                 )
             }
-            binding.menuBtn.setOnClickListener{
 
+            binding.menuBtn.setOnClickListener{
+                val popupMenu = PopupMenu(itemView.context, binding.menuBtn)
+                popupMenu.menuInflater.inflate(R.menu.menu_popup, popupMenu.menu)
+                popupMenu.setOnMenuItemClickListener { item ->
+                    when (item.itemId) {
+                        R.id.action_delete -> {
+                            // 처리할 내용
+                            true
+                        }
+                        R.id.action_move -> {
+                            // 처리할 내용
+                            true
+                        }
+                        else -> false
+                    }
+                }
+                popupMenu.show()
             }
 
         }
