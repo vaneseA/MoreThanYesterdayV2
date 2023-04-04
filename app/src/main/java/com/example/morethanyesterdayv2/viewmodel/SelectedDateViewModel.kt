@@ -63,13 +63,15 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
 
     fun onDeleteRecord(recordEntity: RecordEntity, context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
+            // 미리 kg값을 받아놓고
             val kg = recordEntity?.kg
-
+            // 일단 삭제
             repository.delete(recordEntity)
             // recordDAO을 이용해 ROOM 안에 있는 MaxKg 값을 가져옴
             val maxKg = withContext(Dispatchers.IO) {
                 repository.getMaxKgFromExerciseByExerciseId(recordEntity?.exerciseId ?: "")
             }
+            // recordDAO을 이용해 ROOM 안에 있는 MaxKg 값을 가져옴
             val newMaxKg = withContext(Dispatchers.IO) {
                 repository.getMaxKgFromRecordByExerciseId(recordEntity?.exerciseId ?: "")
             }
@@ -80,21 +82,18 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
                     // recordDAO를 이용해 ROOM 안에 있는 RecordEntity 목록을 가져옴
                     repository.getMaxKgFromRecordByExerciseId(recordEntity?.exerciseId ?: "")
                     repository.updateMaxKgByExerciseId(recordEntity?.exerciseId ?: "", newMaxKg)
-                    val intent = Intent(context, SelectedDateActivity::class.java)
-                    intent.putExtra("selectedDate", recordEntity.selectedDate)
-                    context.startActivity(intent)
                 }
-            } else {
-                if (maxKg == kg) {
-                    // recordDAO를 이용해 ROOM 안에 있는 RecordEntity 목록을 가져옴
-                    repository.getMaxKgFromRecordByExerciseId(recordEntity?.exerciseId ?: "")
-                    repository.updateMaxKgByExerciseId(recordEntity?.exerciseId ?: "", newMaxKg)
-                    val intent = Intent(context, SelectedDateActivity::class.java)
-                    intent.putExtra("selectedDate", recordEntity.selectedDate)
-                    context.startActivity(intent)
-                }
+                } else {
+                    if (maxKg == kg) {
+                        // recordDAO를 이용해 ROOM 안에 있는 RecordEntity 목록을 가져옴
+                        repository.getMaxKgFromRecordByExerciseId(recordEntity?.exerciseId ?: "")
+                        repository.updateMaxKgByExerciseId(recordEntity?.exerciseId ?: "", newMaxKg)
+                    }
 
+                }
+                val intent = Intent(context, SelectedDateActivity::class.java)
+                intent.putExtra("selectedDate", recordEntity.selectedDate)
+                context.startActivity(intent)
             }
         }
     }
-}
