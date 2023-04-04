@@ -15,20 +15,23 @@ class RecordRepository(private val recordDAO: RecordDAO) {
         recordDAO.delete(recordEntity)
     }
 
-    fun loadExerciseSetListLiveDataByExerciseId(exerciseId: String): LiveData<List<RecordEntity>> {
-        return recordDAO.loadExerciseSetListLiveDataByExerciseId(exerciseId)
+    fun getRecordCountFromRecordByExerciseId(exerciseId: String?): Int {
+        return recordDAO.getCountSetFromRecordByExerciseId(exerciseId)
     }
 
-    fun getRecordCountByExerciseId(exerciseId: String?): Int {
-        return recordDAO.getRecordCountByExerciseId(exerciseId)
+    fun getTotalSetFromExerciseByExerciseId(exerciseId: String?): Int {
+        return exerciseDAO.getTotalSetFromExerciseByExerciseId(exerciseId)
     }
 
-    fun getTotalCountByExerciseId(exerciseId: String?): Int {
-        return recordDAO.getTotalCountByExerciseId(exerciseId)
+    fun getTotalCountFromRecordByExerciseId(exerciseId: String?): Int {
+        return recordDAO.getTotalCountFromRecordByExerciseId(exerciseId)
     }
 
-    fun getTotalKgByExerciseId(exerciseId: String?): Double {
-        return recordDAO.getTotalKgByExerciseId(exerciseId)
+    fun getTotalCountFromExerciseByExerciseId(exerciseId: String?): Int {
+        return exerciseDAO.getTotalCountFromExerciseByExerciseId(exerciseId)
+    }
+    fun getTotalKgFromExerciseByExerciseId(exerciseId: String?): Double {
+        return exerciseDAO.getTotalKgFromExerciseByExerciseId(exerciseId)
     }
 
     fun getMaxKgFromRecordByExerciseId(exerciseId: String): Double {
@@ -37,7 +40,8 @@ class RecordRepository(private val recordDAO: RecordDAO) {
     fun getMaxKgFromExerciseByExerciseId(exerciseId: String): Double {
         return exerciseDAO.getMaxKgByExerciseId(exerciseId)
     }
-    suspend fun updateMaxKgByExerciseId(exerciseId: String, maxKg: Double) {
+
+    suspend fun updateMaxKgFromExerciseByExerciseId(exerciseId: String, maxKg: Double) {
         exerciseDAO.updateMaxKgByExerciseId(exerciseId, maxKg)
     }
 

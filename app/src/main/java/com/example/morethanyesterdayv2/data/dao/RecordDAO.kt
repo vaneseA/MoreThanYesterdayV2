@@ -23,13 +23,13 @@ interface RecordDAO {
     @Query("SELECT * FROM room_record WHERE exerciseId = :exerciseId")
     fun loadExerciseSetListLiveDataByExerciseId(exerciseId: String): LiveData<List<RecordEntity>>
 
-    //ROOM에서 exerciseId로 된 값이 몇 개인지 카운트하는 쿼리
+    //ROOM에서 exerciseId로 된 set값이 총 몇 개인지 카운트하는 쿼리
     @Query("SELECT COUNT(exerciseId) FROM room_record WHERE exerciseId = :exerciseId")
-    fun getRecordCountByExerciseId(exerciseId: String?): Int
+    fun getCountSetFromRecordByExerciseId(exerciseId: String?): Int
 
     //ROOM에서 exerciseId로 된 목록 count를 모두 더한 값을 얻는 쿼리
     @Query("SELECT SUM(count) FROM room_record WHERE exerciseId = :exerciseId")
-    fun getTotalCountByExerciseId(exerciseId: String?): Int
+    fun getTotalCountFromRecordByExerciseId(exerciseId: String?): Int
 
     //ROOM에서 exerciseId로 된 목록 kg 모두 더한 값을 얻는 쿼리
     @Query("SELECT SUM(kg) FROM room_record WHERE exerciseId = :exerciseId")

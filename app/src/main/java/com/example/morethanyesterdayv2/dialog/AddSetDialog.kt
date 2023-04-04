@@ -175,7 +175,7 @@ class AddSetDialog(
 
             // 사용자가 입력한 count 값을 문자열에서 정수로 변환하여 가져옴
             val count = binding.userInputCount?.text?.toString()?.toIntOrNull() ?: 0
-
+Log.d("sssscount", count.toString())
 
             lifecycleScope.launch {
                 // recordDAO을 이용해 ROOM 안에 있는 MaxKg 값을 가져옴
@@ -184,15 +184,15 @@ class AddSetDialog(
                 }
                 // recordDAO을 이용해 ROOM 안에 있는 totalSet 값을 가져옴
                 val totalSet = withContext(Dispatchers.IO) {
-                    repository.getRecordCountByExerciseId(exerciseEntity?.exerciseId ?: "")
+                    recordDAO.getCountSetFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "")
                 }
                 // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
                 val totalCount = withContext(Dispatchers.IO) {
-                    repository.getTotalCountByExerciseId(exerciseEntity?.exerciseId ?: "")
+                    repository.getTotalCountFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "")
                 }
                 // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
                 val totalKg = withContext(Dispatchers.IO) {
-                    repository.getTotalKgByExerciseId(exerciseEntity?.exerciseId ?: "")
+                    repository.getTotalKgFromExerciseByExerciseId(exerciseEntity?.exerciseId ?: "")
                 }
                 //라디오 버튼에 따라 저장하는 값을 달리하는 함수를 적용한 kg값
                 val kg = getWeightValue().toDoubleOrNull() ?: 0.0
@@ -217,20 +217,8 @@ class AddSetDialog(
                         )
                     }
                 }
-                withContext(Dispatchers.IO) {
-                    exerciseDAO.updateTotalCountByExerciseId(
-                        exerciseEntity?.exerciseId ?: "",
-                        totalCount + count
-                    )
-                    exerciseDAO.updateTotalSetByExerciseId(
-                        exerciseEntity?.exerciseId ?: "",
-                        totalSet + 1
-                    )
-                    exerciseDAO.updateTotalKgByExerciseId(
-                        exerciseEntity?.exerciseId ?: "",
-                        totalKg + (kg * count),
-                    )
-                }
+                var newTotalCount = totalCount + count
+                var newTotalKg = totalKg + (kg * count)
                 val record = RecordEntity(
                     exerciseId = exerciseEntity?.exerciseId ?: "",
                     selectedDate = exerciseEntity?.selectedDate ?: "",
@@ -239,8 +227,8 @@ class AddSetDialog(
                     kg = getWeightValue().toDoubleOrNull() ?: 0.0,
                     count = count,
                     totalSet = totalSet + 1,
-                    totalKg = totalKg + (kg * count),
-                    totalCount = totalCount + count,
+                    totalKg = newTotalKg,
+                    totalCount = newTotalCount,
                     maxKg = kg?.toDouble() ?: 0.0
                 )
                 val exercise = ExerciseEntity(
@@ -249,12 +237,30 @@ class AddSetDialog(
                     exerciseName = exerciseEntity?.exerciseName ?: "",
                     exerciseType = exerciseEntity?.exerciseType ?: "",
                     totalSet = totalSet + 1,
-                    totalKg = totalKg + (kg * count),
-                    totalCount = totalCount + count,
+                    totalKg =newTotalKg,
+                    totalCount = newTotalCount,
                     maxKg = kg?.toDouble() ?: 0.0
                 )
 
                 insertAndUpdateRecord(record, exercise)
+
+                Log.d("dongKeunTotalCount","$totalCount + $count = $newTotalCount" )
+                Log.d("dongKeunNewTotalKg,","$totalKg + ($kg * $count) = $newTotalKg" )
+                withContext(Dispatchers.IO) {
+                    exerciseDAO.updateTotalCountFromExerciseByExerciseId(
+                        exerciseEntity?.exerciseId ?: "",
+                        newTotalCount
+                    )
+
+                    exerciseDAO.updateTotalSetFromExerciseByExerciseId(
+                        exerciseEntity?.exerciseId ?: "",
+                        totalSet + 1
+                    )
+                    exerciseDAO.updateTotalKgFromExerciseByExerciseId(
+                        exerciseEntity?.exerciseId ?: "",
+                        totalKg + (kg * count),
+                    )
+                }
                 dialog?.dismiss()
 
                 val intent = Intent(context, SelectedDateActivity::class.java)
@@ -269,7 +275,7 @@ class AddSetDialog(
         lifecycleScope.launch {
             // recordDAO을 이용해 ROOM 안에 있는 totalSet 값을 가져옴
             val totalSet = withContext(Dispatchers.IO) {
-                repository.getRecordCountByExerciseId(exerciseEntity?.exerciseId ?: "") + 1
+                repository.getRecordCountFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "") + 1
             }
             binding.dialogSet.text = "${totalSet}번째 세트"
         }

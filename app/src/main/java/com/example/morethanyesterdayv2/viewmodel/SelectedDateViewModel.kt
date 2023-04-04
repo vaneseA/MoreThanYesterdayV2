@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -64,6 +66,7 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
     fun onDeleteRecord(recordEntity: RecordEntity, context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
             // 미리 kg값을 받아놓고
+            val count = recordEntity?.count ?: 0
             val kg = recordEntity?.kg
             // 일단 삭제
             repository.delete(recordEntity)
@@ -75,26 +78,61 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
             val newMaxKg = withContext(Dispatchers.IO) {
                 repository.getMaxKgFromRecordByExerciseId(recordEntity?.exerciseId ?: "")
             }
-
+            // recordDAO을 이용해 ROOM 안에 있는 totalSet 값을 가져옴
+            val totalSet = withContext(Dispatchers.IO) {
+                repository.getTotalSetFromExerciseByExerciseId(recordEntity?.exerciseId ?: "")
+            }
+            // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
+            val totalCount = withContext(Dispatchers.IO) {
+                repository.getTotalCountFromExerciseByExerciseId(recordEntity?.exerciseId ?: "")
+            }
+            // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
+            val totalKg = withContext(Dispatchers.IO) {
+                repository.getTotalKgFromExerciseByExerciseId(recordEntity?.exerciseId ?: "")
+            }
             // maxKg 업데이트
             if (maxKg != null) {
                 if (maxKg == kg) {
                     // recordDAO를 이용해 ROOM 안에 있는 RecordEntity 목록을 가져옴
                     repository.getMaxKgFromRecordByExerciseId(recordEntity?.exerciseId ?: "")
-                    repository.updateMaxKgByExerciseId(recordEntity?.exerciseId ?: "", newMaxKg)
+                    repository.updateMaxKgFromExerciseByExerciseId(
+                        recordEntity?.exerciseId ?: "",
+                        newMaxKg
+                    )
                 }
-                } else {
-                    if (maxKg == kg) {
-                        // recordDAO를 이용해 ROOM 안에 있는 RecordEntity 목록을 가져옴
-                        repository.getMaxKgFromRecordByExerciseId(recordEntity?.exerciseId ?: "")
-                        repository.updateMaxKgByExerciseId(recordEntity?.exerciseId ?: "", newMaxKg)
-                    }
-
+            } else {
+                if (maxKg == kg) {
+                    // recordDAO를 이용해 ROOM 안에 있는 RecordEntity 목록을 가져옴
+                    repository.getMaxKgFromRecordByExerciseId(recordEntity?.exerciseId ?: "")
+                    repository.updateMaxKgFromExerciseByExerciseId(
+                        recordEntity?.exerciseId ?: "",
+                        newMaxKg
+                    )
                 }
-                val intent = Intent(context, SelectedDateActivity::class.java)
-                intent.putExtra("selectedDate", recordEntity.selectedDate)
-                context.startActivity(intent)
 
+            }
+            var newTotalCount = totalCount - count
+            withContext(Dispatchers.IO) {
+                exerciseDAO.updateTotalCountFromExerciseByExerciseId(
+                    recordEntity?.exerciseId ?: "",
+                    newTotalCount
+                )
+                exerciseDAO.updateTotalSetFromExerciseByExerciseId(
+                    recordEntity?.exerciseId ?: "",
+                    (totalSet) - 1
+                )
+                exerciseDAO.updateTotalKgFromExerciseByExerciseId(
+                    recordEntity?.exerciseId ?: "",
+                    (totalKg) - (kg!! * count),
+                )
+            }
+            Log.d("dongKeunTotalCount","$totalCount - $count = $newTotalCount" )
+            val intent = Intent(context, SelectedDateActivity::class.java)
+            intent.putExtra("selectedDate", recordEntity.selectedDate)
+            context.startActivity(intent)
+            withContext(Dispatchers.Main) {
+                Toast.makeText(context, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
+}

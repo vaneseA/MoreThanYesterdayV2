@@ -35,15 +35,15 @@ interface ExerciseDAO {
 
     //ROOM에서 totalSet를 업데이트하는 쿼리
     @Query("UPDATE room_exercise SET totalSet = :totalSet WHERE exerciseId = :exerciseId")
-    fun updateTotalSetByExerciseId(exerciseId: String, totalSet: Int)
+    fun updateTotalSetFromExerciseByExerciseId(exerciseId: String, totalSet: Int)
 
     //ROOM에서 totalCount 업데이트하는 쿼리
     @Query("UPDATE room_exercise SET totalCount = :totalCount WHERE exerciseId = :exerciseId")
-    fun updateTotalCountByExerciseId(exerciseId: String, totalCount: Int)
+    fun updateTotalCountFromExerciseByExerciseId(exerciseId: String, totalCount: Int)
 
     //ROOM에서 totalKg 업데이트하는 쿼리
     @Query("UPDATE room_exercise SET totalKg = :totalKg WHERE exerciseId = :exerciseId")
-    fun updateTotalKgByExerciseId(exerciseId: String, totalKg: Double)
+    fun updateTotalKgFromExerciseByExerciseId(exerciseId: String, totalKg: Double)
 
     //"room_exercise" 테이블에서 "exerciseId" 필드가 입력받은 "exerciseId" 값과 일치하는 레코드를 삭제하는 쿼리
     @Query("DELETE FROM room_exercise WHERE exerciseId = :exerciseId")
@@ -53,5 +53,16 @@ interface ExerciseDAO {
     @Query("SELECT maxKg FROM room_exercise WHERE exerciseId = :exerciseId")
     fun getMaxKgByExerciseId(exerciseId: String): Double
 
+    //ROOM에서 exerciseId로 된 total Kg값을 얻는 쿼리
+    @Query("SELECT totalKG FROM room_exercise WHERE exerciseId = :exerciseId")
+    fun getTotalKgFromExerciseByExerciseId(exerciseId: String?): Double
+
+    //ROOM에서 exerciseId로 된 totalCount값을 얻는 쿼리
+    @Query("SELECT totalCount FROM room_exercise WHERE exerciseId = :exerciseId")
+    fun getTotalCountFromExerciseByExerciseId(exerciseId: String?): Int
+
+    //ROOM에서 exerciseId로 된 totalSet 값을 얻는 쿼리
+    @Query("SELECT totalSet FROM room_exercise WHERE exerciseId = :exerciseId")
+    fun getTotalSetFromExerciseByExerciseId(exerciseId: String?): Int
 }
 
