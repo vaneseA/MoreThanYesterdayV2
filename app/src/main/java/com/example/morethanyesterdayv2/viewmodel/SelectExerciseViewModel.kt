@@ -19,8 +19,4 @@ class SelectExerciseViewModel : ViewModel() {
         )
     }
 
-//    fun addExerciseData(exerciseData: ExerciseData) {
-//        _exerciseDataList.value?.add(exerciseData)
-//        _exerciseDataList.value = _exerciseDataList.value
-//    }
 }

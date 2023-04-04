@@ -75,7 +75,13 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface, DeleteD
         exerciseDAO = appDatabase.exerciseDAO()
 
         parentAdapter =
-            ParentAdapter(exerciseList, this@SelectedDateActivity, application, recordList)
+            ParentAdapter(
+                exerciseList,
+                this@SelectedDateActivity,
+                application,
+                viewModel,
+                recordList
+            )
 
         with(binding) {
             recordRV.adapter = parentAdapter
@@ -89,7 +95,6 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface, DeleteD
             finish()
         }
     }
-
 
 
     fun showAddSetDialog(

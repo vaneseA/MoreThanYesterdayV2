@@ -1,6 +1,8 @@
 package com.example.morethanyesterdayv2.viewmodel
 
 import android.app.Application
+import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,6 +17,8 @@ import com.example.morethanyesterdayv2.data.dao.RecordDAO
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.repository.ExerciseRepository
 import com.example.morethanyesterdayv2.repository.SelectedDateRepository
+import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
+import kotlinx.coroutines.CoroutineScope
 
 class SelectedDateViewModel(application: Application) : AndroidViewModel(application) {
     private val exerciseRepository = ExerciseRepository(application)
@@ -55,27 +59,13 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
             }
         }
     }
-
-    fun deleteExercise(entity: ExerciseEntity) {
-        viewModelScope.launch(Dispatchers.IO) {
-            exerciseDAO.delete(entity)
-            loadExerciseList()
+    fun onDeleteRecord(recordEntity: RecordEntity, context: Context) {
+        CoroutineScope(Dispatchers.IO).launch {
+            recordDAO.delete(recordEntity)
+            val intent = Intent(context, SelectedDateActivity::class.java)
+            intent.putExtra("selectedDate", recordEntity.selectedDate)
+            context.startActivity(intent)
         }
     }
-
-    fun updateExercise(entity: ExerciseEntity) {
-        viewModelScope.launch(Dispatchers.IO) {
-            exerciseDAO.update(entity)
-            loadExerciseList()
-        }
-    }
-
-    fun insertExercise(entity: ExerciseEntity) {
-        viewModelScope.launch(Dispatchers.IO) {
-            exerciseDAO.insert(entity)
-            loadExerciseList()
-        }
-    }
-
 
 }

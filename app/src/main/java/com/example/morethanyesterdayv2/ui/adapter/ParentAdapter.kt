@@ -18,11 +18,13 @@ import com.example.morethanyesterdayv2.db.AppDatabase
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
 import com.example.morethanyesterdayv2.repository.SelectedDateRepository
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
+import com.example.morethanyesterdayv2.viewmodel.SelectedDateViewModel
 
 class ParentAdapter(
     private val parentList: List<ExerciseEntity>,
     var context: Context,
     application: Application,
+    private val viewModel: SelectedDateViewModel,
     private val childList: List<RecordEntity>
 ) :
     RecyclerView.Adapter<ParentAdapter.Holder>(), AddSetDialogInterface {
@@ -70,7 +72,7 @@ class ParentAdapter(
 
             selectedRepository.getExerciseSetListLiveDataById(exerciseId)
                 .observe(itemView.context as LifecycleOwner) { childExerciseSetList ->
-                    binding.nestedRV.adapter = ChildAdapter(childExerciseSetList, recordDAO)
+                    binding.nestedRV.adapter = ChildAdapter(childExerciseSetList, viewModel )
                     binding.nestedRV.layoutManager = LinearLayoutManager(context)
                     binding.nestedRV.setHasFixedSize(true)
                 }
