@@ -15,18 +15,17 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.morethanyesterdayv2.data.dao.RecordDAO
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
-import com.example.morethanyesterdayv2.repository.ExerciseRepository
 import com.example.morethanyesterdayv2.repository.SelectedDateRepository
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 import kotlinx.coroutines.CoroutineScope
 
 class SelectedDateViewModel(application: Application) : AndroidViewModel(application) {
-    private val exerciseRepository = ExerciseRepository(application)
     private val selectedDateRepository = SelectedDateRepository(application)
     private val exerciseDAO: ExerciseDAO = AppDatabase.getDatabase(application).exerciseDAO()
     private val recordDAO: RecordDAO = AppDatabase.getDatabase(application).recordDAO()
     private val exerciseList = MutableLiveData<List<ExerciseEntity>>()
     private val recordList = MutableLiveData<List<RecordEntity>>()
+
     fun getExerciseList(): LiveData<List<ExerciseEntity>> {
         if (exerciseList.value == null) {
             loadExerciseList()
@@ -40,7 +39,7 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
     // UI의 반응성과 앱의 안정성을 유지하기 위해 메인 스레드에서 UI를 업데이트.
     fun loadExerciseListByDate(selectedDate: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val list = exerciseRepository.getAllByDate(selectedDate)
+            val list = selectedDateRepository.getAllByDate(selectedDate)
             withContext(Dispatchers.Main) {
                 exerciseList.value = list
             }
@@ -53,7 +52,7 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
     // UI의 반응성과 앱의 안정성을 유지하기 위해 메인 스레드에서 UI를 업데이트.
     fun loadExerciseList() {
         viewModelScope.launch(Dispatchers.IO) {
-            val list = exerciseRepository.getAll()
+            val list = selectedDateRepository.getAll()
             withContext(Dispatchers.Main) {
                 exerciseList.value = list
             }

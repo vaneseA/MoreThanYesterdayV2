@@ -21,5 +21,15 @@ class SelectedDateRepository(
         return recordDAO.loadExerciseSetListLiveDataByExerciseId(exerciseId)
     }
 
+    suspend fun getAll(): List<ExerciseEntity> {
+        return withContext(Dispatchers.IO) {
+            exerciseDAO.getAll()
+        }
+    }
 
+    suspend fun getAllByDate(selectedDate: String): List<ExerciseEntity> {
+        return withContext(Dispatchers.IO) {
+            exerciseDAO.getAllByDate(selectedDate)
+        }
+    }
 }
