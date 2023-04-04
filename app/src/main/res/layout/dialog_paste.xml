@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.activity.MainActivity">
-
+        //아니 왜 커밋안돼지
 
         <CalendarView
             android:id="@+id/calendarView"
@@ -24,3 +24,4 @@
             tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
+
