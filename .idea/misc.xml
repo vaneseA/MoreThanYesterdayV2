@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_dialog_rounded.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1345" />
+        <entry key="app/src/main/res/drawable/ic_baseline_content_paste_go_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_remove_circle_outline_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
@@ -29,6 +30,7 @@
         <entry key="app/src/main/res/layout/custom_add_set_dialog.xml" value="0.25" />
         <entry key="app/src/main/res/layout/custom_mylike_dialog.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/delete_dialog.xml" value="0.2490740740740741" />
+        <entry key="app/src/main/res/layout/dialog_paste.xml" value="0.1" />
         <entry key="app/src/main/res/layout/exercise_card_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/exercise_rv_item.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/exercise_set_row_item.xml" value="0.24114583333333334" />
