@@ -20,6 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+
 class DeleteDialog(
     deleteDialogInterface: SelectedDateActivity,
     position: Int,
@@ -67,6 +68,8 @@ class DeleteDialog(
         ).build()
         recordDAO = appDatabase.recordDAO()
         exerciseDAO = appDatabase.exerciseDAO()
+
+
         // 레이아웃 배경을 투명하게 해줌, 필수 아님
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         binding.selectedDateForDelete.text = selectedDate
@@ -76,10 +79,10 @@ class DeleteDialog(
             val selectedDateActivity = SelectedDateActivity.getInstance()
             lifecycleScope.launch {
                 withContext(Dispatchers.IO) {
-                    recordDAO.deleteByExerciseId(
+                    repository.deleteRecordByExerciseId(
                         exerciseEntity?.exerciseId ?: ""
                     )
-                    exerciseDAO.deleteByExerciseId(
+                    repository.deleteExerciseByExerciseId(
                         exerciseEntity?.exerciseId ?: ""
                     )
                 }

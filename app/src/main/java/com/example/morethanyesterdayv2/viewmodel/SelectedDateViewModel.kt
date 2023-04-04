@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.morethanyesterdayv2.data.dao.RecordDAO
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
+import com.example.morethanyesterdayv2.dialog.repository
 import com.example.morethanyesterdayv2.repository.SelectedDateRepository
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 import kotlinx.coroutines.CoroutineScope
@@ -66,5 +67,43 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
             context.startActivity(intent)
         }
     }
+
+//    lifecycleScope.launch {
+//        // recordDAO을 이용해 ROOM 안에 있는 MaxKg 값을 가져옴
+//        val maxKg = withContext(Dispatchers.IO) {
+//            repository.getMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "")
+//        }
+//        // recordDAO을 이용해 ROOM 안에 있는 totalSet 값을 가져옴
+//        val totalSet = withContext(Dispatchers.IO) {
+//            repository.getRecordCountByExerciseId(exerciseEntity?.exerciseId ?: "")
+//        }
+//        // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
+//        val totalCount = withContext(Dispatchers.IO) {
+//            repository.getTotalCountByExerciseId(exerciseEntity?.exerciseId ?: "")
+//        }
+//        // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
+//        val totalKg = withContext(Dispatchers.IO) {
+//            repository.getTotalKgByExerciseId(exerciseEntity?.exerciseId ?: "")
+//        }
+//        val kg = recordEntity?.kg?: 0.0
+//        // maxKg 업데이트
+//        if (maxKg != null) {
+//            if (maxKg == kg) {
+//                // recordDAO를 이용해 ROOM 안에 있는 RecordEntity 목록을 가져옴
+//                val recordList = withContext(Dispatchers.IO) {
+//                    repository.getMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "")
+//                }
+//                // recordList에서 kg보다 큰 MaxKg를 찾아 업데이트
+////                    val nextMaxKg = recordList.filter { it.kg > kg }
+////                        .maxByOrNull { it.kg }?.kg
+//
+//                withContext(Dispatchers.IO) {
+//                    repository.updateMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "", kg)
+//
+//                }
+//            }
+//        } else {
+//        }
+//    }
 
 }

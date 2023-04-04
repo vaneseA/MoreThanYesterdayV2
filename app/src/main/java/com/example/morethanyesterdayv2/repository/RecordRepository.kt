@@ -3,6 +3,7 @@ package com.example.morethanyesterdayv2.repository
 import androidx.lifecycle.LiveData
 import com.example.morethanyesterdayv2.data.dao.RecordDAO
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
+import com.example.morethanyesterdayv2.dialog.exerciseDAO
 
 class RecordRepository(private val recordDAO: RecordDAO) {
 
@@ -30,15 +31,18 @@ class RecordRepository(private val recordDAO: RecordDAO) {
         return recordDAO.getTotalKgByExerciseId(exerciseId)
     }
 
-    fun getMaxKgByExerciseId(exerciseId: String): Int? {
+    fun getMaxKgByExerciseId(exerciseId: String): Double {
         return recordDAO.getMaxKgByExerciseId(exerciseId)
     }
 
     suspend fun updateMaxKgByExerciseId(exerciseId: String, maxKg: Double) {
-        recordDAO.updateMaxKgByExerciseId(exerciseId, maxKg)
+        exerciseDAO.updateMaxKgByExerciseId(exerciseId, maxKg)
     }
 
-    suspend fun deleteByExerciseId(exerciseId: String) {
-        recordDAO.deleteByExerciseId(exerciseId)
+    suspend fun deleteRecordByExerciseId(exerciseId: String) {
+        recordDAO.deleteRecordByExerciseId(exerciseId)
+    }
+    suspend fun deleteExerciseByExerciseId(exerciseId: String) {
+        exerciseDAO.deleteExerciseByExerciseId(exerciseId)
     }
 }

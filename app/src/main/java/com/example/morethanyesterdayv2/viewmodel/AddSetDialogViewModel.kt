@@ -1,4 +1,4 @@
-package com.example.morethanyesterdayv2.dialog
+package com.example.morethanyesterdayv2.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -9,7 +9,7 @@ import com.example.morethanyesterdayv2.data.dao.RecordDAO
 import com.example.morethanyesterdayv2.db.AppDatabase
 
 
-class CustomDialogViewModel(application: Application) : AndroidViewModel(application) {
+class AddSetDialogViewModel(application: Application) : AndroidViewModel(application) {
     //내부에서도 설정하는 자료형은 뮤터블로
     //뮤터블(변경 가능) 라이브 데이터 - 수정 가능
     //일반 라이브 데이터 - 값 변동 안됨

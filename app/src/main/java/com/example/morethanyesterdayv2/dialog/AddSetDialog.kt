@@ -24,8 +24,8 @@ import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.db.AppDatabase
 import com.example.morethanyesterdayv2.databinding.CustomAddSetDialogBinding
 import com.example.morethanyesterdayv2.repository.RecordRepository
-import com.example.morethanyesterdayv2.repository.Repository
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
+import com.example.morethanyesterdayv2.viewmodel.AddSetDialogViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -45,7 +45,7 @@ class AddSetDialog(
 ) : DialogFragment() {
 
 
-    lateinit var viewModel: CustomDialogViewModel
+    lateinit var viewModel: AddSetDialogViewModel
 
     // 뷰 바인딩 정의
     private var _binding: CustomAddSetDialogBinding? = null
@@ -85,7 +85,7 @@ class AddSetDialog(
         // 레이아웃 배경을 투명하게 해줌, 필수 아님
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        viewModel = ViewModelProvider(this).get(CustomDialogViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(AddSetDialogViewModel::class.java)
 
         viewModel.currentKg.observe(this, Observer {
             binding.userInputKg?.setText(it.toString())
@@ -201,7 +201,7 @@ class AddSetDialog(
                 if (maxKg != null) {
                     if (maxKg < kg) {
                         withContext(Dispatchers.IO) {
-                            repository.updateMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "", kg)
+//                            repository.updateMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "", kg)
                             exerciseDAO.updateMaxKgByExerciseId(
                                 exerciseEntity?.exerciseId ?: "",
                                 kg
@@ -210,7 +210,7 @@ class AddSetDialog(
                     }
                 } else {
                     withContext(Dispatchers.IO) {
-                        repository.updateMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "", kg)
+//                        repository.updateMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "", kg)
                         exerciseDAO.updateMaxKgByExerciseId(
                             exerciseEntity?.exerciseId ?: "",
                             kg
