@@ -31,10 +31,12 @@ class RecordRepository(private val recordDAO: RecordDAO) {
         return recordDAO.getTotalKgByExerciseId(exerciseId)
     }
 
-    fun getMaxKgByExerciseId(exerciseId: String): Double {
+    fun getMaxKgFromRecordByExerciseId(exerciseId: String): Double {
         return recordDAO.getMaxKgByExerciseId(exerciseId)
     }
-
+    fun getMaxKgFromExerciseByExerciseId(exerciseId: String): Double {
+        return exerciseDAO.getMaxKgByExerciseId(exerciseId)
+    }
     suspend fun updateMaxKgByExerciseId(exerciseId: String, maxKg: Double) {
         exerciseDAO.updateMaxKgByExerciseId(exerciseId, maxKg)
     }

@@ -180,7 +180,7 @@ class AddSetDialog(
             lifecycleScope.launch {
                 // recordDAO을 이용해 ROOM 안에 있는 MaxKg 값을 가져옴
                 val maxKg = withContext(Dispatchers.IO) {
-                    repository.getMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "")
+                    repository.getMaxKgFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "")
                 }
                 // recordDAO을 이용해 ROOM 안에 있는 totalSet 값을 가져옴
                 val totalSet = withContext(Dispatchers.IO) {

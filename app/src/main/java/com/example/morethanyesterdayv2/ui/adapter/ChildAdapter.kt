@@ -26,6 +26,7 @@ class ChildAdapter(
         holder.recordData(listForNested, position)
         holder.binding.removeButton.setOnClickListener {
             viewModel.onDeleteRecord(listForNested, holder.binding.root.context)
+
         }
     }
 
@@ -35,6 +36,7 @@ class ChildAdapter(
         var recordEntity: RecordEntity? = null
         fun recordData(recordEntity: RecordEntity, position: Int) {
             var childPosition = (position + 1)
+
             binding.recordSetItem.text = "${childPosition}번째 세트"
             binding.recordKgItem.text = "${(recordEntity?.kg)}kg"
             binding.recordCountItem.text = "${(recordEntity?.count)}회"

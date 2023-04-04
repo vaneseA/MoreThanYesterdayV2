@@ -49,6 +49,9 @@ interface ExerciseDAO {
     @Query("DELETE FROM room_exercise WHERE exerciseId = :exerciseId")
     fun deleteExerciseByExerciseId(exerciseId: String)
 
+    //"room_exercise" 테이블에서 "exerciseId" 검색해 maxKg를 추출하는 쿼리
+    @Query("SELECT maxKg FROM room_exercise WHERE exerciseId = :exerciseId")
+    fun getMaxKgByExerciseId(exerciseId: String): Double
 
 }
 

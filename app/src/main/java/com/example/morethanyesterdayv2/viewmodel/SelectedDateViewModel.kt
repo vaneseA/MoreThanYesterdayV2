@@ -3,6 +3,7 @@ package com.example.morethanyesterdayv2.viewmodel
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -59,51 +60,41 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
             }
         }
     }
+
     fun onDeleteRecord(recordEntity: RecordEntity, context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
-            recordDAO.delete(recordEntity)
-            val intent = Intent(context, SelectedDateActivity::class.java)
-            intent.putExtra("selectedDate", recordEntity.selectedDate)
-            context.startActivity(intent)
+            val kg = recordEntity?.kg
+
+            repository.delete(recordEntity)
+            // recordDAO을 이용해 ROOM 안에 있는 MaxKg 값을 가져옴
+            val maxKg = withContext(Dispatchers.IO) {
+                repository.getMaxKgFromExerciseByExerciseId(recordEntity?.exerciseId ?: "")
+            }
+            val newMaxKg = withContext(Dispatchers.IO) {
+                repository.getMaxKgFromRecordByExerciseId(recordEntity?.exerciseId ?: "")
+            }
+
+            // maxKg 업데이트
+            if (maxKg != null) {
+                if (maxKg == kg) {
+                    // recordDAO를 이용해 ROOM 안에 있는 RecordEntity 목록을 가져옴
+                    repository.getMaxKgFromRecordByExerciseId(recordEntity?.exerciseId ?: "")
+                    repository.updateMaxKgByExerciseId(recordEntity?.exerciseId ?: "", newMaxKg)
+                    val intent = Intent(context, SelectedDateActivity::class.java)
+                    intent.putExtra("selectedDate", recordEntity.selectedDate)
+                    context.startActivity(intent)
+                }
+            } else {
+                if (maxKg == kg) {
+                    // recordDAO를 이용해 ROOM 안에 있는 RecordEntity 목록을 가져옴
+                    repository.getMaxKgFromRecordByExerciseId(recordEntity?.exerciseId ?: "")
+                    repository.updateMaxKgByExerciseId(recordEntity?.exerciseId ?: "", newMaxKg)
+                    val intent = Intent(context, SelectedDateActivity::class.java)
+                    intent.putExtra("selectedDate", recordEntity.selectedDate)
+                    context.startActivity(intent)
+                }
+
+            }
         }
     }
-
-//    lifecycleScope.launch {
-//        // recordDAO을 이용해 ROOM 안에 있는 MaxKg 값을 가져옴
-//        val maxKg = withContext(Dispatchers.IO) {
-//            repository.getMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "")
-//        }
-//        // recordDAO을 이용해 ROOM 안에 있는 totalSet 값을 가져옴
-//        val totalSet = withContext(Dispatchers.IO) {
-//            repository.getRecordCountByExerciseId(exerciseEntity?.exerciseId ?: "")
-//        }
-//        // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
-//        val totalCount = withContext(Dispatchers.IO) {
-//            repository.getTotalCountByExerciseId(exerciseEntity?.exerciseId ?: "")
-//        }
-//        // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
-//        val totalKg = withContext(Dispatchers.IO) {
-//            repository.getTotalKgByExerciseId(exerciseEntity?.exerciseId ?: "")
-//        }
-//        val kg = recordEntity?.kg?: 0.0
-//        // maxKg 업데이트
-//        if (maxKg != null) {
-//            if (maxKg == kg) {
-//                // recordDAO를 이용해 ROOM 안에 있는 RecordEntity 목록을 가져옴
-//                val recordList = withContext(Dispatchers.IO) {
-//                    repository.getMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "")
-//                }
-//                // recordList에서 kg보다 큰 MaxKg를 찾아 업데이트
-////                    val nextMaxKg = recordList.filter { it.kg > kg }
-////                        .maxByOrNull { it.kg }?.kg
-//
-//                withContext(Dispatchers.IO) {
-//                    repository.updateMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "", kg)
-//
-//                }
-//            }
-//        } else {
-//        }
-//    }
-
 }
