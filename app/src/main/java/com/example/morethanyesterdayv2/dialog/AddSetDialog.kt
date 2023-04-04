@@ -217,30 +217,6 @@ class AddSetDialog(
                         )
                     }
                 }
-                val record = RecordEntity(
-                    exerciseId = exerciseEntity?.exerciseId ?: "",
-                    selectedDate = exerciseEntity?.selectedDate ?: "",
-                    exerciseName = exerciseEntity?.exerciseName ?: "",
-                    exerciseType = exerciseEntity?.exerciseType ?: "",
-                    kg = getWeightValue().toDoubleOrNull() ?: 0.0,
-                    count = count,
-                    totalSet = totalSet + 1,
-                    totalKg = totalKg + kg,
-                    totalCount = totalCount + count,
-                    maxKg = kg?.toDouble() ?: 0.0
-                )
-                val exercise = ExerciseEntity(
-                    exerciseId = exerciseEntity?.exerciseId ?: "",
-                    selectedDate = exerciseEntity?.selectedDate ?: "",
-                    exerciseName = exerciseEntity?.exerciseName ?: "",
-                    exerciseType = exerciseEntity?.exerciseType ?: "",
-                    totalSet = totalSet + 1,
-                    totalKg = totalKg + kg,
-                    totalCount = totalCount + count,
-                    maxKg = kg?.toDouble() ?: 0.0
-                )
-
-
                 withContext(Dispatchers.IO) {
                     exerciseDAO.updateTotalCountByExerciseId(
                         exerciseEntity?.exerciseId ?: "",
@@ -252,9 +228,32 @@ class AddSetDialog(
                     )
                     exerciseDAO.updateTotalKgByExerciseId(
                         exerciseEntity?.exerciseId ?: "",
-                        totalKg + kg
+                        totalKg + (kg * count),
                     )
                 }
+                val record = RecordEntity(
+                    exerciseId = exerciseEntity?.exerciseId ?: "",
+                    selectedDate = exerciseEntity?.selectedDate ?: "",
+                    exerciseName = exerciseEntity?.exerciseName ?: "",
+                    exerciseType = exerciseEntity?.exerciseType ?: "",
+                    kg = getWeightValue().toDoubleOrNull() ?: 0.0,
+                    count = count,
+                    totalSet = totalSet + 1,
+                    totalKg = totalKg + (kg * count),
+                    totalCount = totalCount + count,
+                    maxKg = kg?.toDouble() ?: 0.0
+                )
+                val exercise = ExerciseEntity(
+                    exerciseId = exerciseEntity?.exerciseId ?: "",
+                    selectedDate = exerciseEntity?.selectedDate ?: "",
+                    exerciseName = exerciseEntity?.exerciseName ?: "",
+                    exerciseType = exerciseEntity?.exerciseType ?: "",
+                    totalSet = totalSet + 1,
+                    totalKg = totalKg + (kg * count),
+                    totalCount = totalCount + count,
+                    maxKg = kg?.toDouble() ?: 0.0
+                )
+
                 insertAndUpdateRecord(record, exercise)
                 dialog?.dismiss()
 

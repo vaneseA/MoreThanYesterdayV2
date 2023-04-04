@@ -8,6 +8,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
@@ -96,6 +98,10 @@ class DeleteDialog(
             intent.putExtra("selectedDate", selectedDate)
             context?.startActivity(intent)
             (context as SelectedDateActivity).finish()
+            Toast.makeText(
+                requireContext(),
+                "삭제 되었습니다",
+                Toast.LENGTH_LONG)
         }
         return view
     }
