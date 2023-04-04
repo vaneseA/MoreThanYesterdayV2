@@ -47,6 +47,8 @@ interface ExerciseDAO {
 
     //"room_exercise" 테이블에서 "exerciseId" 필드가 입력받은 "exerciseId" 값과 일치하는 레코드를 삭제하는 쿼리
     @Query("DELETE FROM room_exercise WHERE exerciseId = :exerciseId")
-    fun deleteByExerciseId(exerciseId: String): List<ExerciseEntity>
+    fun deleteByExerciseId(exerciseId: String)
+
+
 }
 
