@@ -42,11 +42,6 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
 
     lateinit var fname: String
     lateinit var str: String
-    lateinit var updateBtn: Button
-    lateinit var deleteBtn: Button
-    lateinit var saveBtn: Button
-    lateinit var diaryTextView: TextView
-    lateinit var diaryContent: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,9 +65,9 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
 
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             viewModel.selectedDate = String.format("%d년 %d월 %d일", year, month + 1, dayOfMonth)
-            binding.diaryTextView.visibility = View.VISIBLE
+//            binding.diaryTextView.visibility = View.VISIBLE
             binding.goToWriteBtn.visibility = View.VISIBLE
-            binding.diaryTextView.text = viewModel.selectedDate
+            binding.selectedDateTextView.text = viewModel.selectedDate
             checkDay(year, month, dayOfMonth)
 
 
@@ -90,7 +85,7 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
         }
 
         binding.pasteBtn.setOnClickListener {
-            pasteDialog()
+            pasteDialog(viewModel.selectedDate)
         }
         binding.goToWriteBtn.setOnClickListener {
             intent.putExtra("selectedDate", viewModel.selectedDate)
@@ -117,29 +112,23 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
             fileInputStream.close()
             str = String(fileData)
             binding.goToWriteBtn.visibility = View.INVISIBLE
-            if (diaryContent.text == null) {
+            if (binding.mainRecordRV == null) {
 
-                diaryContent.visibility = View.INVISIBLE
-                updateBtn.visibility = View.INVISIBLE
-                deleteBtn.visibility = View.INVISIBLE
-                diaryTextView.visibility = View.VISIBLE
-                saveBtn.visibility = View.VISIBLE
-
+                binding.pasteBtn.visibility = View.INVISIBLE
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
+
     fun pasteDialog(
-//        position: Int,
-//        exerciseEntity: ExerciseEntity,
-//        exerciseId: String,
-//        selectedDate: String
+        selectedDate: String
     ) {
         val selectedDate = intent.getStringExtra("selectedDate")
         val dialog = selectedDate?.let {
-            PasteDialog()
-//                this, position, exerciseEntity, exerciseId,selectedDate)
+            PasteDialog(
+                selectedDate,
+            )
         }
         // 알림창이 띄워져있는 동안 배경 클릭 막기
         dialog?.isCancelable = false
@@ -148,9 +137,7 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
 
     private fun handleCalendarSelection(year: Int, month: Int, dayOfMonth: Int) {
         viewModel.selectedDate = String.format("%d년 %d월 %d일", year, month + 1, dayOfMonth)
-        binding.diaryTextView.visibility = View.VISIBLE
-        binding.goToWriteBtn.visibility = View.VISIBLE
-        binding.diaryTextView.text = viewModel.selectedDate
+        binding.selectedDateTextView.text = viewModel.selectedDate
         checkDay(year, month, dayOfMonth)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)

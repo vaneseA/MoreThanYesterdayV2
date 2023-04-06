@@ -175,7 +175,7 @@ class AddSetDialog(
 
             // 사용자가 입력한 count 값을 문자열에서 정수로 변환하여 가져옴
             val count = binding.userInputCount?.text?.toString()?.toIntOrNull() ?: 0
-Log.d("sssscount", count.toString())
+            Log.d("sssscount", count.toString())
 
             lifecycleScope.launch {
                 // recordDAO을 이용해 ROOM 안에 있는 MaxKg 값을 가져옴
@@ -237,15 +237,15 @@ Log.d("sssscount", count.toString())
                     exerciseName = exerciseEntity?.exerciseName ?: "",
                     exerciseType = exerciseEntity?.exerciseType ?: "",
                     totalSet = totalSet + 1,
-                    totalKg =newTotalKg,
+                    totalKg = newTotalKg,
                     totalCount = newTotalCount,
                     maxKg = kg?.toDouble() ?: 0.0
                 )
 
                 insertAndUpdateRecord(record, exercise)
 
-                Log.d("dongKeunTotalCount","$totalCount + $count = $newTotalCount" )
-                Log.d("dongKeunNewTotalKg,","$totalKg + ($kg * $count) = $newTotalKg" )
+                Log.d("dongKeunTotalCount", "$totalCount + $count = $newTotalCount")
+                Log.d("dongKeunNewTotalKg,", "$totalKg + ($kg * $count) = $newTotalKg")
                 withContext(Dispatchers.IO) {
                     exerciseDAO.updateTotalCountFromExerciseByExerciseId(
                         exerciseEntity?.exerciseId ?: "",
@@ -275,7 +275,9 @@ Log.d("sssscount", count.toString())
         lifecycleScope.launch {
             // recordDAO을 이용해 ROOM 안에 있는 totalSet 값을 가져옴
             val totalSet = withContext(Dispatchers.IO) {
-                repository.getRecordCountFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "") + 1
+                repository.getRecordCountFromRecordByExerciseId(
+                    exerciseEntity?.exerciseId ?: ""
+                ) + 1
             }
             binding.dialogSet.text = "${totalSet}번째 세트"
         }

@@ -4,11 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.databinding.MainRvItemBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
+import com.example.morethanyesterdayv2.ui.activity.MainActivity
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 
 
@@ -51,6 +53,13 @@ class MainAdapter(
             binding.mainBestKg.text = "최고 ${exerciseEntity.maxKg}kg, "
             binding.mainTotalCount.text = "총 ${exerciseEntity.totalCount}회"
             this.exerciseEntity = exerciseEntity // exerciseEntity를 초기화
+        }
+    }
+    fun notifyDataSetChangedWithButton() {
+        val mainActivity = MainActivity.getInstance()
+        // 버튼의 visibility 속성을 조절
+        mainActivity?.let {
+            pasteBtn.visibility = if (setList.isEmpty()) View.GONE else View.VISIBLE
         }
     }
 

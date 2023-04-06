@@ -15,11 +15,8 @@ import com.example.morethanyesterdayv2.db.AppDatabase
 import com.example.morethanyesterdayv2.ui.activity.MainActivity
 
 class PasteDialog(
-//    pasteDialogInterface: MainActivity,
-//    position: Int,
-//    exerciseEntity: ExerciseEntity,
-//    exerciseId: String,
-//    selectedDate: String,
+
+    selectedDate: String,
 ) : DialogFragment() {
 
     // 뷰 바인딩 정의
@@ -28,20 +25,14 @@ class PasteDialog(
     private var pasteDialogInterface: PasteDialogInterface? = null
     var exerciseEntity: ExerciseEntity? = null
     var recordEntity: RecordEntity? = null
-    private var position: Int? = null
-    private var exerciseId: String? = null
     private var selectedDate: String? = null
-    private var exerciseName: String? = null
+
 
 
     init {
-        this.exerciseEntity = exerciseEntity
-        this.recordEntity = recordEntity
-        this.position = position
-        this.pasteDialogInterface = pasteDialogInterface
-        this.exerciseId = exerciseId
+
         this.selectedDate = selectedDate
-        this.exerciseName = exerciseName
+
     }
 
     override fun onCreateView(
