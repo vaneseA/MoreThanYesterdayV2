@@ -60,6 +60,8 @@ class MainAdapter(
         // 버튼의 visibility 속성을 조절
         mainActivity?.let {
             pasteBtn.visibility = if (setList.isEmpty()) View.GONE else View.VISIBLE
+
+            binding
         }
     }
 
