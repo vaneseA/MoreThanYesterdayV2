@@ -61,7 +61,7 @@ class MainAdapter(
         mainActivity?.let {
             pasteBtn.visibility = if (setList.isEmpty()) View.GONE else View.VISIBLE
 
-            binding
+            binding.visibility
         }
     }
 
