@@ -55,15 +55,15 @@ class MainAdapter(
             this.exerciseEntity = exerciseEntity // exerciseEntity를 초기화
         }
     }
-    fun notifyDataSetChangedWithButton() {
-        val mainActivity = MainActivity.getInstance()
-        // 버튼의 visibility 속성을 조절
-        mainActivity?.let {
-            pasteBtn.visibility = if (setList.isEmpty()) View.GONE else View.VISIBLE
-
-            binding.visibility
-        }
-    }
+//    fun notifyDataSetChangedWithButton() {
+//        val mainActivity = MainActivity.getInstance()
+//        // 버튼의 visibility 속성을 조절
+//        mainActivity?.let {
+//            pasteBtn.visibility = if (setList.isEmpty()) View.GONE else View.VISIBLE
+//
+//            binding.visibility
+//        }
+//    }
 
     override fun onYesButtonClick(id: Int) {
     }
