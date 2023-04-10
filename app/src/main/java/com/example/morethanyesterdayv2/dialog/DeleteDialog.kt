@@ -74,6 +74,7 @@ class DeleteDialog(
 
         // 레이아웃 배경을 투명하게 해줌, 필수 아님
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
         binding.selectedDateForDelete.text = selectedDate
         binding.exerciseNameForDelete.text = "$exerciseName \n\n삭제하시겠습니까?"
         binding.noBtnForDelete.setOnClickListener { dialog?.dismiss() }

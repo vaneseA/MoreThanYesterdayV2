@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
@@ -16,7 +17,7 @@ import com.example.morethanyesterdayv2.dialog.PasteDialog
 import com.example.morethanyesterdayv2.ui.adapter.MainAdapter
 import com.example.morethanyesterdayv2.ui.adapter.ParentAdapter
 import com.example.morethanyesterdayv2.viewmodel.MainViewModel
-import com.example.morethanyesterdayv2.viewmodel.SelectedDateViewModel
+
 import java.io.FileInputStream
 import java.util.*
 
@@ -85,7 +86,7 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
         }
 
         binding.pasteBtn.setOnClickListener {
-            pasteDialog(viewModel.selectedDate)
+            showPasteDialog()
         }
         binding.goToWriteBtn.setOnClickListener {
             intent.putExtra("selectedDate", viewModel.selectedDate)
@@ -121,19 +122,12 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
         }
     }
 
-    fun pasteDialog(
-        selectedDate: String
-    ) {
-        val selectedDate = intent.getStringExtra("selectedDate")
-        val dialog = selectedDate?.let {
-            PasteDialog(
-                selectedDate,
-            )
-        }
-        // 알림창이 띄워져있는 동안 배경 클릭 막기
-        dialog?.isCancelable = false
-        dialog?.show(supportFragmentManager, "PasteDialog")
+    fun showPasteDialog() {
+        val dialog = PasteDialog(this)
+        dialog.show(supportFragmentManager, "PasteDialog")
     }
+
+
 
     private fun handleCalendarSelection(year: Int, month: Int, dayOfMonth: Int) {
         viewModel.selectedDate = String.format("%d년 %d월 %d일", year, month + 1, dayOfMonth)
