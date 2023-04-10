@@ -64,6 +64,7 @@ class MainAdapter(
 //            binding.visibility
 //        }
 //    }
+    //dlatl
 
     override fun onYesButtonClick(id: Int) {
     }
