@@ -9,19 +9,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.example.morethanyesterdayv2.data.dao.ExerciseDAO
 import com.example.morethanyesterdayv2.data.dao.RecordDAO
+import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
+import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.DialogPasteBinding
 import com.example.morethanyesterdayv2.db.AppDatabase
 import com.example.morethanyesterdayv2.ui.activity.MainActivity
+import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 import com.example.morethanyesterdayv2.viewmodel.DialogPasteViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.FileInputStream
 import java.util.*
 
 class PasteDialog(
     pasteDialogInterface: MainActivity,
-//    selectedDate: String,
+    selectedDate: String,
 ) : DialogFragment() {
 
     lateinit var viewModel: DialogPasteViewModel
@@ -30,12 +37,16 @@ class PasteDialog(
     private var _binding: DialogPasteBinding? = null
     private val binding get() = _binding!!
     private var pasteDialogInterface: PasteDialogInterface? = null
+    var exerciseEntity: ExerciseEntity? = null
+    var recordEntity: RecordEntity? = null
     private var selectedDate: String? = null
     private var appDatabase: AppDatabase? = null
     private var recordDAO: RecordDAO? = null
     private var exerciseDAO: ExerciseDAO? = null
 
     init {
+        this.exerciseEntity = exerciseEntity
+        this.recordEntity = recordEntity
         this.selectedDate = selectedDate
         this.pasteDialogInterface = pasteDialogInterface
     }
@@ -74,9 +85,32 @@ class PasteDialog(
 
         }
 
-        // 레이아웃 배경을 투명하게 해줌, 필수 아님
-//        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
+        binding.pasteCancelBtn.setOnClickListener { dismiss() }
+        binding.pasteAddBtn.setOnClickListener {
+            val selectedDateActivity = SelectedDateActivity.getInstance()
+            appDatabase = Room.databaseBuilder(it.context, AppDatabase::class.java, "room_db")
+                .build()
+            lifecycleScope.launch {
+//                val maxKg = withContext(Dispatchers.IO) {
+//                    repository.getMaxKgFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "")
+//                }
+//                // recordDAO을 이용해 ROOM 안에 있는 totalSet 값을 가져옴
+//                val totalSet = withContext(Dispatchers.IO) {
+//                    repository.getCountSetFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "")
+//                }
+//                // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
+//                val totalCount = withContext(Dispatchers.IO) {
+//                    repository.getTotalCountFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "")
+//                }
+//                // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
+//                val totalKg = withContext(Dispatchers.IO) {
+//                    repository.getTotalKgFromExerciseByExerciseId(exerciseEntity?.exerciseId ?: "")
+//                }
+
+            }
+
+            dismiss() }
 
         return view
     }

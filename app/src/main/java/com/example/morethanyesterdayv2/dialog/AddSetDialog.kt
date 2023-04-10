@@ -166,12 +166,11 @@ class AddSetDialog(
         binding.dialogExerciseName?.text = exerciseEntity?.exerciseName
         binding.dialogExerciseType?.text = exerciseEntity?.exerciseType
 
-        binding.dialogCancleBtn?.setOnClickListener { dismiss() }
+        binding.dialogCancelBtn?.setOnClickListener { dismiss() }
         binding.dialogAddBtn?.setOnClickListener {
             val selectedDateActivity = SelectedDateActivity.getInstance()
             appDatabase = Room.databaseBuilder(it.context, AppDatabase::class.java, "room_db")
                 .build()
-//            recordDAO = appDatabase.recordDAO()
 
             // 사용자가 입력한 count 값을 문자열에서 정수로 변환하여 가져옴
             val count = binding.userInputCount?.text?.toString()?.toIntOrNull() ?: 0
@@ -184,7 +183,7 @@ class AddSetDialog(
                 }
                 // recordDAO을 이용해 ROOM 안에 있는 totalSet 값을 가져옴
                 val totalSet = withContext(Dispatchers.IO) {
-                    recordDAO.getCountSetFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "")
+                    repository.getCountSetFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "")
                 }
                 // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
                 val totalCount = withContext(Dispatchers.IO) {

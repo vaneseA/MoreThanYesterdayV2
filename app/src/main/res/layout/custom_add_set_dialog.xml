@@ -240,7 +240,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/dialogCancleBtn"
+        android:id="@+id/dialog_cancel_Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -266,7 +266,7 @@
         app:fontFamily="@font/jalnanche"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dialogCancleBtn"
+        app:layout_constraintStart_toEndOf="@+id/dialog_cancel_Btn"
         app:layout_constraintTop_toBottomOf="@+id/userInputCount" />
 
     <TextView

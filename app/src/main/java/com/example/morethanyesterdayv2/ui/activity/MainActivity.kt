@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
         }
 
         binding.pasteBtn.setOnClickListener {
-            showPasteDialog()
+            showPasteDialog(viewModel.selectedDate)
         }
         binding.goToWriteBtn.setOnClickListener {
             intent.putExtra("selectedDate", viewModel.selectedDate)
@@ -122,11 +122,15 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
         }
     }
 
-    fun showPasteDialog() {
+    fun showPasteDialog(
+        selectedDate: String
+    ) {
+
         val dialog = PasteDialog(this)
+        // 알림창이 띄워져있는 동안 배경 클릭 막기
+        dialog.isCancelable = false
         dialog.show(supportFragmentManager, "PasteDialog")
     }
-
 
 
     private fun handleCalendarSelection(year: Int, month: Int, dayOfMonth: Int) {

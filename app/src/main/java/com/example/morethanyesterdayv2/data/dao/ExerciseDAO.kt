@@ -1,5 +1,6 @@
 package com.example.morethanyesterdayv2.data.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
@@ -64,5 +65,9 @@ interface ExerciseDAO {
     //ROOM에서 exerciseId로 된 totalSet 값을 얻는 쿼리
     @Query("SELECT totalSet FROM room_exercise WHERE exerciseId = :exerciseId")
     fun getTotalSetFromExerciseByExerciseId(exerciseId: String?): Int
+
+    //room_exercise에서 selectedDate를 검색해 모든 exerciseId를 추출하는 쿼리
+    @Query("SELECT * FROM room_exercise WHERE selectedDate = :selectedDate")
+    fun loadExerciseSetListLiveDataBySelectedDate(selectedDate: String): LiveData<List<RecordEntity>>
 }
 

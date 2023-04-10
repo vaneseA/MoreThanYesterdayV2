@@ -27,6 +27,11 @@ class RecordRepository(private val recordDAO: RecordDAO) {
         return recordDAO.getTotalCountFromRecordByExerciseId(exerciseId)
     }
 
+    fun getCountSetFromRecordByExerciseId(exerciseId: String?): Int {
+        return recordDAO.getCountSetFromRecordByExerciseId(exerciseId)
+    }
+
+
     fun getTotalCountFromExerciseByExerciseId(exerciseId: String?): Int {
         return exerciseDAO.getTotalCountFromExerciseByExerciseId(exerciseId)
     }
@@ -41,6 +46,10 @@ class RecordRepository(private val recordDAO: RecordDAO) {
         return exerciseDAO.getMaxKgByExerciseId(exerciseId)
     }
 
+    fun getExerciseSetListLiveDataBySelectedDate(selectedDate: String): LiveData<List<RecordEntity>> {
+        return exerciseDAO.loadExerciseSetListLiveDataBySelectedDate(selectedDate)
+    }
+
     suspend fun updateMaxKgFromExerciseByExerciseId(exerciseId: String, maxKg: Double) {
         exerciseDAO.updateMaxKgByExerciseId(exerciseId, maxKg)
     }
@@ -51,4 +60,5 @@ class RecordRepository(private val recordDAO: RecordDAO) {
     suspend fun deleteExerciseByExerciseId(exerciseId: String) {
         exerciseDAO.deleteExerciseByExerciseId(exerciseId)
     }
+
 }
