@@ -46,7 +46,7 @@ class AbsFragment : Fragment() {
     ): View? {
         binding = FragmentAbsBinding.inflate(inflater, container, false)
 
-        recyclerView = binding.absRecyclerView
+        recyclerView = binding.exerciseRv
         recyclerView.layoutManager = LinearLayoutManager(activity)
         val selectedDate = arguments?.getString("selectedDate") ?: ""
         exerciseListAdapter = ExerciseListAdapter(requireContext(), selectedDate)
@@ -57,6 +57,9 @@ class AbsFragment : Fragment() {
         // RecyclerView 설정
         binding.absRecyclerView.adapter = exerciseListAdapter
         binding.absRecyclerView.layoutManager = LinearLayoutManager(context)
+
+
+
 
 
         return binding.root

@@ -9,10 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.morethanyesterdayv2.data.ChestExerciseData
 import com.example.morethanyesterdayv2.data.ExerciseData
 import com.example.morethanyesterdayv2.databinding.FragmentAbsBinding
-import com.example.morethanyesterdayv2.databinding.FragmentBackBinding
 import com.example.morethanyesterdayv2.databinding.FragmentChestBinding
 import com.example.morethanyesterdayv2.ui.adapter.ExerciseListAdapter
 import com.example.morethanyesterdayv2.viewmodel.SelectExerciseViewModel
@@ -26,20 +24,21 @@ class ChestFragment: Fragment() {
     private lateinit var selectedDate: String
 
     companion object {
+        private const val ARG_SELECTED_DATE = "selectedDate"
         fun newInstance(selectedDate: String): ChestFragment {
-            val fragment = ChestFragment()
-            val args = Bundle()
-            args.putString("selectedDate", selectedDate)
-            fragment.arguments = args
-            return fragment
+            val args = Bundle().apply {
+                putString(ARG_SELECTED_DATE, selectedDate)
+            }
+            return ChestFragment().apply {
+                arguments = args
+            }
         }
     }
 
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        selectedDate = arguments?.getString(ARG_SELECTED_DATE) ?: ""
-//    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        selectedDate = arguments?.getString(ARG_SELECTED_DATE) ?: ""
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,10 +47,14 @@ class ChestFragment: Fragment() {
     ): View? {
         binding = FragmentChestBinding.inflate(inflater, container, false)
 
-        // RecyclerView 설정
-        recyclerView = binding.chestRecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView = binding.exerciseRv
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        val selectedDate = arguments?.getString("selectedDate") ?: ""
+        exerciseListAdapter = ExerciseListAdapter(requireContext(), selectedDate)
+        exerciseListAdapter.exerciseDataList = exerciseDataList
+
         recyclerView.adapter = exerciseListAdapter
+
 
         // 운동 데이터 추가
         exerciseDataList.add(ExerciseData(name = "벤치프레스", type = "가슴"))
@@ -62,10 +65,6 @@ class ChestFragment: Fragment() {
         exerciseDataList.add(ExerciseData(name = "플라이", type = "가슴"))
         exerciseDataList.add(ExerciseData(name = "케이블크로스오버", type = "가슴"))
 
-        // 어댑터에 데이터 설정
-        val selectedDate = arguments?.getString("selectedDate") ?: ""
-        exerciseListAdapter = ExerciseListAdapter(requireContext(), selectedDate)
-        exerciseListAdapter.exerciseDataList = exerciseDataList
         return binding.root
     }
 }
