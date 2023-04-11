@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
 
         binding.pasteBtn.setOnClickListener {
             showPasteDialog(viewModel.selectedDate)
-            Log.d("selectedDateMain",viewModel.selectedDate)
+            Log.d("selectedDateMain", viewModel.selectedDate)
         }
         binding.goToWriteBtn.setOnClickListener {
             intent.putExtra("selectedDate", viewModel.selectedDate)
@@ -102,11 +102,13 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
             exerciseList.addAll(list.filter { it.selectedDate == viewModel.selectedDate })
             mainAdapter.notifyDataSetChanged()
 
-            // exerciseList가 비어 있으면 pasteBtn을 숨긴다
+            // exerciseList가 비어 있으면 pasteBtn을 숨기고 goToWriteBtn을 나타나게 한다
             if (exerciseList.isEmpty()) {
                 binding.pasteBtn.visibility = View.GONE
+                binding.goToWriteBtn.visibility = View.VISIBLE
             } else {
                 binding.pasteBtn.visibility = View.VISIBLE
+                binding.goToWriteBtn.visibility = View.GONE
             }
         })
     }

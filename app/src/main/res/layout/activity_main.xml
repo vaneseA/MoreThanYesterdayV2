@@ -58,18 +58,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/selected_date_text_view" />
 
-        <Button
+        <TextView
             android:id="@+id/goToWriteBtn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/main_color"
-            android:text="+ 운동 추가"
-            android:textColor="@color/white"
-            android:textSize="18dp"
+            android:layout_width="409dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="탭하여 운동을 추가하세요."
+            android:textColor="@color/white_gray"
+            android:textSize="26dp"
             app:fontFamily="@font/jalnanche"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainRecordRV" />
+            app:layout_constraintTop_toBottomOf="@+id/selected_date_text_view" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -46,10 +46,7 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface, DeleteD
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val exerciseName = intent?.getStringExtra("exerciseName") ?: ""
-        Log.d("dddddd", exerciseName)
         val selectedDate = intent?.getStringExtra("selectedDate") ?: ""
-        Log.d("dddddd", selectedDate)
         supportActionBar?.title = selectedDate
 
 
