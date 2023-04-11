@@ -1,10 +1,7 @@
 package com.example.morethanyesterdayv2.dialog
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +17,6 @@ import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.DialogPasteBinding
 import com.example.morethanyesterdayv2.db.AppDatabase
 import com.example.morethanyesterdayv2.ui.activity.MainActivity
-import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 import com.example.morethanyesterdayv2.viewmodel.DialogPasteViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -108,7 +104,7 @@ class PasteDialog(
                     val newExerciseId = UUID.randomUUID().toString()
                     // 운동 ID에 해당하는 운동 세트 목록을 가져옴
                     val exerciseEntities = withContext(Dispatchers.IO) {
-                        exerciseDAO?.loadExerciseListLiveDataByExerciseId(exerciseId)
+                        exerciseDAO?.loadExerciseListLiveDataFromExerciseByExerciseId(exerciseId)
                     } ?: continue
                     for (exerciseEntity in exerciseEntities) {
                         // 운동 세트를 새로운 날짜와 운동 ID로 저장
@@ -122,21 +118,29 @@ class PasteDialog(
                             selectedDate = viewModel.newSelectedDate!!, // 변경할 날짜
                             exerciseId = newExerciseId // 변경할 exerciseId
                         )
-//                        val record = RecordEntity(
-//                            exerciseId = newExerciseId,
-//                            selectedDate = viewModel.newSelectedDate!!, // 변경할 날짜
-//                            exerciseName = exerciseEntity?.exerciseName ?: "",
-//                            exerciseType = exerciseEntity?.exerciseType ?: "",
-//                            kg = recordEntity?.kg ?: 0.0,
-//                            count = recordEntity?.count ?:0,
-//                            totalSet = recordEntity?.totalSet?:0,
-//                            totalKg = recordEntity?.totalKg ?: 0.0,
-//                            totalCount = recordEntity?.totalCount?:0,
-//                            maxKg = recordEntity?.maxKg ?: 0.0,
-//                        )
+                        val recordEntities = withContext(Dispatchers.IO) {
+                            recordDAO?.loadExerciseListLiveDataFromRecordByExerciseId(exerciseId)
+                        } ?: continue
+                        for (recordEntity in recordEntities) {
+                            val record = RecordEntity(
+                                exerciseId = newExerciseId,
+                                selectedDate = viewModel.newSelectedDate!!, // 변경할 날짜
+                                exerciseName = exerciseEntity?.exerciseName ?: "",
+                                exerciseType = exerciseEntity?.exerciseType ?: "",
+                                kg = recordEntity?.kg ?: 0.0,
+                                exerciseCount = recordEntity?.exerciseCount ?: 0,
+                                totalSet = recordEntity?.totalSet ?: 0,
+                                totalKg = recordEntity?.totalKg ?: 0.0,
+                                totalCount = recordEntity?.totalCount ?: 0,
+                                maxKg = recordEntity?.maxKg ?: 0.0,
+                            )
+                            withContext(Dispatchers.IO) {
+                                repository.insert(record)
+                            }
+                        }
                         withContext(Dispatchers.IO) {
                             exerciseDAO!!.insert(newExerciseEntity)
-//                            repository.insert(record)
+
                         }
                     }
                 }

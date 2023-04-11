@@ -66,7 +66,7 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
     fun onDeleteRecord(recordEntity: RecordEntity, context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
             // 미리 kg값을 받아놓고
-            val count = recordEntity?.count ?: 0
+            val count = recordEntity?.exerciseCount ?: 0
             val kg = recordEntity?.kg
             // 일단 삭제
             repository.delete(recordEntity)

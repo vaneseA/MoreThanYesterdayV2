@@ -28,7 +28,7 @@ interface RecordDAO {
     fun getCountSetFromRecordByExerciseId(exerciseId: String?): Int
 
     //ROOM에서 exerciseId로 된 목록 count를 모두 더한 값을 얻는 쿼리
-    @Query("SELECT SUM(count) FROM room_record WHERE exerciseId = :exerciseId")
+    @Query("SELECT SUM(exerciseCount) FROM room_record WHERE exerciseId = :exerciseId")
     fun getTotalCountFromRecordByExerciseId(exerciseId: String?): Int
 
     //ROOM에서 exerciseId로 된 목록 kg 모두 더한 값을 얻는 쿼리
@@ -47,5 +47,8 @@ interface RecordDAO {
     @Query("DELETE FROM room_record WHERE exerciseId = :exerciseId")
     fun deleteRecordByExerciseId(exerciseId: String)
 
+    //room_exercise에서 exerciseId를 검색해 모든 exerciseId를 추출하는 쿼리
+    @Query("SELECT exerciseName, exerciseType, totalSet, totalKG,totalCount,maxKg,selectedDate, exerciseId,kg,exerciseCount FROM room_record WHERE exerciseId = :exerciseId")
+    fun loadExerciseListLiveDataFromRecordByExerciseId(exerciseId: String): List<RecordEntity>
 
 }

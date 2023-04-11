@@ -76,7 +76,7 @@ interface ExerciseDAO {
 
     //room_exercise에서 exerciseId를 검색해 모든 exerciseId를 추출하는 쿼리
     @Query("SELECT exerciseName, exerciseType, totalSet, totalKG,totalCount,maxKg,selectedDate, exerciseId FROM room_exercise WHERE exerciseId = :exerciseId")
-    fun loadExerciseListLiveDataByExerciseId(exerciseId: String): List<ExerciseEntity>
+    fun loadExerciseListLiveDataFromExerciseByExerciseId(exerciseId: String): List<ExerciseEntity>
 
 
 }

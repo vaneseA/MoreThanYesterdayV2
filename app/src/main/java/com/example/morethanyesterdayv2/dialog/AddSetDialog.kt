@@ -223,7 +223,7 @@ class AddSetDialog(
                     exerciseName = exerciseEntity?.exerciseName ?: "",
                     exerciseType = exerciseEntity?.exerciseType ?: "",
                     kg = getWeightValue().toDoubleOrNull() ?: 0.0,
-                    count = count,
+                    exerciseCount = count,
                     totalSet = totalSet + 1,
                     totalKg = newTotalKg,
                     totalCount = newTotalCount,

@@ -39,7 +39,7 @@ class ChildAdapter(
 
             binding.recordSetItem.text = "${childPosition}번째 세트"
             binding.recordKgItem.text = "${(recordEntity?.kg)}kg"
-            binding.recordCountItem.text = "${(recordEntity?.count)}회"
+            binding.recordCountItem.text = "${(recordEntity?.exerciseCount)}회"
 
         }
     }
