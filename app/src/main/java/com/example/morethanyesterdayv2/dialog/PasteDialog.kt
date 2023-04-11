@@ -127,18 +127,25 @@ class PasteDialog(
 //                            selectedDate = viewModel.newSelectedDate!!, // 변경할 날짜
 //                            exerciseName = exerciseEntity?.exerciseName ?: "",
 //                            exerciseType = exerciseEntity?.exerciseType ?: "",
-//                            kg = recordEntity.kg,
-//                            count = recordEntity.count,
-//                            totalSet = recordEntity.totalSet,
-//                            totalKg = recordEntity.totalKg,
-//                            totalCount = recordEntity.totalCount,
-//                            maxKg = recordEntity.maxKg
+//                            kg = recordEntity?.kg ?: 0.0,
+//                            count = recordEntity?.count ?:0,
+//                            totalSet = recordEntity?.totalSet?:0,
+//                            totalKg = recordEntity?.totalKg ?: 0.0,
+//                            totalCount = recordEntity?.totalCount?:0,
+//                            maxKg = recordEntity?.maxKg ?: 0.0,
 //                        )
                         withContext(Dispatchers.IO) {
                             exerciseDAO!!.insert(newExerciseEntity)
+//                            repository.insert(record)
                         }
                     }
                 }
+                // 저장 완료 메시지를 띄우고 다이얼로그를 닫음
+                Toast.makeText(
+                    requireContext(),
+                    "저장 완료",
+                    Toast.LENGTH_LONG
+                ).show()
 
                 dismiss()
             }

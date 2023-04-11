@@ -174,7 +174,6 @@ class AddSetDialog(
 
             // 사용자가 입력한 count 값을 문자열에서 정수로 변환하여 가져옴
             val count = binding.userInputCount?.text?.toString()?.toIntOrNull() ?: 0
-            Log.d("sssscount", count.toString())
 
             lifecycleScope.launch {
                 // recordDAO을 이용해 ROOM 안에 있는 MaxKg 값을 가져옴
@@ -243,8 +242,6 @@ class AddSetDialog(
 
                 insertAndUpdateRecord(record, exercise)
 
-                Log.d("dongKeunTotalCount", "$totalCount + $count = $newTotalCount")
-                Log.d("dongKeunNewTotalKg,", "$totalKg + ($kg * $count) = $newTotalKg")
                 withContext(Dispatchers.IO) {
                     exerciseDAO.updateTotalCountFromExerciseByExerciseId(
                         exerciseEntity?.exerciseId ?: "",
