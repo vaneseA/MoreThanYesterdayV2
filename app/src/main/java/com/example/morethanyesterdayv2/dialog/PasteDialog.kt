@@ -4,9 +4,11 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -20,6 +22,7 @@ import com.example.morethanyesterdayv2.db.AppDatabase
 import com.example.morethanyesterdayv2.ui.activity.MainActivity
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 import com.example.morethanyesterdayv2.viewmodel.DialogPasteViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -40,6 +43,7 @@ class PasteDialog(
     var exerciseEntity: ExerciseEntity? = null
     var recordEntity: RecordEntity? = null
     private var selectedDate: String? = null
+    private var newSelectedDate: String? = null
     private var appDatabase: AppDatabase? = null
     private var recordDAO: RecordDAO? = null
     private var exerciseDAO: ExerciseDAO? = null
@@ -48,6 +52,8 @@ class PasteDialog(
         this.exerciseEntity = exerciseEntity
         this.recordEntity = recordEntity
         this.selectedDate = selectedDate
+        this.newSelectedDate = newSelectedDate
+
         this.pasteDialogInterface = pasteDialogInterface
     }
 
@@ -80,7 +86,7 @@ class PasteDialog(
             today.get(Calendar.DAY_OF_MONTH)
         )
         binding.calendarViewForDialog.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            viewModel.selectedDate = String.format("%d년 %d월 %d일", year, month + 1, dayOfMonth)
+            viewModel.newSelectedDate = String.format("%d년 %d월 %d일", year, month + 1, dayOfMonth)
             checkDay(year, month, dayOfMonth, view.context)
 
         }
@@ -88,29 +94,56 @@ class PasteDialog(
 
         binding.pasteCancelBtn.setOnClickListener { dismiss() }
         binding.pasteAddBtn.setOnClickListener {
-            val selectedDateActivity = SelectedDateActivity.getInstance()
+
             appDatabase = Room.databaseBuilder(it.context, AppDatabase::class.java, "room_db")
                 .build()
-            lifecycleScope.launch {
-//                val maxKg = withContext(Dispatchers.IO) {
-//                    repository.getMaxKgFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "")
-//                }
-//                // recordDAO을 이용해 ROOM 안에 있는 totalSet 값을 가져옴
-//                val totalSet = withContext(Dispatchers.IO) {
-//                    repository.getCountSetFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "")
-//                }
-//                // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
-//                val totalCount = withContext(Dispatchers.IO) {
-//                    repository.getTotalCountFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "")
-//                }
-//                // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
-//                val totalKg = withContext(Dispatchers.IO) {
-//                    repository.getTotalKgFromExerciseByExerciseId(exerciseEntity?.exerciseId ?: "")
-//                }
 
+            lifecycleScope.launch {
+                // 선택된 날짜의 운동 ID 목록을 가져옴
+                val exerciseIds = withContext(Dispatchers.IO) {
+                    exerciseDAO!!.getExerciseIdsBySelectedDate(selectedDate!!)
+
+                }
+                for (exerciseId in exerciseIds) {
+                    val newExerciseId = UUID.randomUUID().toString()
+                    // 운동 ID에 해당하는 운동 세트 목록을 가져옴
+                    val exerciseEntities = withContext(Dispatchers.IO) {
+                        exerciseDAO?.loadExerciseListLiveDataByExerciseId(exerciseId)
+                    } ?: continue
+                    for (exerciseEntity in exerciseEntities) {
+                        // 운동 세트를 새로운 날짜와 운동 ID로 저장
+                        val newExerciseEntity = ExerciseEntity(
+                            exerciseName = exerciseEntity.exerciseName,
+                            exerciseType = exerciseEntity.exerciseType,
+                            totalSet = exerciseEntity.totalSet,
+                            totalKg = exerciseEntity.totalKg,
+                            maxKg = exerciseEntity.maxKg,
+                            totalCount = exerciseEntity.totalCount,
+                            selectedDate = viewModel.newSelectedDate!!, // 변경할 날짜
+                            exerciseId = newExerciseId // 변경할 exerciseId
+                        )
+//                        val record = RecordEntity(
+//                            exerciseId = newExerciseId,
+//                            selectedDate = viewModel.newSelectedDate!!, // 변경할 날짜
+//                            exerciseName = exerciseEntity?.exerciseName ?: "",
+//                            exerciseType = exerciseEntity?.exerciseType ?: "",
+//                            kg = recordEntity.kg,
+//                            count = recordEntity.count,
+//                            totalSet = recordEntity.totalSet,
+//                            totalKg = recordEntity.totalKg,
+//                            totalCount = recordEntity.totalCount,
+//                            maxKg = recordEntity.maxKg
+//                        )
+                        withContext(Dispatchers.IO) {
+                            exerciseDAO!!.insert(newExerciseEntity)
+                        }
+                    }
+                }
+
+                dismiss()
             }
 
-            dismiss() }
+        }
 
         return view
     }
@@ -136,7 +169,7 @@ class PasteDialog(
     }
 
     private fun handleCalendarSelection(year: Int, month: Int, dayOfMonth: Int) {
-        viewModel.selectedDate = String.format("%d년 %d월 %d일", year, month + 1, dayOfMonth)
+        viewModel.newSelectedDate = String.format("%d년 %d월 %d일", year, month + 1, dayOfMonth)
         checkDay(year, month, dayOfMonth, context)
 
         viewModel = ViewModelProvider(this).get(DialogPasteViewModel::class.java)
@@ -146,4 +179,11 @@ class PasteDialog(
         fun onYesButtonClick(id: Int)
 
     }
+
+    fun insertExercise(entity: ExerciseEntity) {
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.insertToExercise(entity)
+        }
+    }
+
 }

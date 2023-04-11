@@ -66,7 +66,6 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
 
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             viewModel.selectedDate = String.format("%d년 %d월 %d일", year, month + 1, dayOfMonth)
-//            binding.diaryTextView.visibility = View.VISIBLE
             binding.goToWriteBtn.visibility = View.VISIBLE
             binding.selectedDateTextView.text = viewModel.selectedDate
             checkDay(year, month, dayOfMonth)
@@ -87,6 +86,7 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
 
         binding.pasteBtn.setOnClickListener {
             showPasteDialog(viewModel.selectedDate)
+            Log.d("selectedDateMain",viewModel.selectedDate)
         }
         binding.goToWriteBtn.setOnClickListener {
             intent.putExtra("selectedDate", viewModel.selectedDate)
@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
         selectedDate: String
     ) {
 
-        val dialog = PasteDialog(this)
+        val dialog = PasteDialog(this, selectedDate)
         // 알림창이 띄워져있는 동안 배경 클릭 막기
         dialog.isCancelable = false
         dialog.show(supportFragmentManager, "PasteDialog")

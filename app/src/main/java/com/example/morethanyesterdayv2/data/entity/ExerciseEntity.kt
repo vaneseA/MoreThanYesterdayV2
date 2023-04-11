@@ -45,8 +45,8 @@ class ExerciseEntity {
     @ColumnInfo(name = "totalCount")
     var totalCount: Int = 0
 
-    @ColumnInfo
-    var recordList: List<RecordEntity> = emptyList()
+//    @ColumnInfo
+//    var recordList: List<RecordEntity> = emptyList()
 
 
     constructor(

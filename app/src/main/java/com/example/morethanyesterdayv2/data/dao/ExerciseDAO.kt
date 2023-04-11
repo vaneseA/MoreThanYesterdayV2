@@ -66,8 +66,17 @@ interface ExerciseDAO {
     @Query("SELECT totalSet FROM room_exercise WHERE exerciseId = :exerciseId")
     fun getTotalSetFromExerciseByExerciseId(exerciseId: String?): Int
 
+
+    @Query("SELECT exerciseId FROM room_exercise WHERE selectedDate = :selectedDate")
+    fun getExerciseIdsBySelectedDate(selectedDate: String): List<String>
+
     //room_exercise에서 selectedDate를 검색해 모든 exerciseId를 추출하는 쿼리
     @Query("SELECT * FROM room_exercise WHERE selectedDate = :selectedDate")
-    fun loadExerciseSetListLiveDataBySelectedDate(selectedDate: String): LiveData<List<RecordEntity>>
-}
+    fun loadExerciseSetListLiveDataBySelectedDate(selectedDate: String): LiveData<List<ExerciseEntity>>
 
+    //room_exercise에서 exerciseId를 검색해 모든 exerciseId를 추출하는 쿼리
+    @Query("SELECT exerciseName, exerciseType, totalSet, totalKG,totalCount,maxKg,selectedDate, exerciseId FROM room_exercise WHERE exerciseId = :exerciseId")
+    fun loadExerciseListLiveDataByExerciseId(exerciseId: String): List<ExerciseEntity>
+
+
+}
