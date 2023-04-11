@@ -7,12 +7,12 @@
     android:orientation="vertical">
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/absRecyclerView"
+            android:id="@+id/abs_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/exercise_rv_item" >

@@ -6,13 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.morethanyesterdayv2.R
 import com.example.morethanyesterdayv2.viewmodel.SelectExerciseViewModel
 import com.example.morethanyesterdayv2.databinding.ActivitySelectExerciseBinding
 import com.example.morethanyesterdayv2.ui.adapter.ExerciseListAdapter
+import com.example.morethanyesterdayv2.ui.fragment.AbsFragment
 import com.example.morethanyesterdayv2.ui.fragment.viewpager.ViewPagerAdapter
 import com.example.morethanyesterdayv2.ui.fragment.viewpager.ViewPagerFragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
-
 
 class SelectExerciseActivity : AppCompatActivity() {
 
@@ -29,11 +31,11 @@ class SelectExerciseActivity : AppCompatActivity() {
         "커스텀"
     )
 
-
     private lateinit var binding: ActivitySelectExerciseBinding
     private lateinit var exerciseListAdapter: ExerciseListAdapter
-
     private val viewModel: SelectExerciseViewModel by viewModels()
+    private lateinit var selectedDate: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,18 +55,12 @@ class SelectExerciseActivity : AppCompatActivity() {
         Log.d("selectedDate", selectedDate)
         supportActionBar?.title = selectedDate
 
-        initRecycler()
+        val absFragment = AbsFragment.newInstance(selectedDate)
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, absFragment, "ABS_FRAGMENT_TAG")
+            .commit()
     }
 
-    private fun initRecycler() {
-        val selectedDate = intent?.getStringExtra("selectedDate") ?: ""
-        exerciseListAdapter = ExerciseListAdapter(this, selectedDate)
-
-
-        viewModel.exerciseDataList.observe(this) { ExerciseEntity ->
-            exerciseListAdapter.exerciseDataList = ExerciseEntity
-            exerciseListAdapter.notifyDataSetChanged()
-        }
-    }
 
 }

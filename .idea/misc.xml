@@ -34,6 +34,16 @@
         <entry key="app/src/main/res/layout/exercise_card_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/exercise_rv_item.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/exercise_set_row_item.xml" value="0.24114583333333334" />
+        <entry key="app/src/main/res/layout/fragment_abs.xml" value="0.21574074074074073" />
+        <entry key="app/src/main/res/layout/fragment_back.xml" value="0.21574074074074073" />
+        <entry key="app/src/main/res/layout/fragment_bicep.xml" value="0.21574074074074073" />
+        <entry key="app/src/main/res/layout/fragment_cardio.xml" value="0.21574074074074073" />
+        <entry key="app/src/main/res/layout/fragment_chest.xml" value="0.21574074074074073" />
+        <entry key="app/src/main/res/layout/fragment_custom.xml" value="0.21574074074074073" />
+        <entry key="app/src/main/res/layout/fragment_lower_body.xml" value="0.21574074074074073" />
+        <entry key="app/src/main/res/layout/fragment_shoulder.xml" value="0.21574074074074073" />
+        <entry key="app/src/main/res/layout/fragment_trapezius.xml" value="0.21574074074074073" />
+        <entry key="app/src/main/res/layout/fragment_triceps.xml" value="0.21574074074074073" />
         <entry key="app/src/main/res/layout/item_recycler.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/item_recycler_ex.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/main_rv_item.xml" value="0.259375" />
