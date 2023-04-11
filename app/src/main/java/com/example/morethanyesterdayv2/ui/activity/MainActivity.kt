@@ -94,7 +94,6 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
         }
         mainAdapter = MainAdapter(exerciseList, this@MainActivity)
 
-
         binding.mainRecordRV.adapter = mainAdapter
         binding.mainRecordRV.layoutManager = LinearLayoutManager(this@MainActivity)
     }
@@ -112,11 +111,6 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
             fileInputStream.read(fileData)
             fileInputStream.close()
             str = String(fileData)
-            binding.goToWriteBtn.visibility = View.INVISIBLE
-            if (binding.mainRecordRV == null) {
-
-                binding.pasteBtn.visibility = View.INVISIBLE
-            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -133,7 +127,7 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
     }
 
 
-    private fun handleCalendarSelection(year: Int, month: Int, dayOfMonth: Int) {
+    fun handleCalendarSelection(year: Int, month: Int, dayOfMonth: Int) {
         viewModel.selectedDate = String.format("%d년 %d월 %d일", year, month + 1, dayOfMonth)
         binding.selectedDateTextView.text = viewModel.selectedDate
         checkDay(year, month, dayOfMonth)

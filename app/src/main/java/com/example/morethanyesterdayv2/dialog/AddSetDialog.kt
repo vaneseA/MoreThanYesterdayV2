@@ -22,7 +22,7 @@ import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.data.dao.RecordDAO
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.db.AppDatabase
-import com.example.morethanyesterdayv2.databinding.CustomAddSetDialogBinding
+import com.example.morethanyesterdayv2.databinding.DialogAddSetBinding
 import com.example.morethanyesterdayv2.repository.RecordRepository
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 import com.example.morethanyesterdayv2.viewmodel.AddSetDialogViewModel
@@ -48,7 +48,7 @@ class AddSetDialog(
     lateinit var viewModel: AddSetDialogViewModel
 
     // 뷰 바인딩 정의
-    private var _binding: CustomAddSetDialogBinding? = null
+    private var _binding: DialogAddSetBinding? = null
     private val binding get() = _binding!!
     private var addSetDialogInterface: AddSetDialogInterface? = null
     var exerciseEntity: ExerciseEntity? = null
@@ -69,7 +69,7 @@ class AddSetDialog(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = CustomAddSetDialogBinding.inflate(inflater, container, false)
+        _binding = DialogAddSetBinding.inflate(inflater, container, false)
         val view = binding.root
 
         // AppDatabase 초기화

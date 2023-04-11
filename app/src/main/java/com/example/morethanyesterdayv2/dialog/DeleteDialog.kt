@@ -9,13 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
-import com.example.morethanyesterdayv2.databinding.DeleteDialogBinding
+import com.example.morethanyesterdayv2.databinding.DialogDeleteBinding
 import com.example.morethanyesterdayv2.db.AppDatabase
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 import kotlinx.coroutines.Dispatchers
@@ -33,7 +32,7 @@ class DeleteDialog(
 ) : DialogFragment() {
 
     // 뷰 바인딩 정의
-    private var _binding: DeleteDialogBinding? = null
+    private var _binding: DialogDeleteBinding? = null
     private val binding get() = _binding!!
     private var deleteDialogInterface: DeleteDialogInterface? = null
     var exerciseEntity: ExerciseEntity? = null
@@ -59,7 +58,7 @@ class DeleteDialog(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DeleteDialogBinding.inflate(inflater, container, false)
+        _binding = DialogDeleteBinding.inflate(inflater, container, false)
         val view = binding.root
 
         // AppDatabase와 RecordDAO 초기화
