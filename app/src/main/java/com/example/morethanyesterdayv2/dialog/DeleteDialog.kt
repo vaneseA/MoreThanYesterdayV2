@@ -29,6 +29,7 @@ class DeleteDialog(
     exerciseId: String,
     selectedDate: String,
     exerciseName: String,
+    exerciseType: String
 ) : DialogFragment() {
 
     // 뷰 바인딩 정의
@@ -41,6 +42,7 @@ class DeleteDialog(
     private var exerciseId: String? = null
     private var selectedDate: String? = null
     private var exerciseName: String? = null
+    private var exerciseType: String? = null
 
 
     init {
@@ -51,6 +53,7 @@ class DeleteDialog(
         this.exerciseId = exerciseId
         this.selectedDate = selectedDate
         this.exerciseName = exerciseName
+        this.exerciseType = exerciseType
     }
 
     override fun onCreateView(
@@ -75,7 +78,7 @@ class DeleteDialog(
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding.selectedDateForDelete.text = selectedDate
-        binding.exerciseNameForDelete.text = "$exerciseName \n\n삭제하시겠습니까?"
+        binding.exerciseNameForDelete.text = "$exerciseName($exerciseType) \n\n삭제하시겠습니까?"
         binding.noBtnForDelete.setOnClickListener { dialog?.dismiss() }
         binding.yesBtnForDelete.setOnClickListener {
             val selectedDateActivity = SelectedDateActivity.getInstance()

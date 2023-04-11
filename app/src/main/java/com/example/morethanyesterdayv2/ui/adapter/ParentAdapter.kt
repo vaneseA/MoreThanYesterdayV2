@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -59,11 +60,11 @@ class ParentAdapter(
         private val selectedDateActivity = SelectedDateActivity.getInstance()
         fun setData(exerciseEntity: ExerciseEntity, position: Int, childList: List<RecordEntity>) {
             val exerciseId = exerciseEntity.exerciseId
-            val selectedDate = exerciseEntity.selectedDate
-            val exerciseName = exerciseEntity.exerciseName
+
+
 
             binding.totalSetArea.text = "총 ${exerciseEntity.totalSet}set, "
-            binding.NameArea.text = exerciseName
+            binding.NameArea.text = exerciseEntity.exerciseName
             binding.TypeArea.text = exerciseEntity.exerciseType
             binding.totalKgArea.text = "총 ${exerciseEntity.totalKg}kg, "
             binding.bestKgArea.text = "최고 ${exerciseEntity.maxKg}kg, "
@@ -83,7 +84,7 @@ class ParentAdapter(
                     position,
                     exerciseEntity,
                     exerciseId,
-                    selectedDate
+                    exerciseEntity.selectedDate
                 )
             }
 
@@ -98,14 +99,19 @@ class ParentAdapter(
                                 position,
                                 exerciseEntity,
                                 exerciseId,
-                                selectedDate,
-                                exerciseName
+                                exerciseEntity.selectedDate,
+                                exerciseEntity.exerciseName,
+                                exerciseEntity.exerciseType
                             )
 
                             true
                         }
                         R.id.action_move -> {
                             // 처리할 내용
+                            Toast.makeText(
+                                itemView.context,
+                                "구현 준비 중...",
+                                Toast.LENGTH_LONG).show()
                             true
                         }
                         else -> false

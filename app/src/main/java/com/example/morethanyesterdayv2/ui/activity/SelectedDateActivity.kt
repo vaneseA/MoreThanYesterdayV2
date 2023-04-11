@@ -117,13 +117,14 @@ class SelectedDateActivity : AppCompatActivity(), AddSetDialogInterface, DeleteD
         exerciseEntity: ExerciseEntity,
         exerciseId: String,
         selectedDate: String,
-        exerciseName: String
+        exerciseName: String,
+        exerciseType: String
     ) {
         val selectedDate = intent.getStringExtra("selectedDate")
         val dialog = selectedDate?.let {
             DeleteDialog(
                 this, position, exerciseEntity, exerciseId,
-                it, exerciseName
+                it, exerciseName, exerciseType
             )
         }
         dialog?.show(supportFragmentManager, "DeleteDialog")
