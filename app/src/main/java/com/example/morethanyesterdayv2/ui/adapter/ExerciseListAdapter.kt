@@ -29,7 +29,6 @@ class ExerciseListAdapter(private val context: Context, private val selectedDate
     lateinit var appDatabase: AppDatabase
     val exerciseList = mutableListOf<ExerciseEntity>()
     lateinit var exerciseDAO: ExerciseDAO
-
     var exerciseDataList = mutableListOf<ExerciseData>()
 
     interface OnItemClickListener {

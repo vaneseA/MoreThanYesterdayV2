@@ -10,11 +10,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.R
+import com.example.morethanyesterdayv2.data.ExerciseData
 import com.example.morethanyesterdayv2.databinding.FragmentAbsBinding
 import com.example.morethanyesterdayv2.ui.adapter.ExerciseListAdapter
 import com.example.morethanyesterdayv2.viewmodel.SelectExerciseViewModel
 
 class AbsFragment : Fragment() {
+    private val _absExerciseDataList = mutableListOf<ExerciseData>() // 데이터 리스트
     private lateinit var exerciseListAdapter: ExerciseListAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var binding: FragmentAbsBinding
@@ -33,19 +35,10 @@ class AbsFragment : Fragment() {
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SelectExerciseViewModel::class.java)
-        viewModel.getExerciseDataList().observe(viewLifecycleOwner, { exerciseDataList ->
-            exerciseListAdapter.exerciseDataList = exerciseDataList
-            exerciseListAdapter.notifyDataSetChanged()
-        })
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         selectedDate = arguments?.getString(ARG_SELECTED_DATE) ?: ""
     }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,9 +49,15 @@ class AbsFragment : Fragment() {
         recyclerView = binding.absRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(activity)
         val selectedDate = arguments?.getString("selectedDate") ?: ""
-        Log.d("selectedDate111", selectedDate)
         exerciseListAdapter = ExerciseListAdapter(requireContext(), selectedDate)
         recyclerView.adapter = exerciseListAdapter
+        // 어댑터에 데이터 설정
+        exerciseListAdapter.exerciseDataList = _absExerciseDataList
+
+        // RecyclerView 설정
+        binding.absRecyclerView.adapter = exerciseListAdapter
+        binding.absRecyclerView.layoutManager = LinearLayoutManager(context)
+
 
         return binding.root
     }
