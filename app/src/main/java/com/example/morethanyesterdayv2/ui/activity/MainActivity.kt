@@ -96,6 +96,19 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
 
         binding.mainRecordRV.adapter = mainAdapter
         binding.mainRecordRV.layoutManager = LinearLayoutManager(this@MainActivity)
+
+        viewModel.getExerciseList().observe(this, { list ->
+            exerciseList.clear()
+            exerciseList.addAll(list.filter { it.selectedDate == viewModel.selectedDate })
+            mainAdapter.notifyDataSetChanged()
+
+            // exerciseList가 비어 있으면 pasteBtn을 숨긴다
+            if (exerciseList.isEmpty()) {
+                binding.pasteBtn.visibility = View.GONE
+            } else {
+                binding.pasteBtn.visibility = View.VISIBLE
+            }
+        })
     }
 
 
