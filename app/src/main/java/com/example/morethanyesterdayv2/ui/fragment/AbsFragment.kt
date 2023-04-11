@@ -6,21 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.morethanyesterdayv2.R
 import com.example.morethanyesterdayv2.data.ExerciseData
 import com.example.morethanyesterdayv2.databinding.FragmentAbsBinding
 import com.example.morethanyesterdayv2.ui.adapter.ExerciseListAdapter
-import com.example.morethanyesterdayv2.viewmodel.SelectExerciseViewModel
+
 
 class AbsFragment : Fragment() {
-    private val _absExerciseDataList = mutableListOf<ExerciseData>() // 데이터 리스트
+    private val exerciseDataList = mutableListOf<ExerciseData>() // 데이터 리스트
     private lateinit var exerciseListAdapter: ExerciseListAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var binding: FragmentAbsBinding
-    private lateinit var viewModel: SelectExerciseViewModel
     private lateinit var selectedDate: String
 
     companion object {
@@ -39,6 +36,7 @@ class AbsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         selectedDate = arguments?.getString(ARG_SELECTED_DATE) ?: ""
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,16 +48,14 @@ class AbsFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(activity)
         val selectedDate = arguments?.getString("selectedDate") ?: ""
         exerciseListAdapter = ExerciseListAdapter(requireContext(), selectedDate)
+        exerciseListAdapter.exerciseDataList = exerciseDataList
+
         recyclerView.adapter = exerciseListAdapter
-        // 어댑터에 데이터 설정
-        exerciseListAdapter.exerciseDataList = _absExerciseDataList
-
-        // RecyclerView 설정
-        binding.absRecyclerView.adapter = exerciseListAdapter
-        binding.absRecyclerView.layoutManager = LinearLayoutManager(context)
 
 
-
+        // 운동 데이터 추가
+        exerciseDataList.add(ExerciseData(name = "크런치", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "데드버그", type = "복근"))
 
 
         return binding.root

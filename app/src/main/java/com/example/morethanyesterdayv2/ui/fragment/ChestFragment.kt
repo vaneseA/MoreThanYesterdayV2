@@ -20,7 +20,6 @@ class ChestFragment: Fragment() {
     private lateinit var exerciseListAdapter: ExerciseListAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var binding: FragmentChestBinding
-    private lateinit var viewModel: SelectExerciseViewModel
     private lateinit var selectedDate: String
 
     companion object {
