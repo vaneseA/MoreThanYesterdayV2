@@ -27,6 +27,7 @@
         <entry key="app/src/main/res/layout/activity_select_exercise.xml" value="0.13" />
         <entry key="app/src/main/res/layout/activity_selected_date.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_selected_day.xml" value="0.21822916666666667" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="app/src/main/res/layout/custom_add_set_dialog.xml" value="0.25" />
         <entry key="app/src/main/res/layout/custom_mylike_dialog.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/delete_dialog.xml" value="0.2490740740740741" />
