@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,7 +15,6 @@ import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.example.morethanyesterdayv2.data.dao.RecordDAO
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.dialog.repository
 import com.example.morethanyesterdayv2.repository.SelectedDateRepository
@@ -26,9 +24,7 @@ import kotlinx.coroutines.CoroutineScope
 class SelectedDateViewModel(application: Application) : AndroidViewModel(application) {
     private val selectedDateRepository = SelectedDateRepository(application)
     private val exerciseDAO: ExerciseDAO = AppDatabase.getDatabase(application).exerciseDAO()
-    private val recordDAO: RecordDAO = AppDatabase.getDatabase(application).recordDAO()
     private val exerciseList = MutableLiveData<List<ExerciseEntity>>()
-    private val recordList = MutableLiveData<List<RecordEntity>>()
 
     fun getExerciseList(): LiveData<List<ExerciseEntity>> {
         if (exerciseList.value == null) {

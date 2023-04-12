@@ -6,14 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.data.ExerciseData
-import com.example.morethanyesterdayv2.databinding.FragmentAbsBinding
 import com.example.morethanyesterdayv2.databinding.FragmentChestBinding
 import com.example.morethanyesterdayv2.ui.adapter.ExerciseListAdapter
-import com.example.morethanyesterdayv2.viewmodel.SelectExerciseViewModel
 
 class ChestFragment: Fragment() {
     private val exerciseDataList = mutableListOf<ExerciseData>() // 데이터 리스트

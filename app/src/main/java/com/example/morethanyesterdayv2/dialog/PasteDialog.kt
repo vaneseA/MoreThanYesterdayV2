@@ -18,7 +18,6 @@ import com.example.morethanyesterdayv2.databinding.DialogPasteBinding
 import com.example.morethanyesterdayv2.db.AppDatabase
 import com.example.morethanyesterdayv2.ui.activity.MainActivity
 import com.example.morethanyesterdayv2.viewmodel.DialogPasteViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

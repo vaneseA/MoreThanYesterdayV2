@@ -1,21 +1,16 @@
 package com.example.morethanyesterdayv2.repository
 
-import androidx.lifecycle.LiveData
 import com.example.morethanyesterdayv2.data.dao.RecordDAO
-import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.dialog.exerciseDAO
 
 class RecordRepository(private val recordDAO: RecordDAO) {
 
-    suspend fun insert(recordEntity: RecordEntity) {
+    fun insert(recordEntity: RecordEntity) {
         recordDAO.insert(recordEntity)
     }
-    fun insertToExercise(exerciseEntity: ExerciseEntity) {
-        exerciseDAO.insert(exerciseEntity)
-    }
 
-    suspend fun delete(recordEntity: RecordEntity) {
+    fun delete(recordEntity: RecordEntity) {
         recordDAO.delete(recordEntity)
     }
 
@@ -50,18 +45,14 @@ class RecordRepository(private val recordDAO: RecordDAO) {
         return exerciseDAO.getMaxKgByExerciseId(exerciseId)
     }
 
-//    fun getExerciseSetListLiveDataBySelectedDate(selectedDate: String): LiveData<List<RecordEntity>> {
-//        return exerciseDAO.loadExerciseSetListLiveDataBySelectedDate(selectedDate)
-//    }
-
-    suspend fun updateMaxKgFromExerciseByExerciseId(exerciseId: String, maxKg: Double) {
+    fun updateMaxKgFromExerciseByExerciseId(exerciseId: String, maxKg: Double) {
         exerciseDAO.updateMaxKgByExerciseId(exerciseId, maxKg)
     }
 
-    suspend fun deleteRecordByExerciseId(exerciseId: String) {
+    fun deleteRecordByExerciseId(exerciseId: String) {
         recordDAO.deleteRecordByExerciseId(exerciseId)
     }
-    suspend fun deleteExerciseByExerciseId(exerciseId: String) {
+    fun deleteExerciseByExerciseId(exerciseId: String) {
         exerciseDAO.deleteExerciseByExerciseId(exerciseId)
     }
 

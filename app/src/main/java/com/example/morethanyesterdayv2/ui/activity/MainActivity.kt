@@ -151,7 +151,5 @@ class MainActivity : AppCompatActivity(), PasteDialog.PasteDialogInterface {
 
     }
 
-    override fun onYesButtonClick(id: Int) {
-        TODO("Not yet implemented")
-    }
+    override fun onYesButtonClick(id: Int) {}
 }

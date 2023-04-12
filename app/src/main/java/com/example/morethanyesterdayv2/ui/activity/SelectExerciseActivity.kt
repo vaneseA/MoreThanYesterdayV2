@@ -1,19 +1,12 @@
 package com.example.morethanyesterdayv2.ui.activity
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.morethanyesterdayv2.R
-import com.example.morethanyesterdayv2.viewmodel.SelectExerciseViewModel
 import com.example.morethanyesterdayv2.databinding.ActivitySelectExerciseBinding
-import com.example.morethanyesterdayv2.ui.adapter.ExerciseListAdapter
 import com.example.morethanyesterdayv2.ui.fragment.*
 import com.example.morethanyesterdayv2.ui.fragment.viewpager.ViewPagerAdapter
-import com.example.morethanyesterdayv2.ui.fragment.viewpager.ViewPagerFragmentStateAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
