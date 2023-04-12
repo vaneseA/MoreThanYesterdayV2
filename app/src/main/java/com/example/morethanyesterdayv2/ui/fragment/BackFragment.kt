@@ -50,7 +50,8 @@ class BackFragment: Fragment() {
 
         recyclerView.adapter = exerciseListAdapter
 
-
+        // exerciseDataList 초기화
+        exerciseDataList.clear()
         // 운동 데이터 추가
         exerciseDataList.add(ExerciseData(name = "데드리프트", type = "등"))
         exerciseDataList.add(ExerciseData(name = "풀업", type = "등"))

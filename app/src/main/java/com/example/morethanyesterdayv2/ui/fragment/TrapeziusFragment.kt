@@ -51,7 +51,8 @@ class TrapeziusFragment: Fragment() {
 
         recyclerView.adapter = exerciseListAdapter
 
-
+        // exerciseDataList 초기화
+        exerciseDataList.clear()
         // 운동 데이터 추가
         exerciseDataList.add(ExerciseData(name = "슈러그", type = "승모근"))
         exerciseDataList.add(ExerciseData(name = "업라이트 로우", type = "승모근"))

@@ -54,7 +54,8 @@ class ChestFragment: Fragment() {
 
         recyclerView.adapter = exerciseListAdapter
 
-
+        // exerciseDataList 초기화
+        exerciseDataList.clear()
         // 운동 데이터 추가
         exerciseDataList.add(ExerciseData(name = "벤치프레스", type = "가슴"))
         exerciseDataList.add(ExerciseData(name = "덤벨프레스", type = "가슴"))

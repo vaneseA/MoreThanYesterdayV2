@@ -50,7 +50,8 @@ class CustomFragment: Fragment() {
 
         recyclerView.adapter = exerciseListAdapter
 
-
+        // exerciseDataList 초기화
+        exerciseDataList.clear()
         // 운동 데이터 추가
         exerciseDataList.add(ExerciseData(name = "커스텀", type = "커스텀"))
         return binding.root

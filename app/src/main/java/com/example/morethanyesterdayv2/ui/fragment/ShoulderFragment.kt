@@ -51,7 +51,8 @@ class ShoulderFragment: Fragment() {
 
         recyclerView.adapter = exerciseListAdapter
 
-
+        // exerciseDataList 초기화
+        exerciseDataList.clear()
         // 운동 데이터 추가
         exerciseDataList.add(ExerciseData(name = "바벨 숄더 프레스", type = "어깨"))
         exerciseDataList.add(ExerciseData(name = "덤벨 숄더 프레스", type = "어깨"))

@@ -50,7 +50,8 @@ class LowerBodyFragment: Fragment() {
 
         recyclerView.adapter = exerciseListAdapter
 
-
+        // exerciseDataList 초기화
+        exerciseDataList.clear()
         // 운동 데이터 추가
         exerciseDataList.add(ExerciseData(name = "런지", type = "하체"))
         exerciseDataList.add(ExerciseData(name = "레그컬", type = "하체"))

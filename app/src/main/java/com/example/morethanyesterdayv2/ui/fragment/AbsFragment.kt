@@ -52,7 +52,8 @@ class AbsFragment : Fragment() {
 
         recyclerView.adapter = exerciseListAdapter
 
-
+        // exerciseDataList 초기화
+        exerciseDataList.clear()
         // 운동 데이터 추가
         exerciseDataList.add(ExerciseData(name = "크런치", type = "복근"))
         exerciseDataList.add(ExerciseData(name = "데드버그", type = "복근"))

@@ -50,7 +50,8 @@ class CardioFragment: Fragment() {
 
         recyclerView.adapter = exerciseListAdapter
 
-
+        // exerciseDataList 초기화
+        exerciseDataList.clear()
         // 운동 데이터 추가
         exerciseDataList.add(ExerciseData(name = "실외 달리기", type = "유산소"))
         exerciseDataList.add(ExerciseData(name = "실내 달리기", type = "유산소"))
