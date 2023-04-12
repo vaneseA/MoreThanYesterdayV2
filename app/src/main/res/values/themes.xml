@@ -21,6 +21,17 @@
         <item name="colorAccent">@color/main_color</item>
         <!-- Add the following line to show title in action bar -->
         <item name="android:displayOptions">showTitle</item>
+        <item name="fontFamily">@font/jalnanche</item>
+
+    </style>
+
+
+
+
+    <!-- MyActionBar 스타일 정의 -->
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="tab_text" parent="TextAppearance.Design.Tab">

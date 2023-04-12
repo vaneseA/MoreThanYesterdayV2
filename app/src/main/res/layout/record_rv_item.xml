@@ -42,7 +42,7 @@
                         android:paddingBottom="5dp"
                         android:text="운동명"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <!-- 운동부위 -->
                     <TextView
@@ -54,7 +54,7 @@
                         android:paddingBottom="5dp"
                         android:text="운동부위"
                         android:textColor="@color/gray"
-                        android:textSize="14sp" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
@@ -73,7 +73,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="5dp"
                 android:orientation="horizontal">
                 <!-- 총 세트 -->
                 <TextView
@@ -83,7 +83,7 @@
                     android:paddingHorizontal="10dp"
                     android:paddingBottom="10dp"
                     android:text="총 0set,"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <!-- 총 kg -->
                 <TextView
@@ -93,7 +93,7 @@
                     android:paddingHorizontal="10dp"
                     android:paddingBottom="10dp"
                     android:text="총 0kg,"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <!-- 최고 kg -->
                 <TextView
@@ -103,7 +103,7 @@
                     android:paddingHorizontal="10dp"
                     android:paddingBottom="10dp"
                     android:text="최고 0kg,"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <!-- 총 횟수 -->
                 <TextView
@@ -113,7 +113,7 @@
                     android:paddingHorizontal="10dp"
                     android:paddingBottom="10dp"
                     android:text="0회"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
         </LinearLayout>
