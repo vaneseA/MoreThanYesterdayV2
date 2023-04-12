@@ -53,7 +53,26 @@ class BicepFragment: Fragment() {
         // exerciseDataList 초기화
         exerciseDataList.clear()
         // 운동 데이터 추가
+        exerciseDataList.add(ExerciseData(name = "바벨컬", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "덤벨컬", type = "이두"))
         exerciseDataList.add(ExerciseData(name = "해머컬", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "프리처컬", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "케이블컬", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "컨센트레이션컬", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "스컷컬", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "리버스컬", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "인클라인덤벨컬", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "프리쳐덤벨컬", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "프리쳐해머컬", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "인클라인바벨컬", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "해머프리처컬", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "버티컬바벨컬", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "오버헤드케이블익스텐션", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "오버헤드케이블컬", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "케이블로프컬", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "덤벨스탠딩컬", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "프리쳐바벨컬", type = "이두"))
+        exerciseDataList.add(ExerciseData(name = "인클라인해머컬", type = "이두"))
 
         return binding.root
     }

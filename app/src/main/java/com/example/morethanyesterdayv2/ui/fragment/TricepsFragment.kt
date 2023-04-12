@@ -57,7 +57,25 @@ class TricepsFragment: Fragment() {
         exerciseDataList.add(ExerciseData(name = "스컬크러셔", type = "삼두"))
         exerciseDataList.add(ExerciseData(name = "로프 푸시다운", type = "삼두"))
         exerciseDataList.add(ExerciseData(name = "다이아몬드 푸시업", type = "삼두"))
-
+        exerciseDataList.add(ExerciseData(name = "케이블 푸시다운", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "바벨 스컬크러셔", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "덤벨 킥백", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "케이블 삼두 익스텐션", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "바벨 삼두 익스텐션", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "스컬크러셔", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "원암 덤벨 익스텐션", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "롤링 익스텐션", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "딥스", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "파워 푸시업", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "오버헤드 케이블 익스텐션", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "오버헤드 덤벨 익스텐션", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "트라이셉스 딥스 머신", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "덤벨 케이블 크런치", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "팔굽혀펴기", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "덤벨 삼두 익스텐션(서있는 자세)", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "케이블 로프 푸시다운", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "숄더 푸시업", type = "삼두"))
+        exerciseDataList.add(ExerciseData(name = "트라이셉스 익스텐션 머신", type = "삼두"))
 
         return binding.root
     }

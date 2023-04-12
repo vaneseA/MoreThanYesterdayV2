@@ -57,13 +57,26 @@ class ChestFragment: Fragment() {
         // exerciseDataList 초기화
         exerciseDataList.clear()
         // 운동 데이터 추가
-        exerciseDataList.add(ExerciseData(name = "벤치프레스", type = "가슴"))
-        exerciseDataList.add(ExerciseData(name = "덤벨프레스", type = "가슴"))
-        exerciseDataList.add(ExerciseData(name = "인클라인벤치프레스", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "벤치 프레스", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "덤벨 프레스", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "인클라인 벤치 프레스", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "디클라인 벤치 프레스", type = "가슴"))
         exerciseDataList.add(ExerciseData(name = "딥스", type = "가슴"))
-        exerciseDataList.add(ExerciseData(name = "푸쉬업", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "푸쉬 업", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "체스트 프레스", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "펙 덱 플라이", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "시티드 체스트 프레스", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "인클라인 덤벨 프레스", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "인클라인 딥스", type = "가슴"))
         exerciseDataList.add(ExerciseData(name = "플라이", type = "가슴"))
-        exerciseDataList.add(ExerciseData(name = "케이블크로스오버", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "케이블 크로스오버", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "원암 덤벨 푸쉬", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "원암 덤벨 플라이", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "덤벨 플라이", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "펙 덱 플라이", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "펙 덱 머신", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "펙 덱 푸쉬업", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "펙 덱 패드 체스트", type = "가슴"))
 
         return binding.root
     }

@@ -56,6 +56,16 @@ class TrapeziusFragment: Fragment() {
         // 운동 데이터 추가
         exerciseDataList.add(ExerciseData(name = "슈러그", type = "승모근"))
         exerciseDataList.add(ExerciseData(name = "업라이트 로우", type = "승모근"))
+        exerciseDataList.add(ExerciseData(name = "바벨 로우", type = "승모근"))
+        exerciseDataList.add(ExerciseData(name = "덤벨 로우", type = "승모근"))
+        exerciseDataList.add(ExerciseData(name = "랫 풀 다운", type = "승모근"))
+        exerciseDataList.add(ExerciseData(name = "풀 오버", type = "승모근"))
+        exerciseDataList.add(ExerciseData(name = "케이블 로우", type = "승모근"))
+        exerciseDataList.add(ExerciseData(name = "덤벨 숄더프레스", type = "승모근"))
+        exerciseDataList.add(ExerciseData(name = "밀리터리프레스", type = "승모근"))
+        exerciseDataList.add(ExerciseData(name = "숄더 레터럴 레이즈", type = "승모근"))
+        exerciseDataList.add(ExerciseData(name = "벤트오버 레터럴 레이즈", type = "승모근"))
+        exerciseDataList.add(ExerciseData(name = "페이스 풀", type = "승모근"))
 
         return binding.root
     }

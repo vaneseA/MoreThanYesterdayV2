@@ -53,10 +53,26 @@ class CardioFragment: Fragment() {
         // exerciseDataList 초기화
         exerciseDataList.clear()
         // 운동 데이터 추가
-        exerciseDataList.add(ExerciseData(name = "실외 달리기", type = "유산소"))
-        exerciseDataList.add(ExerciseData(name = "실내 달리기", type = "유산소"))
-        exerciseDataList.add(ExerciseData(name = "자전거", type = "유산소"))
-        exerciseDataList.add(ExerciseData(name = "싸이클머신", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "런닝머신", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "로잉머신", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "실내사이클", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "에어로빅", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "줄넘기", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "스텝", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "에르고메터", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "점핑잭", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "에어로밍", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "크로스핏", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "스피닝", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "윗몸일으키기", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "버피", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "로프밀", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "스쿼트점프", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "바운스잭", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "클린앤저크", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "사이드 스텝", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "스키점프", type = "유산소"))
+        exerciseDataList.add(ExerciseData(name = "농구", type = "유산소"))
         return binding.root
     }
 }

@@ -56,8 +56,25 @@ class AbsFragment : Fragment() {
         exerciseDataList.clear()
         // 운동 데이터 추가
         exerciseDataList.add(ExerciseData(name = "크런치", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "레그레이즈", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "플랭크", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "사이드 플랭크", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "힙 업", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "시즈 업", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "런지 크런치", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "크러치 크로스", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "하이 킥", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "로우 킥백", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "스쿼트", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "런지", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "사이드 런지", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "힙 브릿지", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "벽 등반", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "플랭크 니 터치", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "크러치", type = "복근"))
         exerciseDataList.add(ExerciseData(name = "데드버그", type = "복근"))
-
+        exerciseDataList.add(ExerciseData(name = "복근 수축기", type = "복근"))
+        exerciseDataList.add(ExerciseData(name = "트위스트 크런치", type = "복근"))
 
         return binding.root
     }

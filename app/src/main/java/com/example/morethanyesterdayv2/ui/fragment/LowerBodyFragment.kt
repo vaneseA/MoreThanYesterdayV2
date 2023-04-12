@@ -56,8 +56,21 @@ class LowerBodyFragment: Fragment() {
         exerciseDataList.add(ExerciseData(name = "런지", type = "하체"))
         exerciseDataList.add(ExerciseData(name = "레그컬", type = "하체"))
         exerciseDataList.add(ExerciseData(name = "스쿼트", type = "하체"))
-
-
+        exerciseDataList.add(ExerciseData(name = "레그프레스", type = "하체"))
+        exerciseDataList.add(ExerciseData(name = "데드리프트", type = "하체"))
+        exerciseDataList.add(ExerciseData(name = "글루트브릿지", type = "하체"))
+        exerciseDataList.add(ExerciseData(name = "와이드 스쿼트", type = "하체"))
+        exerciseDataList.add(ExerciseData(name = "버피", type = "하체"))
+        exerciseDataList.add(ExerciseData(name = "바벨 스쿼트", type = "하체"))
+        exerciseDataList.add(ExerciseData(name = "점프 스쿼트", type = "하체"))
+        exerciseDataList.add(ExerciseData(name = "스텝업", type = "하체"))
+        exerciseDataList.add(ExerciseData(name = "데드리프트", type = "하체"))
+        exerciseDataList.add(ExerciseData(name = "힙 쓰러스트", type = "하체"))
+        exerciseDataList.add(ExerciseData(name = "와이드 레그 데드리프트", type = "하체"))
+        exerciseDataList.add(ExerciseData(name = "레그 익스텐션", type = "하체"))
+        exerciseDataList.add(ExerciseData(name = "시티드 레그 프레스", type = "하체"))
+        exerciseDataList.add(ExerciseData(name = "힙 레이즈", type = "하체"))
+        exerciseDataList.add(ExerciseData(name = "레그 컬 머신", type = "하체"))
         return binding.root
     }
 }
