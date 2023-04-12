@@ -4,13 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.databinding.MainRvItemBinding
 import com.example.morethanyesterdayv2.dialog.AddSetDialogInterface
-import com.example.morethanyesterdayv2.ui.activity.MainActivity
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 
 

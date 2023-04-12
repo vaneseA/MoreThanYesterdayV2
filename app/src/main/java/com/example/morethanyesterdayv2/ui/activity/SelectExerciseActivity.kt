@@ -33,10 +33,6 @@ class SelectExerciseActivity : AppCompatActivity() {
     )
 
     private lateinit var binding: ActivitySelectExerciseBinding
-    private lateinit var exerciseListAdapter: ExerciseListAdapter
-    private val viewModel: SelectExerciseViewModel by viewModels()
-    private lateinit var selectedDate: String
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

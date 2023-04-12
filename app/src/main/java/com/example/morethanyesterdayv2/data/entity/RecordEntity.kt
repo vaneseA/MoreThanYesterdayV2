@@ -10,7 +10,6 @@ class RecordEntity {
     @ColumnInfo(name = "id")
     var id: Long? = null
 
-
     @ColumnInfo(name = "exerciseId")
     var exerciseId: String = ""
 
@@ -24,7 +23,6 @@ class RecordEntity {
     // 운동타입
     @ColumnInfo(name = "exerciseType")
     var exerciseType: String = ""
-
 
     // 중량
     @ColumnInfo

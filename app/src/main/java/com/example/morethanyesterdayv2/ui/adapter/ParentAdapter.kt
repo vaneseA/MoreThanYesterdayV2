@@ -30,8 +30,8 @@ class ParentAdapter(
 ) :
     RecyclerView.Adapter<ParentAdapter.Holder>(), AddSetDialogInterface {
     private val selectedRepository: SelectedDateRepository
-    private lateinit var exerciseDAO: ExerciseDAO
-    private lateinit var recordDAO: RecordDAO
+    private var exerciseDAO: ExerciseDAO
+    private var recordDAO: RecordDAO
 
     init {
         val appDatabase = AppDatabase.getDatabase(context.applicationContext as Application)

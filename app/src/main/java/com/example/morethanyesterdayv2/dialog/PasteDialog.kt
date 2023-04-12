@@ -191,10 +191,4 @@ class PasteDialog(
 
     }
 
-    fun insertExercise(entity: ExerciseEntity) {
-        CoroutineScope(Dispatchers.IO).launch {
-            repository.insertToExercise(entity)
-        }
-    }
-
 }

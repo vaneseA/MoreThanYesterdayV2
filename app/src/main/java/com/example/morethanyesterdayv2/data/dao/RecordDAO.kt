@@ -39,15 +39,11 @@ interface RecordDAO {
     @Query("SELECT MAX(kg) FROM room_record WHERE exerciseId = :exerciseId")
     fun getMaxKgByExerciseId(exerciseId: String): Double
 
-//    //ROOM에서 maxKg를 업데이트하는 쿼리
-//    @Query("UPDATE room_record SET maxKg = :maxKg WHERE exerciseId = :exerciseId")
-//    fun updateMaxKgByExerciseId(exerciseId: String, maxKg: Double)
-
     //"room_exercise" 테이블에서 "exerciseId" 필드가 입력받은 "exerciseId" 값과 일치하는 레코드를 삭제하는 쿼리
     @Query("DELETE FROM room_record WHERE exerciseId = :exerciseId")
     fun deleteRecordByExerciseId(exerciseId: String)
 
-    //room_exercise에서 exerciseId를 검색해 모든 exerciseId를 추출하는 쿼리
+    //room_exercise에서 exerciseId를 검색해 exerciseId가 가진 모든 행을 추출하는 쿼리
     @Query("SELECT exerciseName, exerciseType, totalSet, totalKG,totalCount,maxKg,selectedDate, exerciseId,kg,exerciseCount FROM room_record WHERE exerciseId = :exerciseId")
     fun loadExerciseListLiveDataFromRecordByExerciseId(exerciseId: String): List<RecordEntity>
 
