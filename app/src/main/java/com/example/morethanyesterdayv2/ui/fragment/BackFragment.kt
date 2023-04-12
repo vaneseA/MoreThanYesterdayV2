@@ -52,13 +52,10 @@ class BackFragment: Fragment() {
 
 
         // 운동 데이터 추가
-        exerciseDataList.add(ExerciseData(name = "벤치프레스", type = "가슴"))
-        exerciseDataList.add(ExerciseData(name = "덤벨프레스", type = "가슴"))
-        exerciseDataList.add(ExerciseData(name = "인클라인벤치프레스", type = "가슴"))
-        exerciseDataList.add(ExerciseData(name = "딥스", type = "가슴"))
-        exerciseDataList.add(ExerciseData(name = "푸쉬업", type = "가슴"))
-        exerciseDataList.add(ExerciseData(name = "플라이", type = "가슴"))
-        exerciseDataList.add(ExerciseData(name = "케이블크로스오버", type = "가슴"))
+        exerciseDataList.add(ExerciseData(name = "데드리프트", type = "등"))
+        exerciseDataList.add(ExerciseData(name = "풀업", type = "등"))
+        exerciseDataList.add(ExerciseData(name = "렛풀다운", type = "등"))
+        exerciseDataList.add(ExerciseData(name = "케이블 시티드 로우", type = "등"))
 
         return binding.root
     }

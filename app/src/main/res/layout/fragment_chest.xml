@@ -19,16 +19,5 @@
         </androidx.recyclerview.widget.RecyclerView>
 
     </FrameLayout>
-    <TextView
-        android:id="@+id/main_exercise_name"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:paddingHorizontal="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="5dp"
-        android:text="운동dddddddddd명         나는 가슴"
-        android:textColor="@color/black"
-        android:textSize="18sp" />
 
 </RelativeLayout>
