@@ -104,7 +104,7 @@ class DeleteDialog(
             Toast.makeText(
                 requireContext(),
                 "삭제 되었습니다",
-                Toast.LENGTH_LONG)
+                Toast.LENGTH_LONG).show()
         }
         return view
     }
