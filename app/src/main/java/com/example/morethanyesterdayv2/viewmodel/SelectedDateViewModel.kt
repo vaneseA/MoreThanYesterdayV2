@@ -123,7 +123,6 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
                     (totalKg) - (kg!! * count),
                 )
             }
-            Log.d("dongKeunTotalCount","$totalCount - $count = $newTotalCount" )
             val intent = Intent(context, SelectedDateActivity::class.java)
             intent.putExtra("selectedDate", recordEntity.selectedDate)
             context.startActivity(intent)
