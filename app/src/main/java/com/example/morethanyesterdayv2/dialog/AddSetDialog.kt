@@ -23,6 +23,7 @@ import com.example.morethanyesterdayv2.data.dao.RecordDAO
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.db.AppDatabase
 import com.example.morethanyesterdayv2.databinding.DialogAddSetBinding
+import com.example.morethanyesterdayv2.repository.ExerciseRepository
 import com.example.morethanyesterdayv2.repository.RecordRepository
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 import com.example.morethanyesterdayv2.viewmodel.AddSetDialogViewModel
@@ -33,7 +34,8 @@ import kotlinx.coroutines.withContext
 
 lateinit var appDatabase: AppDatabase
 lateinit var recordDAO: RecordDAO
-lateinit var repository: RecordRepository
+lateinit var recordRepository: RecordRepository
+lateinit var exerciseRepository: ExerciseRepository
 lateinit var exerciseDAO: ExerciseDAO
 
 class AddSetDialog(
@@ -72,15 +74,15 @@ class AddSetDialog(
         _binding = DialogAddSetBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // AppDatabase 초기화
+        // AppDatabase와 lateinit으로 선언된 변수들을 초기화하는 코드
         appDatabase = Room.databaseBuilder(
             requireContext(),
             AppDatabase::class.java, "room_db"
         ).build()
         recordDAO = appDatabase.recordDAO()
-
-        repository = RecordRepository(recordDAO)
+        recordRepository = RecordRepository(recordDAO)
         exerciseDAO = appDatabase.exerciseDAO()
+        exerciseRepository = ExerciseRepository(exerciseDAO)
 
         // 레이아웃 배경을 투명하게 해줌, 필수 아님
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -178,19 +180,19 @@ class AddSetDialog(
             lifecycleScope.launch {
                 // recordDAO을 이용해 ROOM 안에 있는 MaxKg 값을 가져옴
                 val maxKg = withContext(Dispatchers.IO) {
-                    repository.getMaxKgFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "")
+                    recordRepository.getMaxKgFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "")
                 }
                 // recordDAO을 이용해 ROOM 안에 있는 totalSet 값을 가져옴
                 val totalSet = withContext(Dispatchers.IO) {
-                    repository.getCountSetFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "")
+                    recordRepository.getCountSetFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "")
                 }
                 // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
                 val totalCount = withContext(Dispatchers.IO) {
-                    repository.getTotalCountFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "")
+                    recordRepository.getTotalCountFromRecordByExerciseId(exerciseEntity?.exerciseId ?: "")
                 }
                 // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
                 val totalKg = withContext(Dispatchers.IO) {
-                    repository.getTotalKgFromExerciseByExerciseId(exerciseEntity?.exerciseId ?: "")
+                    exerciseRepository.getTotalKgFromExerciseByExerciseId(exerciseEntity?.exerciseId ?: "")
                 }
                 //라디오 버튼에 따라 저장하는 값을 달리하는 함수를 적용한 kg값
                 val kg = getWeightValue().toDoubleOrNull() ?: 0.0
@@ -199,7 +201,6 @@ class AddSetDialog(
                 if (maxKg != null) {
                     if (maxKg < kg) {
                         withContext(Dispatchers.IO) {
-//                            repository.updateMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "", kg)
                             exerciseDAO.updateMaxKgByExerciseId(
                                 exerciseEntity?.exerciseId ?: "",
                                 kg
@@ -208,7 +209,6 @@ class AddSetDialog(
                     }
                 } else {
                     withContext(Dispatchers.IO) {
-//                        repository.updateMaxKgByExerciseId(exerciseEntity?.exerciseId ?: "", kg)
                         exerciseDAO.updateMaxKgByExerciseId(
                             exerciseEntity?.exerciseId ?: "",
                             kg
@@ -271,7 +271,7 @@ class AddSetDialog(
         lifecycleScope.launch {
             // recordDAO을 이용해 ROOM 안에 있는 totalSet 값을 가져옴
             val totalSet = withContext(Dispatchers.IO) {
-                repository.getRecordCountFromRecordByExerciseId(
+                recordRepository.getRecordCountFromRecordByExerciseId(
                     exerciseEntity?.exerciseId ?: ""
                 ) + 1
             }
@@ -343,8 +343,8 @@ class AddSetDialog(
 
 fun insertAndUpdateRecord(record: RecordEntity, exercise: ExerciseEntity) {
     CoroutineScope(Dispatchers.IO).launch {
-        repository.insert(record)
-        exerciseDAO.update(exercise)
+        recordRepository.insert(record)
+        exerciseRepository.update(exercise)
     }
 }
 

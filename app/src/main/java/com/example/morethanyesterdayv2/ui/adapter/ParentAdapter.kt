@@ -71,7 +71,7 @@ class ParentAdapter(
             binding.totalCountArea.text = "총 ${exerciseEntity.totalCount}회"
 
 
-            selectedRepository.getExerciseSetListLiveDataById(exerciseId)
+            selectedRepository.getExerciseSetListLiveDataFromRecordById(exerciseId)
                 .observe(itemView.context as LifecycleOwner) { childExerciseSetList ->
                     binding.nestedRV.adapter = ChildAdapter(childExerciseSetList, viewModel )
                     binding.nestedRV.layoutManager = LinearLayoutManager(context)

@@ -16,6 +16,8 @@ import com.example.morethanyesterdayv2.data.entity.ExerciseEntity
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
 import com.example.morethanyesterdayv2.databinding.DialogDeleteBinding
 import com.example.morethanyesterdayv2.db.AppDatabase
+import com.example.morethanyesterdayv2.repository.ExerciseRepository
+import com.example.morethanyesterdayv2.repository.RecordRepository
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -64,14 +66,16 @@ class DeleteDialog(
         _binding = DialogDeleteBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // AppDatabase와 RecordDAO 초기화
-        appDatabase = Room.databaseBuilder(
+        // AppDatabase와 lateinit으로 선언된 변수들을 초기화하는 코드
+        val appDatabase = Room.databaseBuilder(
             view.context,
             AppDatabase::class.java,
             "room_db"
         ).build()
         recordDAO = appDatabase.recordDAO()
+        recordRepository = RecordRepository(recordDAO)
         exerciseDAO = appDatabase.exerciseDAO()
+        exerciseRepository = ExerciseRepository(exerciseDAO)
 
 
         // 레이아웃 배경을 투명하게 해줌, 필수 아님
@@ -84,10 +88,10 @@ class DeleteDialog(
             val selectedDateActivity = SelectedDateActivity.getInstance()
             lifecycleScope.launch {
                 withContext(Dispatchers.IO) {
-                    repository.deleteRecordByExerciseId(
+                    recordRepository.deleteRecordByExerciseId(
                         exerciseEntity?.exerciseId ?: ""
                     )
-                    repository.deleteExerciseByExerciseId(
+                    exerciseRepository.deleteExerciseByExerciseId(
                         exerciseEntity?.exerciseId ?: ""
                     )
                 }
@@ -104,7 +108,8 @@ class DeleteDialog(
             Toast.makeText(
                 requireContext(),
                 "삭제 되었습니다",
-                Toast.LENGTH_LONG).show()
+                Toast.LENGTH_LONG
+            ).show()
         }
         return view
     }

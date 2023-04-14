@@ -16,7 +16,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.morethanyesterdayv2.data.entity.RecordEntity
-import com.example.morethanyesterdayv2.dialog.repository
+import com.example.morethanyesterdayv2.dialog.exerciseRepository
+import com.example.morethanyesterdayv2.dialog.recordRepository
 import com.example.morethanyesterdayv2.repository.SelectedDateRepository
 import com.example.morethanyesterdayv2.ui.activity.SelectedDateActivity
 import kotlinx.coroutines.CoroutineScope
@@ -65,33 +66,33 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
             val count = recordEntity?.exerciseCount ?: 0
             val kg = recordEntity?.kg
             // 일단 삭제
-            repository.delete(recordEntity)
+            recordRepository.delete(recordEntity)
             // recordDAO을 이용해 ROOM 안에 있는 MaxKg 값을 가져옴
             val maxKg = withContext(Dispatchers.IO) {
-                repository.getMaxKgFromExerciseByExerciseId(recordEntity?.exerciseId ?: "")
+                exerciseRepository.getMaxKgFromExerciseByExerciseId(recordEntity?.exerciseId ?: "")
             }
             // recordDAO을 이용해 ROOM 안에 있는 MaxKg 값을 가져옴
             val newMaxKg = withContext(Dispatchers.IO) {
-                repository.getMaxKgFromRecordByExerciseId(recordEntity?.exerciseId ?: "")
+                recordRepository.getMaxKgFromRecordByExerciseId(recordEntity?.exerciseId ?: "")
             }
             // recordDAO을 이용해 ROOM 안에 있는 totalSet 값을 가져옴
             val totalSet = withContext(Dispatchers.IO) {
-                repository.getTotalSetFromExerciseByExerciseId(recordEntity?.exerciseId ?: "")
+                exerciseRepository.getTotalSetFromExerciseByExerciseId(recordEntity?.exerciseId ?: "")
             }
             // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
             val totalCount = withContext(Dispatchers.IO) {
-                repository.getTotalCountFromExerciseByExerciseId(recordEntity?.exerciseId ?: "")
+                exerciseRepository.getTotalCountFromExerciseByExerciseId(recordEntity?.exerciseId ?: "")
             }
             // recordDAO을 이용해 ROOM 안에 있는 totalCount 값을 가져옴
             val totalKg = withContext(Dispatchers.IO) {
-                repository.getTotalKgFromExerciseByExerciseId(recordEntity?.exerciseId ?: "")
+                exerciseRepository.getTotalKgFromExerciseByExerciseId(recordEntity?.exerciseId ?: "")
             }
             // maxKg 업데이트
             if (maxKg != null) {
                 if (maxKg == kg) {
                     // recordDAO를 이용해 ROOM 안에 있는 RecordEntity 목록을 가져옴
-                    repository.getMaxKgFromRecordByExerciseId(recordEntity?.exerciseId ?: "")
-                    repository.updateMaxKgFromExerciseByExerciseId(
+                    recordRepository.getMaxKgFromRecordByExerciseId(recordEntity?.exerciseId ?: "")
+                    exerciseRepository.updateMaxKgFromExerciseByExerciseId(
                         recordEntity?.exerciseId ?: "",
                         newMaxKg
                     )
@@ -99,8 +100,8 @@ class SelectedDateViewModel(application: Application) : AndroidViewModel(applica
             } else {
                 if (maxKg == kg) {
                     // recordDAO를 이용해 ROOM 안에 있는 RecordEntity 목록을 가져옴
-                    repository.getMaxKgFromRecordByExerciseId(recordEntity?.exerciseId ?: "")
-                    repository.updateMaxKgFromExerciseByExerciseId(
+                    recordRepository.getMaxKgFromRecordByExerciseId(recordEntity?.exerciseId ?: "")
+                    exerciseRepository.updateMaxKgFromExerciseByExerciseId(
                         recordEntity?.exerciseId ?: "",
                         newMaxKg
                     )

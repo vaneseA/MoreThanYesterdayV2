@@ -134,7 +134,7 @@ class PasteDialog(
                                 maxKg = recordEntity?.maxKg ?: 0.0,
                             )
                             withContext(Dispatchers.IO) {
-                                repository.insert(record)
+                                recordRepository.insert(record)
                             }
                         }
                         withContext(Dispatchers.IO) {
