@@ -18,7 +18,6 @@ interface RecordDAO {
     @Delete
     fun delete(recordEntity: RecordEntity)
 
-
     //room_record 테이블에서 exerciseId 필드 값이 exerciseId 매개변수 값과 일치하는 모든 레코드를 가져오는 쿼리
     @Query("SELECT * FROM room_record WHERE exerciseId = :exerciseId")
     fun loadExerciseSetListLiveDataByExerciseId(exerciseId: String): LiveData<List<RecordEntity>>
