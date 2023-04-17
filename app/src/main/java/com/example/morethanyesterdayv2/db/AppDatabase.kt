@@ -18,6 +18,9 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
         private var instance: AppDatabase? = null
 
+
+        //synchronized를 쓴 이유,
+        //다른 스레드가 동시에 getDatabase() 메서드를 호출하는 것을 막아주기 때문에, 보다 안정적인 애플리케이션 동작을 보장
         fun getDatabase(application: Application): AppDatabase {
             return instance ?: synchronized(this) {
                 instance ?: Room.databaseBuilder(
